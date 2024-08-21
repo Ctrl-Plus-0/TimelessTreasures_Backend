@@ -15,7 +15,28 @@ namespace TempService
         TempDatabaseDataContext DB = new TempDatabaseDataContext();
         string IService1.login(string Email, string Password)
         {
-            throw new NotImplementedException();
+            //using the join is not 100% necessary as only the username and password really matter at this point
+            //but for later when this method needs to be updated for showing who signed in and so forth itll work
+            var UserLogged = (from c in DB.Customers
+                              join u in DB.PUsers on c.CustID equals u.UId
+                              where u.UEmail == Email && u.UPassword == Password
+                              select c).FirstOrDefault();
+
+            //simple logic from here
+            //check if user returned is null,if not  say they logged in succesfully
+            if(UserLogged!=null){
+                return "Succesful login";
+            }
+            else
+            {
+                return "Username Or Password is Incorrect";
+            }
+           
+            /*
+             * NOTE:this method is a placeholder to ge the frotn end going so long
+             * proper implementation will check role types and give adjust the nav bar element as necessary
+             * set true admind bar visiblity etc
+             */
         }
 
         string IService1.Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address,string phonenum)
