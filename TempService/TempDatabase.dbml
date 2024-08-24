@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TempDB" Class="TempDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\TempDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TempDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.[_User]" Member="_Users">
-    <Type Name="_User">
-      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="U_Password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="UserRole" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="UserEmail" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="UserFullName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="UserSurname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="UserCreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="_User_Customer" Member="Customer" ThisKey="User_ID" OtherKey="Cust_ID" Type="Customer" Cardinality="One" />
+  <Table Name="dbo.PUser" Member="PUsers">
+    <Type Name="PUser">
+      <Column Name="UId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[UserName ]" Member="UserName_" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="UPassword" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UFullName" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="USurname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="UCreationTime" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="URole" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UEmail" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="PUser_Customer" Member="Customer" ThisKey="UId" OtherKey="CustID" Type="Customer" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.Customer" Member="Customers">
     <Type Name="Customer">
-      <Column Name="Cust_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Cust_Address" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Cust_PhoneNum" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Date_Of_Birth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="_User_Customer" Member="_User" ThisKey="Cust_ID" OtherKey="User_ID" Type="_User" IsForeignKey="true" />
+      <Association Name="PUser_Customer" Member="PUser" ThisKey="CustID" OtherKey="UId" Type="PUser" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

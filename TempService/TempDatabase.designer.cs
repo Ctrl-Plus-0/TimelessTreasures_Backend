@@ -30,9 +30,9 @@ namespace TempService
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insert_User(_User instance);
-    partial void Update_User(_User instance);
-    partial void Delete_User(_User instance);
+    partial void InsertPUser(PUser instance);
+    partial void UpdatePUser(PUser instance);
+    partial void DeletePUser(PUser instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
@@ -68,11 +68,11 @@ namespace TempService
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<_User> _Users
+		public System.Data.Linq.Table<PUser> PUsers
 		{
 			get
 			{
-				return this.GetTable<_User>();
+				return this.GetTable<PUser>();
 			}
 		}
 		
@@ -85,27 +85,27 @@ namespace TempService
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[_User]")]
-	public partial class _User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PUser")]
+	public partial class PUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _User_ID;
+		private int _UId;
 		
-		private string _Username;
+		private string _UserName_;
 		
-		private string _U_Password;
+		private string _UPassword;
 		
-		private string _UserRole;
+		private string _UFullName;
 		
-		private string _UserEmail;
+		private string _USurname;
 		
-		private string _UserFullName;
+		private System.DateTime _UCreationTime;
 		
-		private string _UserSurname;
+		private string _URole;
 		
-		private System.DateTime _UserCreateTime;
+		private string _UEmail;
 		
 		private EntityRef<Customer> _Customer;
 		
@@ -113,191 +113,191 @@ namespace TempService
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUser_IDChanging(int value);
-    partial void OnUser_IDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnU_PasswordChanging(string value);
-    partial void OnU_PasswordChanged();
-    partial void OnUserRoleChanging(string value);
-    partial void OnUserRoleChanged();
-    partial void OnUserEmailChanging(string value);
-    partial void OnUserEmailChanged();
-    partial void OnUserFullNameChanging(string value);
-    partial void OnUserFullNameChanged();
-    partial void OnUserSurnameChanging(string value);
-    partial void OnUserSurnameChanged();
-    partial void OnUserCreateTimeChanging(System.DateTime value);
-    partial void OnUserCreateTimeChanged();
+    partial void OnUIdChanging(int value);
+    partial void OnUIdChanged();
+    partial void OnUserName_Changing(string value);
+    partial void OnUserName_Changed();
+    partial void OnUPasswordChanging(string value);
+    partial void OnUPasswordChanged();
+    partial void OnUFullNameChanging(string value);
+    partial void OnUFullNameChanged();
+    partial void OnUSurnameChanging(string value);
+    partial void OnUSurnameChanged();
+    partial void OnUCreationTimeChanging(System.DateTime value);
+    partial void OnUCreationTimeChanged();
+    partial void OnURoleChanging(string value);
+    partial void OnURoleChanged();
+    partial void OnUEmailChanging(string value);
+    partial void OnUEmailChanged();
     #endregion
 		
-		public _User()
+		public PUser()
 		{
 			this._Customer = default(EntityRef<Customer>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int User_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UId
 		{
 			get
 			{
-				return this._User_ID;
+				return this._UId;
 			}
 			set
 			{
-				if ((this._User_ID != value))
+				if ((this._UId != value))
 				{
-					this.OnUser_IDChanging(value);
+					this.OnUIdChanging(value);
 					this.SendPropertyChanging();
-					this._User_ID = value;
-					this.SendPropertyChanged("User_ID");
-					this.OnUser_IDChanged();
+					this._UId = value;
+					this.SendPropertyChanged("UId");
+					this.OnUIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Username
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[UserName ]", Storage="_UserName_", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string UserName_
 		{
 			get
 			{
-				return this._Username;
+				return this._UserName_;
 			}
 			set
 			{
-				if ((this._Username != value))
+				if ((this._UserName_ != value))
 				{
-					this.OnUsernameChanging(value);
+					this.OnUserName_Changing(value);
 					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
+					this._UserName_ = value;
+					this.SendPropertyChanged("UserName_");
+					this.OnUserName_Changed();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_U_Password", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string U_Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPassword", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string UPassword
 		{
 			get
 			{
-				return this._U_Password;
+				return this._UPassword;
 			}
 			set
 			{
-				if ((this._U_Password != value))
+				if ((this._UPassword != value))
 				{
-					this.OnU_PasswordChanging(value);
+					this.OnUPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._U_Password = value;
-					this.SendPropertyChanged("U_Password");
-					this.OnU_PasswordChanged();
+					this._UPassword = value;
+					this.SendPropertyChanged("UPassword");
+					this.OnUPasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserRole", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserRole
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UFullName", DbType="NChar(100)")]
+		public string UFullName
 		{
 			get
 			{
-				return this._UserRole;
+				return this._UFullName;
 			}
 			set
 			{
-				if ((this._UserRole != value))
+				if ((this._UFullName != value))
 				{
-					this.OnUserRoleChanging(value);
+					this.OnUFullNameChanging(value);
 					this.SendPropertyChanging();
-					this._UserRole = value;
-					this.SendPropertyChanged("UserRole");
-					this.OnUserRoleChanged();
+					this._UFullName = value;
+					this.SendPropertyChanged("UFullName");
+					this.OnUFullNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserEmail", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string UserEmail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USurname", DbType="VarChar(100)")]
+		public string USurname
 		{
 			get
 			{
-				return this._UserEmail;
+				return this._USurname;
 			}
 			set
 			{
-				if ((this._UserEmail != value))
+				if ((this._USurname != value))
 				{
-					this.OnUserEmailChanging(value);
+					this.OnUSurnameChanging(value);
 					this.SendPropertyChanging();
-					this._UserEmail = value;
-					this.SendPropertyChanged("UserEmail");
-					this.OnUserEmailChanged();
+					this._USurname = value;
+					this.SendPropertyChanged("USurname");
+					this.OnUSurnameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserFullName", DbType="VarChar(200)")]
-		public string UserFullName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UCreationTime", DbType="Date NOT NULL")]
+		public System.DateTime UCreationTime
 		{
 			get
 			{
-				return this._UserFullName;
+				return this._UCreationTime;
 			}
 			set
 			{
-				if ((this._UserFullName != value))
+				if ((this._UCreationTime != value))
 				{
-					this.OnUserFullNameChanging(value);
+					this.OnUCreationTimeChanging(value);
 					this.SendPropertyChanging();
-					this._UserFullName = value;
-					this.SendPropertyChanged("UserFullName");
-					this.OnUserFullNameChanged();
+					this._UCreationTime = value;
+					this.SendPropertyChanged("UCreationTime");
+					this.OnUCreationTimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserSurname", DbType="VarChar(100)")]
-		public string UserSurname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URole", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string URole
 		{
 			get
 			{
-				return this._UserSurname;
+				return this._URole;
 			}
 			set
 			{
-				if ((this._UserSurname != value))
+				if ((this._URole != value))
 				{
-					this.OnUserSurnameChanging(value);
+					this.OnURoleChanging(value);
 					this.SendPropertyChanging();
-					this._UserSurname = value;
-					this.SendPropertyChanged("UserSurname");
-					this.OnUserSurnameChanged();
+					this._URole = value;
+					this.SendPropertyChanged("URole");
+					this.OnURoleChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime UserCreateTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UEmail", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string UEmail
 		{
 			get
 			{
-				return this._UserCreateTime;
+				return this._UEmail;
 			}
 			set
 			{
-				if ((this._UserCreateTime != value))
+				if ((this._UEmail != value))
 				{
-					this.OnUserCreateTimeChanging(value);
+					this.OnUEmailChanging(value);
 					this.SendPropertyChanging();
-					this._UserCreateTime = value;
-					this.SendPropertyChanged("UserCreateTime");
-					this.OnUserCreateTimeChanged();
+					this._UEmail = value;
+					this.SendPropertyChanged("UEmail");
+					this.OnUEmailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="_User_Customer", Storage="_Customer", ThisKey="User_ID", OtherKey="Cust_ID", IsUnique=true, IsForeignKey=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PUser_Customer", Storage="_Customer", ThisKey="UId", OtherKey="CustID", IsUnique=true, IsForeignKey=false)]
 		public Customer Customer
 		{
 			get
@@ -314,12 +314,12 @@ namespace TempService
 					if ((previousValue != null))
 					{
 						this._Customer.Entity = null;
-						previousValue._User = null;
+						previousValue.PUser = null;
 					}
 					this._Customer.Entity = value;
 					if ((value != null))
 					{
-						value._User = this;
+						value.PUser = this;
 					}
 					this.SendPropertyChanged("Customer");
 				}
@@ -353,7 +353,7 @@ namespace TempService
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Cust_ID;
+		private int _CustID;
 		
 		private string _Cust_Address;
 		
@@ -361,14 +361,14 @@ namespace TempService
 		
 		private System.DateTime _Date_Of_Birth;
 		
-		private EntityRef<_User> @__User;
+		private EntityRef<PUser> _PUser;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCust_IDChanging(int value);
-    partial void OnCust_IDChanged();
+    partial void OnCustIDChanging(int value);
+    partial void OnCustIDChanged();
     partial void OnCust_AddressChanging(string value);
     partial void OnCust_AddressChanged();
     partial void OnCust_PhoneNumChanging(string value);
@@ -379,30 +379,30 @@ namespace TempService
 		
 		public Customer()
 		{
-			this.@__User = default(EntityRef<_User>);
+			this._PUser = default(EntityRef<PUser>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cust_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Cust_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CustID
 		{
 			get
 			{
-				return this._Cust_ID;
+				return this._CustID;
 			}
 			set
 			{
-				if ((this._Cust_ID != value))
+				if ((this._CustID != value))
 				{
-					if (this.@__User.HasLoadedOrAssignedValue)
+					if (this._PUser.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCust_IDChanging(value);
+					this.OnCustIDChanging(value);
 					this.SendPropertyChanging();
-					this._Cust_ID = value;
-					this.SendPropertyChanged("Cust_ID");
-					this.OnCust_IDChanged();
+					this._CustID = value;
+					this.SendPropertyChanged("CustID");
+					this.OnCustIDChanged();
 				}
 			}
 		}
@@ -467,36 +467,36 @@ namespace TempService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="_User_Customer", Storage="__User", ThisKey="Cust_ID", OtherKey="User_ID", IsForeignKey=true)]
-		public _User _User
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PUser_Customer", Storage="_PUser", ThisKey="CustID", OtherKey="UId", IsForeignKey=true)]
+		public PUser PUser
 		{
 			get
 			{
-				return this.@__User.Entity;
+				return this._PUser.Entity;
 			}
 			set
 			{
-				_User previousValue = this.@__User.Entity;
+				PUser previousValue = this._PUser.Entity;
 				if (((previousValue != value) 
-							|| (this.@__User.HasLoadedOrAssignedValue == false)))
+							|| (this._PUser.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this.@__User.Entity = null;
+						this._PUser.Entity = null;
 						previousValue.Customer = null;
 					}
-					this.@__User.Entity = value;
+					this._PUser.Entity = value;
 					if ((value != null))
 					{
 						value.Customer = this;
-						this._Cust_ID = value.User_ID;
+						this._CustID = value.UId;
 					}
 					else
 					{
-						this._Cust_ID = default(int);
+						this._CustID = default(int);
 					}
-					this.SendPropertyChanged("_User");
+					this.SendPropertyChanged("PUser");
 				}
 			}
 		}

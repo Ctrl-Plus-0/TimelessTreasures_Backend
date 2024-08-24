@@ -12,7 +12,17 @@ namespace TempService
     [ServiceContract]
     public interface IService1
     {
+       [OperationContract] 
+       //MEthod will assign customer role on its own as admins and managers not added this way
+       //Note can make another service to manage the addition and removal of customers as needed
+       //
+         string Register(string Email,string Name,string Username,string Surname,string Number,string Password,string Address);
 
-     
+        [OperationContract]
+        //hash pass in backend when trying to login
+        //hash in registering when reading
+        string login(string Email, string Password);
+
+  
     }
 }
