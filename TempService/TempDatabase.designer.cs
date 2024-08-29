@@ -36,13 +36,10 @@ namespace TempService
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
+    partial void InsertItem(Item instance);
+    partial void UpdateItem(Item instance);
+    partial void DeleteItem(Item instance);
     #endregion
-		
-		public TempDatabaseDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TempDBConnectionString"].ConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
 		
 		public TempDatabaseDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -81,6 +78,14 @@ namespace TempService
 			get
 			{
 				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Item> Items
+		{
+			get
+			{
+				return this.GetTable<Item>();
 			}
 		}
 	}
@@ -497,6 +502,175 @@ namespace TempService
 						this._CustID = default(int);
 					}
 					this.SendPropertyChanged("PUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Item : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _title = default(string);
+		
+		private decimal _price;
+		
+		private string _description;
+		
+		private string _category;
+		
+		private string _image;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnpriceChanging(decimal value);
+    partial void OnpriceChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OncategoryChanging(string value);
+    partial void OncategoryChanged();
+    partial void OnimageChanging(string value);
+    partial void OnimageChanged();
+    #endregion
+		
+		public Item()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price")]
+		public decimal price
+		{
+			get
+			{
+				return this._price;
+			}
+			set
+			{
+				if ((this._price != value))
+				{
+					this.OnpriceChanging(value);
+					this.SendPropertyChanging();
+					this._price = value;
+					this.SendPropertyChanged("price");
+					this.OnpriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_category", CanBeNull=false)]
+		public string category
+		{
+			get
+			{
+				return this._category;
+			}
+			set
+			{
+				if ((this._category != value))
+				{
+					this.OncategoryChanging(value);
+					this.SendPropertyChanging();
+					this._category = value;
+					this.SendPropertyChanged("category");
+					this.OncategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", CanBeNull=false)]
+		public string image
+		{
+			get
+			{
+				return this._image;
+			}
+			set
+			{
+				if ((this._image != value))
+				{
+					this.OnimageChanging(value);
+					this.SendPropertyChanging();
+					this._image = value;
+					this.SendPropertyChanged("image");
+					this.OnimageChanged();
 				}
 			}
 		}

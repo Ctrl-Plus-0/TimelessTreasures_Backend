@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TempService
 {
@@ -12,6 +13,10 @@ namespace TempService
     [ServiceContract]
     public interface IService1
     {
+
+       [OperationContract]
+       Product[] returnList();
+
        [OperationContract] 
        //MEthod will assign customer role on its own as admins and managers not added this way
        //Note can make another service to manage the addition and removal of customers as needed
@@ -23,6 +28,11 @@ namespace TempService
         //hash in registering when reading
         string login(string Email, string Password);
 
-  
+        [OperationContract]
+        // function to make http requestion and populate list of products
+        Task getProducts();
+      
+
+
     }
 }

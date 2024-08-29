@@ -4,7 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+
 
 namespace TempService
 {
@@ -12,9 +17,34 @@ namespace TempService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        TempDatabaseDataContext DB = new TempDatabaseDataContext();
 
-  
+
+        TempDatabaseDataContext DB = new TempDatabaseDataContext("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TempDB.mdf;Integrated Security=True");
+
+        public List<Product> prodList = new List<Product>();
+         public async Task getProducts()
+        {
+            using (HttpClient client = new HttpClient()) {
+                var request = await client.GetAsync("https://fakestoreapi.com/products");
+                if (request.IsSuccessStatusCode)
+                {
+                    var res = await request.Content.ReadAsStringAsync();
+                    var json = "[{\"id\":1,\"title\":\"Product 1\",\"price\":10.99}]";
+                    prodList = JsonSerializer.Deserialize<List<Product>>(res);
+                }
+         
+            } ;
+
+        }
+
+        Product[] prodArray;
+        public Product[] returnList()
+        {
+            getProducts().Wait();
+            prodArray = prodList.ToArray();
+            return prodArray;
+
+        }
 
         string IService1.login(string Email, string Password)
         {
@@ -46,15 +76,7 @@ namespace TempService
         {
             //First check the database to see if there already exists a user with a specefic email
             //If so return a string saying theyve already registered adn that they should log in instead
-
-            var UserExistCheck = (from c in DB.PUsers
-                                  where c.UEmail == Email
-                                  select c).FirstOrDefault();
-
-            if (UserExistCheck != null)
-            {
-                return "Already Registred";
-            }
+            
 
             var UserToStore = new PUser
             {
@@ -100,7 +122,9 @@ namespace TempService
             {
                 return "Error in Registering customer";
             }
+
         }
+
     }
 }
        

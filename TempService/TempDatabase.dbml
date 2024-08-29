@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TempDB" Class="TempDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\TempDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TempDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.PUser" Member="PUsers">
     <Type Name="PUser">
       <Column Name="UId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -20,6 +19,16 @@
       <Column Name="Cust_PhoneNum" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Date_Of_Birth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="PUser_Customer" Member="PUser" ThisKey="CustID" OtherKey="UId" Type="PUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="Items">
+    <Type Name="Item">
+      <Column Name="id" Type="System.String" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" IsReadOnly="true" CanBeNull="false" />
+      <Column Name="price" Type="System.Decimal" CanBeNull="false" />
+      <Column Name="description" Type="System.String" CanBeNull="false" />
+      <Column Name="category" Type="System.String" CanBeNull="false" />
+      <Column Name="image" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
