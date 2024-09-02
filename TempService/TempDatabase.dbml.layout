@@ -21,10 +21,10 @@
         <classShapeMoniker Id="dd18f505-0367-4721-ab74-6415cad080df" />
       </nodes>
     </associationConnector>
-    <classShape Id="ad02ca18-96b7-4e8b-8d28-da589e9d1140" absoluteBounds="5.5, 3.375, 2.25, 1.9631982421874996">
+    <classShape Id="6e0314bb-5d26-4930-9cf6-b0b60647653a" absoluteBounds="3.125, 3.25, 2, 1.9631982421875">
       <DataClassMoniker Name="/TempDatabaseDataContext/Item" />
       <nestedChildShapes>
-        <elementListCompartment Id="f3596dd8-4a1d-4946-9388-e265da55855a" absoluteBounds="5.5150000000000006, 3.835, 2.2199999999999998, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d9e0a5f6-f844-496d-8bd2-10d9f5f402d1" absoluteBounds="3.1399999999999997, 3.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

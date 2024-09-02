@@ -21,14 +21,14 @@
       <Association Name="PUser_Customer" Member="PUser" ThisKey="CustID" OtherKey="UId" Type="PUser" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="" Member="Items">
+  <Table Name="dbo.Item" Member="Items">
     <Type Name="Item">
-      <Column Name="id" Type="System.String" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" IsReadOnly="true" CanBeNull="false" />
-      <Column Name="price" Type="System.Decimal" CanBeNull="false" />
-      <Column Name="description" Type="System.String" CanBeNull="false" />
-      <Column Name="category" Type="System.String" CanBeNull="false" />
-      <Column Name="image" Type="System.String" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(900) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

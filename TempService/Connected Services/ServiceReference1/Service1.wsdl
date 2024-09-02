@@ -31,6 +31,18 @@
   <wsdl:message name="IService1_getProducts_OutputMessage">
     <wsdl:part name="parameters" element="tns:getProductsResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_addItemsToDB_InputMessage">
+    <wsdl:part name="parameters" element="tns:addItemsToDB" />
+  </wsdl:message>
+  <wsdl:message name="IService1_addItemsToDB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addItemsToDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddDummyData_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDummyData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddDummyData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDummyDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="returnList">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/returnList" message="tns:IService1_returnList_InputMessage" />
@@ -47,6 +59,14 @@
     <wsdl:operation name="getProducts">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/getProducts" message="tns:IService1_getProducts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/getProductsResponse" message="tns:IService1_getProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToDB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/addItemsToDB" message="tns:IService1_addItemsToDB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/addItemsToDBResponse" message="tns:IService1_addItemsToDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDummyData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddDummyData" message="tns:IService1_AddDummyData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddDummyDataResponse" message="tns:IService1_AddDummyData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -80,6 +100,24 @@
     </wsdl:operation>
     <wsdl:operation name="getProducts">
       <soap:operation soapAction="http://tempuri.org/IService1/getProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToDB">
+      <soap:operation soapAction="http://tempuri.org/IService1/addItemsToDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDummyData">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddDummyData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

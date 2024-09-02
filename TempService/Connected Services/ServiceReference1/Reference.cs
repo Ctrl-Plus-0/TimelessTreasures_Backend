@@ -23,23 +23,23 @@ namespace TempService.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
-
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ImageField;
-
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CategoryField;
-
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -47,6 +47,32 @@ namespace TempService.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Category {
+            get {
+                return this.CategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
+                    this.CategoryField = value;
+                    this.RaisePropertyChanged("Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
             }
         }
         
@@ -59,6 +85,19 @@ namespace TempService.ServiceReference1 {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
                 }
             }
         }
@@ -88,63 +127,7 @@ namespace TempService.ServiceReference1 {
                 }
             }
         }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Image
-        {
-            get
-            {
-                return this.ImageField;
-            }
-            set
-            {
-                if ((object.ReferenceEquals(this.ImageField, value) != true))
-                {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Category
-        {
-            get
-            {
-                return this.CategoryField;
-            }
-            set
-            {
-                if ((object.ReferenceEquals(this.CategoryField, value) != true))
-                {
-                    this.CategoryField = value;
-                    this.RaisePropertyChanged("Category");
-                }
-            }
-        }
-
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description
-        {
-            get
-            {
-                return this.DescriptionField;
-            }
-            set
-            {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true))
-                {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-
-
-
-
-
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -182,6 +165,18 @@ namespace TempService.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getProducts", ReplyAction="http://tempuri.org/IService1/getProductsResponse")]
         System.Threading.Tasks.Task getProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
+        string addItemsToDB(string title, decimal price, string desciption, string category, string image);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
+        System.Threading.Tasks.Task<string> addItemsToDBAsync(string title, decimal price, string desciption, string category, string image);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
+        void AddDummyData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
+        System.Threading.Tasks.Task AddDummyDataAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -241,6 +236,22 @@ namespace TempService.ServiceReference1 {
         
         public System.Threading.Tasks.Task getProductsAsync() {
             return base.Channel.getProductsAsync();
+        }
+        
+        public string addItemsToDB(string title, decimal price, string desciption, string category, string image) {
+            return base.Channel.addItemsToDB(title, price, desciption, category, image);
+        }
+        
+        public System.Threading.Tasks.Task<string> addItemsToDBAsync(string title, decimal price, string desciption, string category, string image) {
+            return base.Channel.addItemsToDBAsync(title, price, desciption, category, image);
+        }
+        
+        public void AddDummyData() {
+            base.Channel.AddDummyData();
+        }
+        
+        public System.Threading.Tasks.Task AddDummyDataAsync() {
+            return base.Channel.AddDummyDataAsync();
         }
     }
 }

@@ -31,8 +31,12 @@ namespace TempService
         [OperationContract]
         // function to make http requestion and populate list of products
         Task getProducts();
-      
 
 
+        [OperationContract]
+        string addItemsToDB(string title, decimal price, string desciption, string category, string image);
+
+        [OperationContract]
+        void AddDummyData();
     }
 }

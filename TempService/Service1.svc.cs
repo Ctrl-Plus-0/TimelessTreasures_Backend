@@ -18,33 +18,14 @@ namespace TempService
     public class Service1 : IService1
     {
 
+        public Service1()
+        {
+            returnList();
+            AddDummyData();
+        }
+
 
         TempDatabaseDataContext DB = new TempDatabaseDataContext("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TempDB.mdf;Integrated Security=True");
-
-        public List<Product> prodList = new List<Product>();
-         public async Task getProducts()
-        {
-            using (HttpClient client = new HttpClient()) {
-                var request = await client.GetAsync("https://fakestoreapi.com/products");
-                if (request.IsSuccessStatusCode)
-                {
-                    var res = await request.Content.ReadAsStringAsync();
-                    var json = "[{\"id\":1,\"title\":\"Product 1\",\"price\":10.99}]";
-                    prodList = JsonSerializer.Deserialize<List<Product>>(res);
-                }
-         
-            } ;
-
-        }
-
-        Product[] prodArray;
-        public Product[] returnList()
-        {
-            getProducts().Wait();
-            prodArray = prodList.ToArray();
-            return prodArray;
-
-        }
 
         string IService1.login(string Email, string Password)
         {
@@ -125,6 +106,87 @@ namespace TempService
 
         }
 
+        //List of products
+        public List<Product> prodList = new List<Product>();
+
+        //function to retrieve json from api
+        public async Task getProducts()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var request = await client.GetAsync("https://fakestoreapi.com/products");
+                if (request.IsSuccessStatusCode)
+                {
+                    //store json object
+                    var res = await request.Content.ReadAsStringAsync();
+                    //deserializes json to list
+                    prodList = JsonSerializer.Deserialize<List<Product>>(res);
+                }
+
+            };
+
+        }
+
+        Product[] prodArray;
+
+        //function to convert list to array
+        public Product[] returnList()
+        {
+            //gets list
+            getProducts().Wait();
+
+            //converts list to arry
+            prodArray = prodList.ToArray();
+            return prodArray;
+
+        }
+
+        //Method to add items to item table
+       public string addItemsToDB(string title, decimal price, string desciption, string category, string image)
+        {
+
+            //check if item already exists
+            var existingItem = (from i in DB.Items
+                                where i.Title == title && i.Category == category
+                                select i
+                                ).FirstOrDefault();
+
+            if(existingItem != null)
+            {
+                return "Item already exists";
+            }
+
+            var item = new Item
+            {
+                Title = title,
+                Price = price,
+                Description = desciption,
+                Category = category,
+                Image = image
+            };
+
+            DB.Items.InsertOnSubmit(item);
+            try
+            {
+                DB.SubmitChanges();
+                return "Successfully added item";
+            }
+            catch
+            {
+                return "Unable to add item";
+            }
+            
+        }
+
+        public void AddDummyData()
+        {
+            foreach (Product p in prodArray)
+            {
+                string result = addItemsToDB(p.Title, p.Price, p.Description, p.Category, p.Image);
+            }
+        }
+
+     
     }
 }
        
