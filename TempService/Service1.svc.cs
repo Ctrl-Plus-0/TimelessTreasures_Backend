@@ -4,7 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+
 
 namespace TempService
 {
@@ -12,9 +17,15 @@ namespace TempService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        TempDatabaseDataContext DB = new TempDatabaseDataContext();
 
-  
+        public Service1()
+        {
+            returnList();
+            AddDummyData();
+        }
+
+
+        TempDatabaseDataContext DB = new TempDatabaseDataContext("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TempDB.mdf;Integrated Security=True");
 
         string IService1.login(string Email, string Password)
         {
@@ -46,15 +57,7 @@ namespace TempService
         {
             //First check the database to see if there already exists a user with a specefic email
             //If so return a string saying theyve already registered adn that they should log in instead
-
-            var UserExistCheck = (from c in DB.PUsers
-                                  where c.UEmail == Email
-                                  select c).FirstOrDefault();
-
-            if (UserExistCheck != null)
-            {
-                return "Already Registred";
-            }
+            
 
             var UserToStore = new PUser
             {
@@ -100,7 +103,90 @@ namespace TempService
             {
                 return "Error in Registering customer";
             }
+
         }
+
+        //List of products
+        public List<Product> prodList = new List<Product>();
+
+        //function to retrieve json from api
+        public async Task getProducts()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var request = await client.GetAsync("https://fakestoreapi.com/products");
+                if (request.IsSuccessStatusCode)
+                {
+                    //store json object
+                    var res = await request.Content.ReadAsStringAsync();
+                    //deserializes json to list
+                    prodList = JsonSerializer.Deserialize<List<Product>>(res);
+                }
+
+            };
+
+        }
+
+        Product[] prodArray;
+
+        //function to convert list to array
+        public Product[] returnList()
+        {
+            //gets list
+            getProducts().Wait();
+
+            //converts list to arry
+            prodArray = prodList.ToArray();
+            return prodArray;
+
+        }
+
+        //Method to add items to item table
+       public string addItemsToDB(string title, decimal price, string desciption, string category, string image)
+        {
+
+            //check if item already exists
+            var existingItem = (from i in DB.Items
+                                where i.Title == title && i.Category == category
+                                select i
+                                ).FirstOrDefault();
+
+            if(existingItem != null)
+            {
+                return "Item already exists";
+            }
+
+            var item = new Item
+            {
+                Title = title,
+                Price = price,
+                Description = desciption,
+                Category = category,
+                Image = image
+            };
+
+            DB.Items.InsertOnSubmit(item);
+            try
+            {
+                DB.SubmitChanges();
+                return "Successfully added item";
+            }
+            catch
+            {
+                return "Unable to add item";
+            }
+            
+        }
+
+        public void AddDummyData()
+        {
+            foreach (Product p in prodArray)
+            {
+                string result = addItemsToDB(p.Title, p.Price, p.Description, p.Category, p.Image);
+            }
+        }
+
+     
     }
 }
        
