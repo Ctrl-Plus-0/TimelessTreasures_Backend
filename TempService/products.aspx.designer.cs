@@ -15,6 +15,24 @@ namespace TempService
     {
 
         /// <summary>
+        /// sortDropdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList sortDropdown;
+
+        /// <summary>
+        /// filterDropdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList filterDropdown;
+
+        /// <summary>
         /// productsDiv control.
         /// </summary>
         /// <remarks>

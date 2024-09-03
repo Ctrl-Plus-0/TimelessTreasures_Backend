@@ -186,7 +186,74 @@ namespace TempService
             }
         }
 
-     
+        public Item[] getItems()
+        {
+            return DB.Items.ToArray();
+        }
+
+  
+
+        //Function to filter by category and sort by price
+        public Item[] filterAndSortItems(string filterOrder, string sortOrder)
+        {
+
+            Item[] items;
+
+            switch (filterOrder)
+            {
+                case "men's clothing":
+                    items = (from i in DB.Items
+                             where i.Category.Equals("men's clothing")
+                             select i
+                             ).ToArray();
+                    break;
+                case "women's clothing":
+                    items = (from i in DB.Items
+                             where i.Category.Equals("women's clothing")
+                             select i
+                             ).ToArray();
+                    break;
+                case "electronics":
+                    items = (from i in DB.Items
+                             where i.Category.Equals("electronics")
+                             select i
+                             ).ToArray();
+                    break;
+                case "jewelery":
+                    items = (from i in DB.Items
+                             where i.Category.Equals("jewelery")
+                             select i
+                             ).ToArray();
+                    break;
+                default:
+                    items = (from i in DB.Items
+                             select i
+                             ).ToArray();
+                    break;
+            }
+
+            switch (sortOrder)
+            {
+                case "Price ASC":
+                    items = (from i in items
+                             orderby i.Price ascending
+                             select i
+                             ).ToArray();
+                    break;
+                case "Price DESC":
+                    items = (from i in items
+                             orderby i.Price descending
+                             select i
+                             ).ToArray();
+                    break;
+                default:
+            
+                    break;
+
+            }
+
+            return items;
+        }
     }
 }
        

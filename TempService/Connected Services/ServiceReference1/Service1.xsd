@@ -86,4 +86,31 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="getItems">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getItemsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="getItemsResult" nillable="true" type="q2:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="filterAndSortItems">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filterOrder" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sortOrder" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="filterAndSortItemsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="filterAndSortItemsResult" nillable="true" type="q3:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

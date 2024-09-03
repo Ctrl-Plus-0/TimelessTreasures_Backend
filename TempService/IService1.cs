@@ -38,5 +38,11 @@ namespace TempService
 
         [OperationContract]
         void AddDummyData();
+
+        [OperationContract]
+        Item[] getItems();
+
+        [OperationContract]
+        Item[] filterAndSortItems(String filterOrder, string sortOrder);
     }
 }
