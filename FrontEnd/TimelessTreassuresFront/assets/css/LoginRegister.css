@@ -1,0 +1,16 @@
+﻿.Formblock {
+    border-style: solid;
+    border-color: inherit;
+    border-width: 2px;
+    display: block;
+    background-color: cyan;
+    overflow: hidden;
+    margin: auto;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    top: 141px;
+    left: -65px;
+}
