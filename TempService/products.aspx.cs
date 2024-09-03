@@ -16,11 +16,13 @@ namespace TempService
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //get list
-            sc.getProducts();
+            //gets product list from db
+            ServiceReference1.Item[] products = sc.filterAndSortItems(filterDropdown.SelectedValue, sortDropdown.SelectedValue);
 
-            //convert list to array
-            TempService.ServiceReference1.Product[] products = sc.returnList();
+
+
+            //clears exisiting html
+            productsDiv.InnerHtml = string.Empty;
 
             // Start the section and container
             productsDiv.InnerHtml += "<section class='section' id='about'>";
@@ -41,9 +43,10 @@ namespace TempService
                 productsDiv.InnerHtml += "<div class='features-icon' style='width: 100%; text-align: center;'>";
 
                 // Product details
-                productsDiv.InnerHtml += "<h2 style='text-align: center;'>" + products[i].Id + "</h2>";
+                //productsDiv.InnerHtml += "<h2 style='text-align: center;'>" + products[i].Id + "</h2>";
                 productsDiv.InnerHtml += "<img src='" + products[i].Image + "' alt='img' style='width: 100%; height: auto; margin-bottom: 15px;' />";
                 productsDiv.InnerHtml += "<h4 style='text-align: center;'>" + products[i].Title + "</h4>";
+                productsDiv.InnerHtml += "<h4 style='text-align: center;'>" + products[i].Price + "</h4>";
 
                 // Limit description to 100 characters and apply flex properties
                 string truncatedDescription = products[i].Description.Length > 100 ? products[i].Description.Substring(0, 100) + "..." : products[i].Description;
@@ -79,7 +82,6 @@ namespace TempService
 
 
         }
-
 
     }
 }

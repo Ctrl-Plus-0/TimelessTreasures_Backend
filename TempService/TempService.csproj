@@ -221,6 +221,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Front.Master" />
+    <Content Include="Connected Services\ServiceReference1\TempService.ServiceReference1.Item.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="TempDatabase.dbml.layout">
       <DependentUpon>TempDatabase.dbml</DependentUpon>
