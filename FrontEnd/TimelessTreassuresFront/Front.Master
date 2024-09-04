@@ -30,6 +30,18 @@ https://templatemo.com/tm-540-lava-landing-page
 
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
+    <style>
+        .logo img{
+            max-width: 200px;
+            padding-left: 0;
+            margin-left: 0;
+            display: inline;
+        }
+
+        nav {
+            display: inline;
+        }
+    </style>
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -49,7 +61,7 @@ https://templatemo.com/tm-540-lava-landing-page
     
     
     <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky" runat="server">
+    <header class="header-area header-sticky" runat="server" style="background:none;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -58,13 +70,13 @@ https://templatemo.com/tm-540-lava-landing-page
 
                     <nav id="CustomerNav" class="main-nav" runat="server" visible="false">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            Lava
+                        <a href="Landing.aspx" class="logo" style="background-color:#ffffff;">
+                            <img src="assets\images\no_slogan_trans.png" style="background-color:#ffffff;"/>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
+                            <li class="scroll-to-section"><a href="Landing.aspx" class="menu-item">Home</a></li>
                             <li class="scroll-to-section"><a href="#about" class="menu-item">About</a></li>
                             <li class="scroll-to-section"><a href="#testimonials" class="menu-item">Testimonials</a>
                             </li>
@@ -93,12 +105,12 @@ https://templatemo.com/tm-540-lava-landing-page
                     <nav id="AdminNav" class="main-nav" runat="server" visible="false">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            Lava
+                            <img src="assets\images\no_slogan_trans.png"/>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
+                            <li class="scroll-to-section"><a href="Landing.aspx" class="menu-item">Home</a></li>
                             <li class="scroll-to-section"><a href="#about" class="menu-item">About</a></li>
                             <li class="scroll-to-section"><a href="#testimonials" class="menu-item">Manage Users</a>
                                 <li class="scroll-to-section"><a href="#testimonials" class="menu-item">Manage Products</a>
@@ -126,12 +138,12 @@ https://templatemo.com/tm-540-lava-landing-page
                        <nav id="RegLoginNav" class="main-nav" runat="server" visible="true">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            Lava
+                            <img src="assets\images\no_slogan_trans.png"/>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
+                            <li class="scroll-to-section"><a href="Landing.aspx" class="menu-item">Home</a></li>
                             <li class="scroll-to-section"><a href="#about" class="menu-item">About</a></li>
                             <li class="scroll-to-section"><a href="Login.aspx" class="menu-item">Login</a>
                              <li class="scroll-to-section"><a href="Register.aspx" class="menu-item">Register</a>
