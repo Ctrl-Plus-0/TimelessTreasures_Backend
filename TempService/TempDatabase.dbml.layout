@@ -14,31 +14,31 @@
         <elementListCompartment Id="4d242d87-5717-4d21-b5ea-e45031401dca" absoluteBounds="0.51500000000000012, 6.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3ced6e96-eb89-4efc-b73a-7ba7a6b1c6e9" absoluteBounds="6.125, 2.375, 2, 1.9631982421875">
-      <DataClassMoniker Name="/TempDatabaseDataContext/Item" />
-      <nestedChildShapes>
-        <elementListCompartment Id="323eeaa4-73a0-488c-88c6-723e33e4a328" absoluteBounds="6.14, 2.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="8e3f4bf8-3405-4797-9d9e-ddcd8ae0a4f1" absoluteBounds="2, 2.375, 2, 2.3478011067708335">
       <DataClassMoniker Name="/TempDatabaseDataContext/PUser" />
       <nestedChildShapes>
         <elementListCompartment Id="a5c55be1-6556-45f7-bf32-abe98f5d3ccb" absoluteBounds="2.015, 2.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.6875 : 4.72280110677083); (3.6875 : 6)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.6875 : 4.72280110677083); (3.6875 : 6)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TempDatabaseDataContext/PUser/PUser_Customer" />
       <nodes>
         <classShapeMoniker Id="8e3f4bf8-3405-4797-9d9e-ddcd8ae0a4f1" />
         <classShapeMoniker Id="446cd4f2-6bde-43b1-a6e6-b5e4a19a65fe" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.25 : 4.72280110677083); (2.25 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.25 : 4.72280110677083); (2.25 : 5.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TempDatabaseDataContext/PUser/PUser_Admin" />
       <nodes>
         <classShapeMoniker Id="8e3f4bf8-3405-4797-9d9e-ddcd8ae0a4f1" />
         <classShapeMoniker Id="a098b8bd-12ae-4f5e-a352-f1fa38f1adf6" />
       </nodes>
     </associationConnector>
+    <classShape Id="5239e7d1-05df-41aa-a484-3d4eb3290e9a" absoluteBounds="6.375, 2.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/TempDatabaseDataContext/Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f0a5940d-6aa7-4d7d-a466-c1314b2ea1a6" absoluteBounds="6.39, 3.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
