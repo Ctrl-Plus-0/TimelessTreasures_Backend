@@ -21,7 +21,7 @@ namespace TimelessTreassuresFront
             string PhoneNO = txtContact.Text;
             string Email = txtEmail.Text;
             string Username = TxtUsername.Text;
-            string Password =     Secrecy.HashPassword(TxtPass.Text);
+            string Password =   Secrecy.HashPassword(TxtPass.Text);
 
             string RegistrationStatus = Client.Register(Email, Name, Username, Surname, PhoneNO, Password, Address);
 

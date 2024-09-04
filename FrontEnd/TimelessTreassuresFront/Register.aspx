@@ -28,49 +28,49 @@
                         <fieldset>
                           <asp:Label ID="EmailLabel" runat="server" Text="Email"></asp:Label>
                           <br />
-                          <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtEmail" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="NameLabel" runat="server" Text="Name"></asp:Label>
                           <br />
-                          <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtName" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="SurnameLabel" runat="server" Text="Surname"></asp:Label>
                           <br />
-                          <asp:TextBox ID="txtSurname" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtSurname" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="AddyLabel" runat="server" Text="Address"></asp:Label>
                           <br />
-                          <asp:TextBox ID="txtAddy" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtAddy" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="ContactLabel" runat="server" Text="Contact Number"></asp:Label>
                           <br />
-                          <asp:TextBox ID="txtContact" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtContact" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="UsernameLabel" runat="server" Text="Username"></asp:Label>
                           <br />
-                          <asp:TextBox ID="TxtUsername" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="TxtUsername" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
                           <asp:Label ID="PasswordLabel" runat="server" Text="Password"></asp:Label>
                           <br />
-                          <asp:TextBox ID="TxtPass" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="TxtPass" runat="server" style="color:black"></asp:TextBox>
                         </fieldset>
                     </div>
                     <div class="col-lg-12">

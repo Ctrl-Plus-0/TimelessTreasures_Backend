@@ -4,8 +4,15 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:62638/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62638/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:62638/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TempService" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IService1_returnList_InputMessage">
+    <wsdl:part name="parameters" element="tns:returnList" />
+  </wsdl:message>
+  <wsdl:message name="IService1_returnList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:returnListResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_Register_InputMessage">
     <wsdl:part name="parameters" element="tns:Register" />
   </wsdl:message>
@@ -18,7 +25,41 @@
   <wsdl:message name="IService1_login_OutputMessage">
     <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_getProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProducts" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_addItemsToDB_InputMessage">
+    <wsdl:part name="parameters" element="tns:addItemsToDB" />
+  </wsdl:message>
+  <wsdl:message name="IService1_addItemsToDB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addItemsToDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddDummyData_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDummyData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddDummyData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDummyDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:getItems" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_filterAndSortItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:filterAndSortItems" />
+  </wsdl:message>
+  <wsdl:message name="IService1_filterAndSortItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:filterAndSortItemsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
+    <wsdl:operation name="returnList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/returnList" message="tns:IService1_returnList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/returnListResponse" message="tns:IService1_returnList_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/RegisterResponse" message="tns:IService1_Register_OutputMessage" />
@@ -27,9 +68,38 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/login" message="tns:IService1_login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/loginResponse" message="tns:IService1_login_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getProducts" message="tns:IService1_getProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getProductsResponse" message="tns:IService1_getProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToDB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/addItemsToDB" message="tns:IService1_addItemsToDB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/addItemsToDBResponse" message="tns:IService1_addItemsToDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDummyData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddDummyData" message="tns:IService1_AddDummyData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddDummyDataResponse" message="tns:IService1_AddDummyData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getItems" message="tns:IService1_getItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getItemsResponse" message="tns:IService1_getItems_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="filterAndSortItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/filterAndSortItems" message="tns:IService1_filterAndSortItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/filterAndSortItemsResponse" message="tns:IService1_filterAndSortItems_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="returnList">
+      <soap:operation soapAction="http://tempuri.org/IService1/returnList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Register">
       <soap:operation soapAction="http://tempuri.org/IService1/Register" style="document" />
       <wsdl:input>
@@ -41,6 +111,51 @@
     </wsdl:operation>
     <wsdl:operation name="login">
       <soap:operation soapAction="http://tempuri.org/IService1/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <soap:operation soapAction="http://tempuri.org/IService1/getProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToDB">
+      <soap:operation soapAction="http://tempuri.org/IService1/addItemsToDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDummyData">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddDummyData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getItems">
+      <soap:operation soapAction="http://tempuri.org/IService1/getItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="filterAndSortItems">
+      <soap:operation soapAction="http://tempuri.org/IService1/filterAndSortItems" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
