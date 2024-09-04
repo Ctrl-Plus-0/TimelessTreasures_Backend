@@ -38,8 +38,10 @@ namespace TempService
 
             //simple logic from here
             //check if user returned is null,if not  say they logged in succesfully
+            //Returns login role 
+            //perform additional check in front end for admin type to see if manager or admin
             if(UserLogged!=null){
-                return UserLogged.URole;
+                return UserLogged.Urole;
             }
             else
             {
@@ -64,9 +66,9 @@ namespace TempService
                 UEmail = Email,
                 UFullName = Name,
                 USurname = Surname,
-                URole = "Customer", //this method is used only for registering client so this can be done
+                Urole = "Customer", //this method is used only for registering client so this can be done
                 UPassword = Password,
-                UserName_ = Username,
+                UserName = Username,
 
 
 
@@ -89,9 +91,9 @@ namespace TempService
 
                 //get auto generated iD from the user table
                 //maintain inheritance
-                CustID = UserToStore.UId,
-                Cust_Address=Address,
-                Cust_PhoneNum=Number,
+                CustId = UserToStore.UId,
+                CustAddress=Address,
+                CustPhoneNo=Number,
               };
             DB.Customers.InsertOnSubmit(UCustToStore);
             try
@@ -107,7 +109,7 @@ namespace TempService
         }
 
         //List of products
-        public List<Product> prodList = new List<Product>();
+        public List<Item> prodList = new List<Item>();
 
         //function to retrieve json from api
         public async Task getProducts()
@@ -120,17 +122,17 @@ namespace TempService
                     //store json object
                     var res = await request.Content.ReadAsStringAsync();
                     //deserializes json to list
-                    prodList = JsonSerializer.Deserialize<List<Product>>(res);
+                    prodList = JsonSerializer.Deserialize<List<Item>>(res);
                 }
 
             };
 
         }
 
-        Product[] prodArray;
+        Item[] prodArray;
 
         //function to convert list to array
-        public Product[] returnList()
+        public Item[] returnList()
         {
             //gets list
             getProducts().Wait();
@@ -180,7 +182,7 @@ namespace TempService
 
         public void AddDummyData()
         {
-            foreach (Product p in prodArray)
+            foreach (Item p in prodArray)
             {
                 string result = addItemsToDB(p.Title, p.Price, p.Description, p.Category, p.Image);
             }

@@ -15,7 +15,7 @@ namespace TempService
     {
 
        [OperationContract]
-       Product[] returnList();
+       Item[] returnList();
 
        [OperationContract] 
        //MEthod will assign customer role on its own as admins and managers not added this way
