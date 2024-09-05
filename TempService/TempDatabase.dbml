@@ -16,16 +16,6 @@
       <Association Name="PUser_Admin" Member="PUser" ThisKey="AdminId" OtherKey="UId" Type="PUser" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Item" Member="Items">
-    <Type Name="Item">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(900) NOT NULL" CanBeNull="false" />
-      <Column Name="Category" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Image" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.PUser" Member="PUsers">
     <Type Name="PUser">
       <Column Name="UId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -38,6 +28,17 @@
       <Column Name="UEmail" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="PUser_Customer" Member="Customer" ThisKey="UId" OtherKey="CustId" Type="Customer" Cardinality="One" />
       <Association Name="PUser_Admin" Member="Admin" ThisKey="UId" OtherKey="AdminId" Type="Admin" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Item" Member="Items">
+    <Type Name="Item">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(900) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="[Visible ]" Member="Visible_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

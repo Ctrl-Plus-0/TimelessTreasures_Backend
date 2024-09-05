@@ -9,11 +9,160 @@
 //------------------------------------------------------------------------------
 
 namespace TimelessTreassuresFront.ServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Visible_Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Category {
+            get {
+                return this.CategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
+                    this.CategoryField = value;
+                    this.RaisePropertyChanged("Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Visible_ {
+            get {
+                return this.Visible_Field;
+            }
+            set {
+                if ((this.Visible_Field.Equals(value) != true)) {
+                    this.Visible_Field = value;
+                    this.RaisePropertyChanged("Visible_");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/returnList", ReplyAction="http://tempuri.org/IService1/returnListResponse")]
+        TimelessTreassuresFront.ServiceReference1.Item[] returnList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/returnList", ReplyAction="http://tempuri.org/IService1/returnListResponse")]
+        System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> returnListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
         string Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address);
@@ -26,6 +175,36 @@ namespace TimelessTreassuresFront.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
         System.Threading.Tasks.Task<string> loginAsync(string Email, string Password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getProducts", ReplyAction="http://tempuri.org/IService1/getProductsResponse")]
+        void getProducts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getProducts", ReplyAction="http://tempuri.org/IService1/getProductsResponse")]
+        System.Threading.Tasks.Task getProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
+        string addItemsToDB(string title, decimal price, string desciption, string category, string image);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
+        System.Threading.Tasks.Task<string> addItemsToDBAsync(string title, decimal price, string desciption, string category, string image);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
+        void AddDummyData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
+        System.Threading.Tasks.Task AddDummyDataAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItems", ReplyAction="http://tempuri.org/IService1/getItemsResponse")]
+        TimelessTreassuresFront.ServiceReference1.Item[] getItems();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItems", ReplyAction="http://tempuri.org/IService1/getItemsResponse")]
+        System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> getItemsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/filterAndSortItems", ReplyAction="http://tempuri.org/IService1/filterAndSortItemsResponse")]
+        TimelessTreassuresFront.ServiceReference1.Item[] filterAndSortItems(string filterOrder, string sortOrder);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/filterAndSortItems", ReplyAction="http://tempuri.org/IService1/filterAndSortItemsResponse")]
+        System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> filterAndSortItemsAsync(string filterOrder, string sortOrder);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +234,14 @@ namespace TimelessTreassuresFront.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
+        public TimelessTreassuresFront.ServiceReference1.Item[] returnList() {
+            return base.Channel.returnList();
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> returnListAsync() {
+            return base.Channel.returnListAsync();
+        }
+        
         public string Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address) {
             return base.Channel.Register(Email, Name, Username, Surname, Number, Password, Address);
         }
@@ -69,6 +256,46 @@ namespace TimelessTreassuresFront.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> loginAsync(string Email, string Password) {
             return base.Channel.loginAsync(Email, Password);
+        }
+        
+        public void getProducts() {
+            base.Channel.getProducts();
+        }
+        
+        public System.Threading.Tasks.Task getProductsAsync() {
+            return base.Channel.getProductsAsync();
+        }
+        
+        public string addItemsToDB(string title, decimal price, string desciption, string category, string image) {
+            return base.Channel.addItemsToDB(title, price, desciption, category, image);
+        }
+        
+        public System.Threading.Tasks.Task<string> addItemsToDBAsync(string title, decimal price, string desciption, string category, string image) {
+            return base.Channel.addItemsToDBAsync(title, price, desciption, category, image);
+        }
+        
+        public void AddDummyData() {
+            base.Channel.AddDummyData();
+        }
+        
+        public System.Threading.Tasks.Task AddDummyDataAsync() {
+            return base.Channel.AddDummyDataAsync();
+        }
+        
+        public TimelessTreassuresFront.ServiceReference1.Item[] getItems() {
+            return base.Channel.getItems();
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> getItemsAsync() {
+            return base.Channel.getItemsAsync();
+        }
+        
+        public TimelessTreassuresFront.ServiceReference1.Item[] filterAndSortItems(string filterOrder, string sortOrder) {
+            return base.Channel.filterAndSortItems(filterOrder, sortOrder);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreassuresFront.ServiceReference1.Item[]> filterAndSortItemsAsync(string filterOrder, string sortOrder) {
+            return base.Channel.filterAndSortItemsAsync(filterOrder, sortOrder);
         }
     }
 }

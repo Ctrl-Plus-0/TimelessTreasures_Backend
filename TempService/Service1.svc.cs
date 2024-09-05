@@ -18,14 +18,9 @@ namespace TempService
     public class Service1 : IService1
     {
 
-        public Service1()
-        {
-            returnList();
-            AddDummyData();
-        }
+       
 
-
-        TempDatabaseDataContext DB = new TempDatabaseDataContext("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TempDB.mdf;Integrated Security=True");
+        TempDatabaseDataContext DB = new TempDatabaseDataContext();
 
         string IService1.login(string Email, string Password)
         {
@@ -58,7 +53,7 @@ namespace TempService
         string IService1.Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address)
         {
             //First check the database to see if there already exists a user with a specefic email
-            //If so return a string saying theyve already registered adn that they should log in instead
+            //If so return a string saying theyve already registered and that they should log in instead
             
 
             var UserToStore = new PUser
@@ -69,6 +64,7 @@ namespace TempService
                 Urole = "Customer", //this method is used only for registering client so this can be done
                 UPassword = Password,
                 UserName = Username,
+                Ucreationtime=DateTime.Now
 
 
 
@@ -79,10 +75,11 @@ namespace TempService
                 DB.SubmitChanges();
 
             }
-            //needs to be fixed
+            //Update the exceptions to take more into account not just general exception 
+            //Makes debugging easier
             catch (Exception e)
             {
-                return "Error in Registering user";
+                return "Error in Registering user" +e.Message;
             }
 
             //Now do Registering for the Customer
