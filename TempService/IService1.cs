@@ -40,9 +40,12 @@ namespace TempService
         void AddDummyData();
 
         [OperationContract]
-        Item[] getItems();
+        List<ItemWrapper> getItems(int SortType);
 
         [OperationContract]
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
+
+        [OperationContract]
+        string AddItemToCart(int Prodid, int UserId);
     }
 }

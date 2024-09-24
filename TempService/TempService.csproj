@@ -140,6 +140,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemWrapper.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
@@ -153,6 +154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TempDatabase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="TrackerWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TempDatabase.dbml">
