@@ -96,12 +96,56 @@ namespace TempService
             try
             {
                 DB.SubmitChanges();
-                return "User Succesfully Registered";
+               
             }
             catch
             {
+                //if a customer record fails to be made delete the previously made user record
+                //To avoid dummy records that point nowhere
+                DB.PUsers.DeleteOnSubmit(UserToStore);
+                DB.SubmitChanges();
+
                 return "Error in Registering customer";
             }
+
+            //As soon as a user registers create a shopping cart for their accound
+            //If there are concerns about dead accounts adding bloat to database can
+            //Make function to check for inactivity 
+            //If account inavtive for certain period deactivate it
+
+            //Only the user id is necessary to fully create the cart
+            //Can do this becasue this method is stricntly for registering customers
+            var cart = new UCart
+            {
+                CustId = UserToStore.UId
+            };
+
+            DB.UCarts.InsertOnSubmit(cart);
+
+            try
+            {
+                DB.SubmitChanges();
+
+                return "User Succesfully Registered";
+
+            }
+            catch(Exception e1) 
+            {
+                Console.WriteLine(e1.Message);
+             
+                //Same as above remove to prevent dummy records
+                DB.Customers.DeleteOnSubmit(UCustToStore);
+
+                DB.SubmitChanges();
+
+                DB.PUsers.DeleteOnSubmit(UserToStore);
+
+                DB.SubmitChanges();
+
+
+                return " Error in Registration";
+            }
+
 
         }
 
@@ -185,12 +229,142 @@ namespace TempService
             }
         }
 
-        public Item[] getItems()
+        public List<ItemWrapper> getItems(int SortType)
         {
-            return DB.Items.ToArray();
+            dynamic prod = new List<ItemWrapper>();
+            if (SortType == 1)
+            {
+                //return a sorted list starting from higheest to lowest price
+                dynamic Sorted = (from i in DB.Items
+                                  where i.Quantity > 0 && i.Visible_ == 1
+                                  orderby i.Price descending
+                                  select i).DefaultIfEmpty();
+
+                //Instead of using the table use the wrapper and return list of the wrappers
+                //used in front end as well in exact same way
+                foreach (dynamic i in Sorted)
+                {
+                    ItemWrapper IW = new ItemWrapper();
+                    IW.ID = i.Id;
+                    IW.Title = i.Title;
+                    IW.Image = i.Image;
+                    IW.Description = i.Description;
+                    IW.Price = i.Price;
+                    IW.Quantity = i.Quantity;
+                    IW.Category = i.Category;
+                    IW.NumSold = i.NumSold;
+                    IW.Visibility = i.Visible_;
+                    prod.Add(IW);
+
+                }
+                return prod;
+
+            }
+            else if (SortType == 2)
+            {
+                //return a sorted list starting from lowest price to highest
+                dynamic Sorted = (from i in DB.Items
+                                  where i.Quantity > 0 && i.Visible_ == 1
+                                  orderby i.Price
+                                  select i).DefaultIfEmpty();
+
+                foreach (dynamic i in Sorted)
+                {
+                    ItemWrapper IW = new ItemWrapper();
+                    IW.ID = i.Id;
+                    IW.Title = i.Title;
+                    IW.Image = i.Image;
+                    IW.Description = i.Description;
+                    IW.Price = i.Price;
+                    IW.Quantity = i.Quantity;
+                    IW.Category = i.Category;
+                    IW.NumSold = i.NumSold;
+                    IW.Visibility = i.Visible_;
+                    prod.Add(IW);
+
+                }
+                return prod;
+            }
+            else if (SortType == 3)
+            {
+                //return a sorted list starting from A to Z
+                dynamic Sorted = (from i in DB.Items
+                                  where i.Quantity > 0 && i.Visible_ == 1
+                                  orderby i.Title
+                                  select i).DefaultIfEmpty();
+
+                foreach (dynamic i in Sorted)
+                {
+                    ItemWrapper IW = new ItemWrapper();
+                    IW.ID = i.Id;
+                    IW.Title = i.Title;
+                    IW.Image = i.Image;
+                    IW.Description = i.Description;
+                    IW.Price = i.Price;
+                    IW.Quantity = i.Quantity;
+                    IW.Category = i.Category;
+                    IW.NumSold = i.NumSold;
+                    IW.Visibility = i.Visible_;
+                    prod.Add(IW);
+
+                }
+                return prod;
+            }
+            else if (SortType == 4)
+            {
+                //return a sorted list starting from A to Z
+                dynamic Sorted = (from i in DB.Items
+                                  where i.Quantity > 0 && i.Visible_ == 1
+                                  orderby i.Title ascending
+                                  select i).DefaultIfEmpty();
+
+                foreach (dynamic i in Sorted)
+                {
+                    ItemWrapper IW = new ItemWrapper();
+                    IW.ID = i.Id;
+                    IW.Title = i.Title;
+                    IW.Image = i.Image;
+                    IW.Description = i.Description;
+                    IW.Price = i.Price;
+                    IW.Quantity = i.Quantity;
+                    IW.Category = i.Category;
+                    IW.NumSold = i.NumSold;
+                    IW.Visibility = i.Visible_;
+                    prod.Add(IW);
+
+                }
+                return prod;
+
+            }
+            else
+            {
+                //return a sorted list starting from A to Z
+                dynamic Unsorted = (from i in DB.Items
+                                    where i.Quantity > 0 && i.Visible_ == 1
+                                    select i).DefaultIfEmpty();
+
+                foreach (dynamic i in Unsorted)
+                {
+                    ItemWrapper IW = new ItemWrapper();
+                    IW.ID = i.Id;
+                    IW.Title = i.Title;
+                    IW.Image = i.Image;
+                    IW.Description = i.Description;
+                    IW.Price = i.Price;
+                    IW.Quantity = i.Quantity;
+                    IW.Category = i.Category;
+                    IW.NumSold = i.NumSold;
+                    IW.Visibility = i.Visible_;
+                    prod.Add(IW);
+
+                }
+                return prod;
+
+            }
         }
 
   
+        //NOTE:This function needs to be updated when the categories are finaly made/added 
 
         //Function to filter by category and sort by price
         public Item[] filterAndSortItems(string filterOrder, string sortOrder)
@@ -252,6 +426,60 @@ namespace TempService
             }
 
             return items;
+        }
+
+        public string AddItemToCart(int Prodid, int UserId)
+        {
+            var CT = (from Tracker in DB.CartTrackers
+                      join Cart in DB.UCarts
+                      on Tracker.CartId equals Cart.Id
+                      where Cart.CustId == UserId && Tracker.ProdID == Prodid
+                      select Tracker).FirstOrDefault();
+
+            if (CT != null)
+            {
+                //update the quantity if user tries to add same item
+                CT.Quantity += 1;
+                try
+                {
+                    DB.SubmitChanges();
+                    return "Product Exists adding to quantity";
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return "Error adding existing record to cart";
+                    //Problem encountred when trying to up quantity
+                }
+            }
+            else
+            {
+                var Cartrack = new CartTracker();
+                //Get the cart and product record being used in this instance
+                var Prod = (from p in DB.Items
+                            where p.Id == Prodid
+                            select p).FirstOrDefault();
+                var Cart = (from c in DB.UCarts
+                            where c.CustId == UserId
+                            select c).FirstOrDefault();
+                Cartrack.ProdID = Prodid;
+                Cartrack.Price = Prod.Price;
+                Cartrack.CartId = Cart.Id; //set the id to the id of the cart associated to the user 
+                Cartrack.Quantity = 1; //set to 1 sice is first time adding to the cart
+                DB.CartTrackers.InsertOnSubmit(Cartrack);
+                try
+                {
+                    DB.SubmitChanges();
+                    return Prod.Title + " added to cart";
+                }
+                catch (Exception e1)
+                {
+                    Console.WriteLine(e1.Message);
+                    return "Error inserting Product to cart,try again later";
+                    //Problem encountred when inserting product to cart;
+                }
+            }
         }
     }
 }
