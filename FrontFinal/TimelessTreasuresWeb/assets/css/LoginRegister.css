@@ -1,0 +1,40 @@
+﻿.Formblock {
+    border-style: solid;
+    border-color: inherit;
+    border-width: 2px;
+    display: block;
+    background-color: cyan;
+    overflow: hidden;
+    margin: auto;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    top: 141px;
+    left: -65px;
+}
+
+#form-head {
+    color: white;
+    text-align: center;
+}
+
+.form-field {
+    margin: auto;
+    width: 80%;
+}
+
+.form-input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.form-container {
+    padding: 20px;
+    font-size: 22px;
+   
+}
