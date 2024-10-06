@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -149,40 +148,7 @@ namespace TempService
 
         }
 
-        //List of products
-        public List<Item> prodList = new List<Item>();
 
-        //function to retrieve json from api
-        public async Task getProducts()
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                var request = await client.GetAsync("https://fakestoreapi.com/products");
-                if (request.IsSuccessStatusCode)
-                {
-                    //store json object
-                    var res = await request.Content.ReadAsStringAsync();
-                    //deserializes json to list
-                    prodList = JsonSerializer.Deserialize<List<Item>>(res);
-                }
-
-            };
-
-        }
-
-        Item[] prodArray;
-
-        //function to convert list to array
-        public Item[] returnList()
-        {
-            //gets list
-            getProducts().Wait();
-
-            //converts list to arry
-            prodArray = prodList.ToArray();
-            return prodArray;
-
-        }
 
         //Method to add items to item table
        public string addItemsToDB(string title, decimal price, string desciption, string category, string image)
@@ -221,13 +187,7 @@ namespace TempService
             
         }
 
-        public void AddDummyData()
-        {
-            foreach (Item p in prodArray)
-            {
-                string result = addItemsToDB(p.Title, p.Price, p.Description, p.Category, p.Image);
-            }
-        }
+
 
         public List<ItemWrapper> getItems(int SortType)
         {
@@ -315,7 +275,7 @@ namespace TempService
                 //return a sorted list starting from A to Z
                 dynamic Sorted = (from i in DB.Items
                                   where i.Quantity > 0 && i.Visible_ == 1
-                                  orderby i.Title ascending
+                                  orderby i.Title descending 
                                   select i).DefaultIfEmpty();
 
                 foreach (dynamic i in Sorted)
@@ -338,7 +298,7 @@ namespace TempService
             }
             else
             {
-                //return a sorted list starting from A to Z
+                //return an unsorted list
                 dynamic Unsorted = (from i in DB.Items
                                     where i.Quantity > 0 && i.Visible_ == 1
                                     select i).DefaultIfEmpty();
@@ -480,6 +440,34 @@ namespace TempService
                     //Problem encountred when inserting product to cart;
                 }
             }
+        }
+
+        public ItemWrapper GetItem(int Prodid)
+        {
+            var Prod = (from p in DB.Items
+                        where p.Id == Prodid
+                        select p).FirstOrDefault();
+
+            if (Prod != null)
+            {
+                ItemWrapper IW = new ItemWrapper();
+                IW.ID = Prod.Id;
+                IW.Title = Prod.Title;
+                IW.Image = Prod.Image;
+                IW.Description = Prod.Description;
+                IW.Price = Prod.Price;
+                IW.Quantity = Prod.Quantity;
+                IW.Category = Prod.Category;
+                IW.NumSold = Prod.NumSold;
+                IW.Visibility = Prod.Visible_;
+
+                return IW;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
     }
 }

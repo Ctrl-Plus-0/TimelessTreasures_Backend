@@ -15,6 +15,179 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemWrapper", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class ItemWrapper : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumSoldField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VisibilityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Category {
+            get {
+                return this.CategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
+                    this.CategoryField = value;
+                    this.RaisePropertyChanged("Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Image {
+            get {
+                return this.ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
+                    this.ImageField = value;
+                    this.RaisePropertyChanged("Image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumSold {
+            get {
+                return this.NumSoldField;
+            }
+            set {
+                if ((this.NumSoldField.Equals(value) != true)) {
+                    this.NumSoldField = value;
+                    this.RaisePropertyChanged("NumSold");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Visibility {
+            get {
+                return this.VisibilityField;
+            }
+            set {
+                if ((this.VisibilityField.Equals(value) != true)) {
+                    this.VisibilityField = value;
+                    this.RaisePropertyChanged("Visibility");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
     [System.SerializableAttribute()]
     public partial class Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -827,188 +1000,9 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ItemWrapper", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
-    [System.SerializableAttribute()]
-    public partial class ItemWrapper : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CategoryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumSoldField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal PriceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuantityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int VisibilityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Category {
-            get {
-                return this.CategoryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
-                    this.CategoryField = value;
-                    this.RaisePropertyChanged("Category");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int NumSold {
-            get {
-                return this.NumSoldField;
-            }
-            set {
-                if ((this.NumSoldField.Equals(value) != true)) {
-                    this.NumSoldField = value;
-                    this.RaisePropertyChanged("NumSold");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Price {
-            get {
-                return this.PriceField;
-            }
-            set {
-                if ((this.PriceField.Equals(value) != true)) {
-                    this.PriceField = value;
-                    this.RaisePropertyChanged("Price");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Quantity {
-            get {
-                return this.QuantityField;
-            }
-            set {
-                if ((this.QuantityField.Equals(value) != true)) {
-                    this.QuantityField = value;
-                    this.RaisePropertyChanged("Quantity");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Visibility {
-            get {
-                return this.VisibilityField;
-            }
-            set {
-                if ((this.VisibilityField.Equals(value) != true)) {
-                    this.VisibilityField = value;
-                    this.RaisePropertyChanged("Visibility");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/returnList", ReplyAction="http://tempuri.org/IService1/returnListResponse")]
-        TimelessTreasuresWeb1.ServiceReference1.Item[] returnList();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/returnList", ReplyAction="http://tempuri.org/IService1/returnListResponse")]
-        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item[]> returnListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
         string Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address);
@@ -1022,29 +1016,23 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
         System.Threading.Tasks.Task<string> loginAsync(string Email, string Password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getProducts", ReplyAction="http://tempuri.org/IService1/getProductsResponse")]
-        void getProducts();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getProducts", ReplyAction="http://tempuri.org/IService1/getProductsResponse")]
-        System.Threading.Tasks.Task getProductsAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
         string addItemsToDB(string title, decimal price, string desciption, string category, string image);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
         System.Threading.Tasks.Task<string> addItemsToDBAsync(string title, decimal price, string desciption, string category, string image);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
-        void AddDummyData();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddDummyData", ReplyAction="http://tempuri.org/IService1/AddDummyDataResponse")]
-        System.Threading.Tasks.Task AddDummyDataAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItems", ReplyAction="http://tempuri.org/IService1/getItemsResponse")]
         TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItems(int SortType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItems", ReplyAction="http://tempuri.org/IService1/getItemsResponse")]
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsAsync(int SortType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetItem", ReplyAction="http://tempuri.org/IService1/GetItemResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.ItemWrapper GetItem(int Prodid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetItem", ReplyAction="http://tempuri.org/IService1/GetItemResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper> GetItemAsync(int Prodid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/filterAndSortItems", ReplyAction="http://tempuri.org/IService1/filterAndSortItemsResponse")]
         TimelessTreasuresWeb1.ServiceReference1.Item[] filterAndSortItems(string filterOrder, string sortOrder);
@@ -1086,14 +1074,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public TimelessTreasuresWeb1.ServiceReference1.Item[] returnList() {
-            return base.Channel.returnList();
-        }
-        
-        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item[]> returnListAsync() {
-            return base.Channel.returnListAsync();
-        }
-        
         public string Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address) {
             return base.Channel.Register(Email, Name, Username, Surname, Number, Password, Address);
         }
@@ -1110,14 +1090,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.loginAsync(Email, Password);
         }
         
-        public void getProducts() {
-            base.Channel.getProducts();
-        }
-        
-        public System.Threading.Tasks.Task getProductsAsync() {
-            return base.Channel.getProductsAsync();
-        }
-        
         public string addItemsToDB(string title, decimal price, string desciption, string category, string image) {
             return base.Channel.addItemsToDB(title, price, desciption, category, image);
         }
@@ -1126,20 +1098,20 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.addItemsToDBAsync(title, price, desciption, category, image);
         }
         
-        public void AddDummyData() {
-            base.Channel.AddDummyData();
-        }
-        
-        public System.Threading.Tasks.Task AddDummyDataAsync() {
-            return base.Channel.AddDummyDataAsync();
-        }
-        
         public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItems(int SortType) {
             return base.Channel.getItems(SortType);
         }
         
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsAsync(int SortType) {
             return base.Channel.getItemsAsync(SortType);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper GetItem(int Prodid) {
+            return base.Channel.GetItem(Prodid);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper> GetItemAsync(int Prodid) {
+            return base.Channel.GetItemAsync(Prodid);
         }
         
         public TimelessTreasuresWeb1.ServiceReference1.Item[] filterAndSortItems(string filterOrder, string sortOrder) {

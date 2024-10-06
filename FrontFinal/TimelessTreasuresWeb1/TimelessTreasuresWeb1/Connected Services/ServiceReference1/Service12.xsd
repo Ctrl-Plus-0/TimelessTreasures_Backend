@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TempService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TempService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfItemWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemWrapper" nillable="true" type="tns:ItemWrapper" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemWrapper" nillable="true" type="tns:ArrayOfItemWrapper" />
+  <xs:complexType name="ItemWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumSold" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Visibility" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemWrapper" nillable="true" type="tns:ItemWrapper" />
   <xs:complexType name="ArrayOfItem">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
@@ -88,24 +108,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUCart" nillable="true" type="tns:ArrayOfUCart" />
-  <xs:complexType name="ArrayOfItemWrapper">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemWrapper" nillable="true" type="tns:ItemWrapper" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfItemWrapper" nillable="true" type="tns:ArrayOfItemWrapper" />
-  <xs:complexType name="ItemWrapper">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NumSold" type="xs:int" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Visibility" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ItemWrapper" nillable="true" type="tns:ItemWrapper" />
 </xs:schema>
