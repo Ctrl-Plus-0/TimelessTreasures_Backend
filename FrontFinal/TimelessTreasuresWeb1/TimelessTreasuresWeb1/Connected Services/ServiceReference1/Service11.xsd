@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:62638/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TempService" />
-  <xs:element name="returnList">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="returnListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="returnListResult" nillable="true" type="q1:ArrayOfItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
@@ -48,16 +36,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getProducts">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getProductsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="addItemsToDB">
     <xs:complexType>
       <xs:sequence>
@@ -76,16 +54,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddDummyData">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddDummyDataResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="getItems">
     <xs:complexType>
       <xs:sequence>
@@ -96,7 +64,21 @@
   <xs:element name="getItemsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="getItemsResult" nillable="true" type="q2:ArrayOfItemWrapper" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="getItemsResult" nillable="true" type="q1:ArrayOfItemWrapper" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Prodid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetItemResult" nillable="true" type="q2:ItemWrapper" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

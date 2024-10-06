@@ -14,8 +14,7 @@ namespace TempService
     public interface IService1
     {
 
-       [OperationContract]
-       Item[] returnList();
+   
 
        [OperationContract] 
        //MEthod will assign customer role on its own as admins and managers not added this way
@@ -29,18 +28,15 @@ namespace TempService
         string login(string Email, string Password);
 
         [OperationContract]
-        // function to make http requestion and populate list of products
-        Task getProducts();
-
-
-        [OperationContract]
         string addItemsToDB(string title, decimal price, string desciption, string category, string image);
 
-        [OperationContract]
-        void AddDummyData();
+   
 
         [OperationContract]
         List<ItemWrapper> getItems(int SortType);
+
+        [OperationContract]
+        ItemWrapper GetItem(int Prodid);
 
         [OperationContract]
         Item[] filterAndSortItems(String filterOrder, string sortOrder);

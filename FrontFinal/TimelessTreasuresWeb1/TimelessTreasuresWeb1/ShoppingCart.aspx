@@ -33,6 +33,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                              <!-- Replace all td and prod info with panel place holder
+                              add in dynamically-->
+                          <!--do same for the update/checkout sections-->
+                        <asp:Panel ID="TDHolder" runat="server"></asp:Panel>
                             <tr>
                                 <td>
                                     <div class="media">
