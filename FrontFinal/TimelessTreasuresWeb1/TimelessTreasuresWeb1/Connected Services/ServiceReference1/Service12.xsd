@@ -108,4 +108,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUCart" nillable="true" type="tns:ArrayOfUCart" />
+  <xs:complexType name="StaffMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UId" type="xs:int" />
+      <xs:element minOccurs="0" name="USurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ucreationtime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Urole" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StaffMember" nillable="true" type="tns:StaffMember" />
 </xs:schema>
