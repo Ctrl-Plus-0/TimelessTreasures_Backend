@@ -15,7 +15,7 @@ namespace IFM2B10_2014_CS_Paper_A
             byte[] byteArray = null;
             byteArray = algorithm.ComputeHash(Encoding.Default.GetBytes(password));
             string hashedPassword = "";
-            for (int i = 0; i < byteArray.Length - 1; i++)
+            for (int i = 0; i < byteArray.Length; i++)
             {
                 hashedPassword += byteArray[i].ToString("x2");
             }

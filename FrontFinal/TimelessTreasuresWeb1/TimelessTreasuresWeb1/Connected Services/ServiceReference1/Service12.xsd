@@ -110,6 +110,7 @@
   <xs:element name="ArrayOfUCart" nillable="true" type="tns:ArrayOfUCart" />
   <xs:complexType name="StaffMember">
     <xs:sequence>
+      <xs:element minOccurs="0" name="PermType" type="xs:int" />
       <xs:element minOccurs="0" name="UEmail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UFullName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UId" type="xs:int" />

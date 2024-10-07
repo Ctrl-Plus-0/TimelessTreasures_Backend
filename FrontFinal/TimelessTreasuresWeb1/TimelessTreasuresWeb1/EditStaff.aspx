@@ -32,8 +32,14 @@
                 <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label><br />
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
 
-                <asp:Label ID="lblRole" runat="server" Text="Role:"></asp:Label><br />
-                <asp:TextBox ID="txtRole" runat="server"></asp:TextBox><br />
+                
+                
+                <asp:DropDownList ID="ddlRole" runat="server"  >
+                <asp:ListItem  Selected="True" Value="0">Select Manager Type</asp:ListItem>
+                <asp:ListItem Value="1">Head Manager</asp:ListItem>
+                <asp:ListItem Value="2">Standard Manager</asp:ListItem>
+            </asp:DropDownList>
+                <br />
 
                 <asp:Button ID="btnEdit" runat="server" Text="Edit Staff" OnClick="btnEdit_Click" />
             </asp:Panel>

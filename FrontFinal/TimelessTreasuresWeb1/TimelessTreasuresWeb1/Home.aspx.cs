@@ -32,8 +32,8 @@ namespace TimelessTreasuresWeb1
             {
                 master.getManageProducts.Visible = true;
 
-                master.getWishlist.Visible = true;
-                master.getShoppingBag.Visible = true;
+                master.getWishlist.Visible = false;
+                master.getShoppingBag.Visible = false;
                 master.getLogin.Visible = true;
                 master.getUser.Visible = true;
                 master.getLogout.Visible = true;
@@ -44,8 +44,8 @@ namespace TimelessTreasuresWeb1
                 master.getManageProducts.Visible = true;
                 master.getManageStaff.Visible = true;
                 master.getUser.Visible = true;
-                master.getWishlist.Visible = true;
-                master.getShoppingBag.Visible = true;
+                master.getWishlist.Visible = false;
+                master.getShoppingBag.Visible = false;
                 master.getLogin.Visible = true;
 
                 master.getLogout.Visible = true;
