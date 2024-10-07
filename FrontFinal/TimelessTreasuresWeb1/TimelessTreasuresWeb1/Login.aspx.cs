@@ -59,16 +59,35 @@ namespace TimelessTreasuresWeb1
                 Msglabel.Text = "Incorrect Username or Passowrd";
 
             }
-            else
+            else if(loginstatus == "Customer")
             {
                 //create a session variable fot the login status
                 //this will be used by  landing page to change the navbar type
-                Session["UserType"] = loginstatus;
 
+
+                Session["UserType"] = loginstatus;  //*****//
+                Session["LoggedInUserID"] = Client.GetUserID(email, password);
                 Response.Redirect("Home.aspx");
 
 
             }
+            else if (loginstatus == "Manager")
+            {
+                Session["UserType"] = loginstatus;  //*****//
+                Session["LoggedInUserID"] = Client.GetUserID(email, password);
+                Response.Redirect("Home.aspx");
+            }
+            else if (loginstatus == "Head Manager")
+            {
+                Session["UserType"] = loginstatus;  //*****//
+                Session["LoggedInUserID"] = Client.GetUserID(email, password);
+                Response.Redirect("Home.aspx");
+            }
+        }
+
+        protected void txtPass_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

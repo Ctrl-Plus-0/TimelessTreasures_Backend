@@ -32,11 +32,13 @@ namespace TimelessTreasuresWeb1
             if (RegistrationStatus == "User Succesfully Registered")
             {
                 Msglabel.Text = "Registration succesful, proceed to login";
-
+                //Redirect User To Login Page Upon Logging In
+                Response.Redirect("Login.aspx");
             }
             else if (RegistrationStatus == "Already Registred")
             {
-                Msglabel.Text = "User alredy registered, please login instead!";
+                // Msglabel.Text = "User alredy registered, please login instead!"; // Unecessary, since the user is immediately redirected to login
+                Response.Redirect("Login.aspx");
             }
             else
             {

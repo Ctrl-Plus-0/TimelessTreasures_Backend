@@ -48,7 +48,25 @@ namespace TempService
              * set true admind bar visiblity etc
              */
         }
+        public int GetUserID(string email, string password)
+        {
+            using (DB)
+            {
+                var checkUser = (from u in DB.PUsers
+                                 where u.UEmail.Equals(email) &&
+                                       u.UPassword.Equals(IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password))
+                                 select u).FirstOrDefault();
 
+                if (checkUser == null)
+                {
+                    return -1; // User not found or authentication failed
+                }
+                else
+                {
+                    return checkUser.UId; // Return the user's ID
+                }
+            }
+        }
         string IService1.Register(string Email, string Name, string Username, string Surname, string Number, string Password, string Address)
         {
             //First check the database to see if there already exists a user with a specefic email
@@ -469,6 +487,205 @@ namespace TempService
             }
            
         }
+
+
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role)
+        {
+            {
+                var checkUser = (from u in DB.PUsers
+                                 where u.UserName.Equals(userName) || u.UEmail.Equals(email)
+                                 select u).FirstOrDefault();
+
+                if (checkUser == null)
+                {
+                    var staffToBeSaved = new PUser
+                    {
+                        UFullName = fullName,
+                        USurname = surname,
+                        UserName = userName,
+                        UEmail = email,
+                        UPassword = IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password),
+                        Ucreationtime = DateTime.Now,
+                        Urole = role
+                    };
+
+                    DB.PUsers.InsertOnSubmit(staffToBeSaved);
+                    try
+                    {
+                        DB.SubmitChanges();
+                        return 0; // STAFF MEMBER ADDED SUCCESSFULLY
+                    }
+                    catch (Exception)
+                    {
+                        return -1; // INTERNAL SERVER ERROR
+                    }
+                }
+                else
+                {
+                    return 1; // STAFF MEMBER ALREADY EXISTS
+                }
+            }
+        }
+
+        public int EditStaffMember(string fullName, string surname, string email, string role)
+        {
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                if (staff != null)
+                {
+                    staff.UEmail = email;
+                    staff.Urole = role;
+                    DB.SubmitChanges(); // Save changes to the database
+                    return 0; // Success
+                }
+                return -1; // Staff member not found
+            }
+        }
+
+        public int DeleteStaffMember(string fullName, string surname)
+        {
+
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                if (staff != null)
+                {
+
+                    var admin = DB.Admins.FirstOrDefault(a => a.AdminId == staff.UId);
+                    if (admin != null)
+                    {
+                        DB.Admins.DeleteOnSubmit(admin);
+                    }
+
+                    // Remove from the PUser table
+                    DB.PUsers.DeleteOnSubmit(staff);
+                    DB.SubmitChanges(); // Save changes to the database
+                    return 0; // Success
+                }
+                return -1; // Staff member not found
+            }
+        }
+
+        public StaffMember GetStaffMember(int userId)
+        {
+            var staffMember = (from u in DB.PUsers
+                               where u.UId == userId
+                               select new StaffMember
+                               {
+                                   UId = u.UId,
+                                   UserName = u.UserName,
+                                   UFullName = u.UFullName,
+                                   USurname = u.USurname,
+                                   UEmail = u.UEmail,
+                                   Ucreationtime = u.Ucreationtime,
+                                   Urole = u.Urole
+                               }).FirstOrDefault();
+
+            return staffMember;
+        }
+
+        public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
+        {
+            var existingItem = GetProductByName(title);
+
+
+            if (existingItem == null)
+            {
+                return 1;
+            }
+
+
+            existingItem.Price = price;
+            existingItem.Description = description;
+            existingItem.Category = category;
+            existingItem.Image = image;
+            existingItem.Quantity = quantity;
+            existingItem.Visible_ = visible;
+
+            try
+            {
+
+                DB.SubmitChanges();
+                return 0;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public int DeleteProduct(string title)
+        {
+            var existingItem = DB.Items.FirstOrDefault(i => i.Title == title);
+
+            if (existingItem == null)
+            {
+                return 1;
+            }
+
+            DB.Items.DeleteOnSubmit(existingItem);
+
+            try
+            {
+                DB.SubmitChanges();
+                return 0; // Product deleted successfully
+            }
+            catch (Exception)
+            {
+                return -1; // Internal server error
+            }
+        }
+
+        public int AddProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
+        {
+            var existingItem = DB.Items.FirstOrDefault(i => i.Title == title);
+
+            if (existingItem != null)
+            {
+                return 1; // Product already exists
+            }
+
+            var newItem = new Item
+            {
+                Title = title,
+                Price = price,
+                Description = description,
+                Category = category,
+                Image = image,
+                Quantity = quantity,
+                Visible_ = visible,
+                NumSold = 0 // Default to not sold
+            };
+
+            DB.Items.InsertOnSubmit(newItem);
+
+            try
+            {
+                DB.SubmitChanges();
+                return 0; // Product added successfully
+            }
+            catch (Exception)
+            {
+                return -1; // Internal server error
+            }
+        }
+
+        public Item GetProductByName(string title)
+        {
+            var product = DB.Items.FirstOrDefault(i => i.Title.Equals(title));
+
+            return product;
+        }
+
+        public PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname)
+        {
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                return DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+            }
+        }
+
     }
 }
        

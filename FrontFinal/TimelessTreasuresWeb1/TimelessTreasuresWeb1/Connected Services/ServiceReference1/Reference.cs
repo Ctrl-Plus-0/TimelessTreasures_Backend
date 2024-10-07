@@ -1000,6 +1000,147 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StaffMember", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class StaffMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UEmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UFullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string USurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime UcreationtimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UroleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UEmail {
+            get {
+                return this.UEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UEmailField, value) != true)) {
+                    this.UEmailField = value;
+                    this.RaisePropertyChanged("UEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UFullName {
+            get {
+                return this.UFullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UFullNameField, value) != true)) {
+                    this.UFullNameField = value;
+                    this.RaisePropertyChanged("UFullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UId {
+            get {
+                return this.UIdField;
+            }
+            set {
+                if ((this.UIdField.Equals(value) != true)) {
+                    this.UIdField = value;
+                    this.RaisePropertyChanged("UId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string USurname {
+            get {
+                return this.USurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.USurnameField, value) != true)) {
+                    this.USurnameField = value;
+                    this.RaisePropertyChanged("USurname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Ucreationtime {
+            get {
+                return this.UcreationtimeField;
+            }
+            set {
+                if ((this.UcreationtimeField.Equals(value) != true)) {
+                    this.UcreationtimeField = value;
+                    this.RaisePropertyChanged("Ucreationtime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Urole {
+            get {
+                return this.UroleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UroleField, value) != true)) {
+                    this.UroleField = value;
+                    this.RaisePropertyChanged("Urole");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -1045,6 +1186,66 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddItemToCart", ReplyAction="http://tempuri.org/IService1/AddItemToCartResponse")]
         System.Threading.Tasks.Task<string> AddItemToCartAsync(int Prodid, int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUserID", ReplyAction="http://tempuri.org/IService1/GetUserIDResponse")]
+        int GetUserID(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUserID", ReplyAction="http://tempuri.org/IService1/GetUserIDResponse")]
+        System.Threading.Tasks.Task<int> GetUserIDAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddStaffMember", ReplyAction="http://tempuri.org/IService1/AddStaffMemberResponse")]
+        int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddStaffMember", ReplyAction="http://tempuri.org/IService1/AddStaffMemberResponse")]
+        System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, string role);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditStaffMember", ReplyAction="http://tempuri.org/IService1/EditStaffMemberResponse")]
+        int EditStaffMember(string fullName, string surname, string email, string role);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditStaffMember", ReplyAction="http://tempuri.org/IService1/EditStaffMemberResponse")]
+        System.Threading.Tasks.Task<int> EditStaffMemberAsync(string fullName, string surname, string email, string role);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteStaffMember", ReplyAction="http://tempuri.org/IService1/DeleteStaffMemberResponse")]
+        int DeleteStaffMember(string fullName, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteStaffMember", ReplyAction="http://tempuri.org/IService1/DeleteStaffMemberResponse")]
+        System.Threading.Tasks.Task<int> DeleteStaffMemberAsync(string fullName, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMember", ReplyAction="http://tempuri.org/IService1/GetStaffMemberResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMember(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMember", ReplyAction="http://tempuri.org/IService1/GetStaffMemberResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditProduct", ReplyAction="http://tempuri.org/IService1/EditProductResponse")]
+        int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditProduct", ReplyAction="http://tempuri.org/IService1/EditProductResponse")]
+        System.Threading.Tasks.Task<int> EditProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        int DeleteProduct(string title);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
+        System.Threading.Tasks.Task<int> DeleteProductAsync(string title);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        int AddProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddProduct", ReplyAction="http://tempuri.org/IService1/AddProductResponse")]
+        System.Threading.Tasks.Task<int> AddProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProductByName", ReplyAction="http://tempuri.org/IService1/GetProductByNameResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.Item GetProductByName(string title);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetProductByName", ReplyAction="http://tempuri.org/IService1/GetProductByNameResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item> GetProductByNameAsync(string title);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.PUser> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1128,6 +1329,86 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> AddItemToCartAsync(int Prodid, int UserId) {
             return base.Channel.AddItemToCartAsync(Prodid, UserId);
+        }
+        
+        public int GetUserID(string email, string password) {
+            return base.Channel.GetUserID(email, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetUserIDAsync(string email, string password) {
+            return base.Channel.GetUserIDAsync(email, password);
+        }
+        
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role) {
+            return base.Channel.AddStaffMember(fullName, surname, userName, email, password, role);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, string role) {
+            return base.Channel.AddStaffMemberAsync(fullName, surname, userName, email, password, role);
+        }
+        
+        public int EditStaffMember(string fullName, string surname, string email, string role) {
+            return base.Channel.EditStaffMember(fullName, surname, email, role);
+        }
+        
+        public System.Threading.Tasks.Task<int> EditStaffMemberAsync(string fullName, string surname, string email, string role) {
+            return base.Channel.EditStaffMemberAsync(fullName, surname, email, role);
+        }
+        
+        public int DeleteStaffMember(string fullName, string surname) {
+            return base.Channel.DeleteStaffMember(fullName, surname);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteStaffMemberAsync(string fullName, string surname) {
+            return base.Channel.DeleteStaffMemberAsync(fullName, surname);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMember(int userId) {
+            return base.Channel.GetStaffMember(userId);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberAsync(int userId) {
+            return base.Channel.GetStaffMemberAsync(userId);
+        }
+        
+        public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.EditProduct(title, price, description, category, image, quantity, visible);
+        }
+        
+        public System.Threading.Tasks.Task<int> EditProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.EditProductAsync(title, price, description, category, image, quantity, visible);
+        }
+        
+        public int DeleteProduct(string title) {
+            return base.Channel.DeleteProduct(title);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteProductAsync(string title) {
+            return base.Channel.DeleteProductAsync(title);
+        }
+        
+        public int AddProduct(string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.AddProduct(title, price, description, category, image, quantity, visible);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.AddProductAsync(title, price, description, category, image, quantity, visible);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.Item GetProductByName(string title) {
+            return base.Channel.GetProductByName(title);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item> GetProductByNameAsync(string title) {
+            return base.Channel.GetProductByNameAsync(title);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname) {
+            return base.Channel.GetStaffMemberByFullNameAndSurname(fullName, surname);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.PUser> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
+            return base.Channel.GetStaffMemberByFullNameAndSurnameAsync(fullName, surname);
         }
     }
 }
