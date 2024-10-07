@@ -1010,6 +1010,9 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PermTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UEmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1037,6 +1040,19 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PermType {
+            get {
+                return this.PermTypeField;
+            }
+            set {
+                if ((this.PermTypeField.Equals(value) != true)) {
+                    this.PermTypeField = value;
+                    this.RaisePropertyChanged("PermType");
+                }
             }
         }
         
@@ -1152,10 +1168,10 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<string> RegisterAsync(string Email, string Name, string Username, string Surname, string Number, string Password, string Address);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
-        string login(string Email, string Password);
+        int login(string Email, string Password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
-        System.Threading.Tasks.Task<string> loginAsync(string Email, string Password);
+        System.Threading.Tasks.Task<int> loginAsync(string Email, string Password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addItemsToDB", ReplyAction="http://tempuri.org/IService1/addItemsToDBResponse")]
         string addItemsToDB(string title, decimal price, string desciption, string category, string image);
@@ -1194,28 +1210,22 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<int> GetUserIDAsync(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddStaffMember", ReplyAction="http://tempuri.org/IService1/AddStaffMemberResponse")]
-        int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role);
+        int AddStaffMember(string fullName, string surname, string userName, string email, string password, int perms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddStaffMember", ReplyAction="http://tempuri.org/IService1/AddStaffMemberResponse")]
-        System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, string role);
+        System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, int perms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditStaffMember", ReplyAction="http://tempuri.org/IService1/EditStaffMemberResponse")]
-        int EditStaffMember(string fullName, string surname, string email, string role);
+        int EditStaffMember(int Memberid, string fullName, string surname, string email, int perms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditStaffMember", ReplyAction="http://tempuri.org/IService1/EditStaffMemberResponse")]
-        System.Threading.Tasks.Task<int> EditStaffMemberAsync(string fullName, string surname, string email, string role);
+        System.Threading.Tasks.Task<int> EditStaffMemberAsync(int Memberid, string fullName, string surname, string email, int perms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteStaffMember", ReplyAction="http://tempuri.org/IService1/DeleteStaffMemberResponse")]
         int DeleteStaffMember(string fullName, string surname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteStaffMember", ReplyAction="http://tempuri.org/IService1/DeleteStaffMemberResponse")]
         System.Threading.Tasks.Task<int> DeleteStaffMemberAsync(string fullName, string surname);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMember", ReplyAction="http://tempuri.org/IService1/GetStaffMemberResponse")]
-        TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMember(int userId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMember", ReplyAction="http://tempuri.org/IService1/GetStaffMemberResponse")]
-        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditProduct", ReplyAction="http://tempuri.org/IService1/EditProductResponse")]
         int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
@@ -1242,10 +1252,10 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item> GetProductByNameAsync(string title);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
-        TimelessTreasuresWeb1.ServiceReference1.PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+        TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
-        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.PUser> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname);
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1283,11 +1293,11 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.RegisterAsync(Email, Name, Username, Surname, Number, Password, Address);
         }
         
-        public string login(string Email, string Password) {
+        public int login(string Email, string Password) {
             return base.Channel.login(Email, Password);
         }
         
-        public System.Threading.Tasks.Task<string> loginAsync(string Email, string Password) {
+        public System.Threading.Tasks.Task<int> loginAsync(string Email, string Password) {
             return base.Channel.loginAsync(Email, Password);
         }
         
@@ -1339,20 +1349,20 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.GetUserIDAsync(email, password);
         }
         
-        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role) {
-            return base.Channel.AddStaffMember(fullName, surname, userName, email, password, role);
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, int perms) {
+            return base.Channel.AddStaffMember(fullName, surname, userName, email, password, perms);
         }
         
-        public System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, string role) {
-            return base.Channel.AddStaffMemberAsync(fullName, surname, userName, email, password, role);
+        public System.Threading.Tasks.Task<int> AddStaffMemberAsync(string fullName, string surname, string userName, string email, string password, int perms) {
+            return base.Channel.AddStaffMemberAsync(fullName, surname, userName, email, password, perms);
         }
         
-        public int EditStaffMember(string fullName, string surname, string email, string role) {
-            return base.Channel.EditStaffMember(fullName, surname, email, role);
+        public int EditStaffMember(int Memberid, string fullName, string surname, string email, int perms) {
+            return base.Channel.EditStaffMember(Memberid, fullName, surname, email, perms);
         }
         
-        public System.Threading.Tasks.Task<int> EditStaffMemberAsync(string fullName, string surname, string email, string role) {
-            return base.Channel.EditStaffMemberAsync(fullName, surname, email, role);
+        public System.Threading.Tasks.Task<int> EditStaffMemberAsync(int Memberid, string fullName, string surname, string email, int perms) {
+            return base.Channel.EditStaffMemberAsync(Memberid, fullName, surname, email, perms);
         }
         
         public int DeleteStaffMember(string fullName, string surname) {
@@ -1361,14 +1371,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<int> DeleteStaffMemberAsync(string fullName, string surname) {
             return base.Channel.DeleteStaffMemberAsync(fullName, surname);
-        }
-        
-        public TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMember(int userId) {
-            return base.Channel.GetStaffMember(userId);
-        }
-        
-        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberAsync(int userId) {
-            return base.Channel.GetStaffMemberAsync(userId);
         }
         
         public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible) {
@@ -1403,11 +1405,11 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.GetProductByNameAsync(title);
         }
         
-        public TimelessTreasuresWeb1.ServiceReference1.PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname) {
+        public TimelessTreasuresWeb1.ServiceReference1.StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname) {
             return base.Channel.GetStaffMemberByFullNameAndSurname(fullName, surname);
         }
         
-        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.PUser> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
             return base.Channel.GetStaffMemberByFullNameAndSurnameAsync(fullName, surname);
         }
     }

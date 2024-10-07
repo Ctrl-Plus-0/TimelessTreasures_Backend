@@ -19,7 +19,10 @@
 	</section>
 	<!-- End Banner Area -->
 
+	<!-- Start of Dynamic prod -->
 	<asp:Literal ID="AbtProd" runat="server"></asp:Literal>
+
+	<!-- End of Dynamic Prod -->
 	<!--================Product Description Area =================-->
 	<section class="product_description_area">
 		<div class="container">
@@ -329,7 +332,7 @@
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
+											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-right">

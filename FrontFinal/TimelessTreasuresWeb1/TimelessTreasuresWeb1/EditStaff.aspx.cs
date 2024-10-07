@@ -36,7 +36,14 @@ namespace TimelessTreasuresWeb1
         {
             Service1Client client = new Service1Client();
 
-            var staff = client.GetStaffMemberByFullNameAndSurname(fullName, surname);
+
+            StaffMember staff = client.GetStaffMemberByFullNameAndSurname(fullName, surname);
+
+            //After getting the staf using the above method
+            //create a session variable to store the id of the 
+            //memeber to be edited
+            //this session variable is deleted once edit is made
+            Session["EditID"] = staff.UId.ToString(); 
 
             if (staff != null)
             {
@@ -44,7 +51,7 @@ namespace TimelessTreasuresWeb1
                 txtFullName.Text = staff.UFullName;
                 txtSurname.Text = staff.USurname;
                 txtEmail.Text = staff.UEmail;
-                txtRole.Text = staff.Urole;
+                ddlRole.SelectedValue = staff.PermType.ToString();
 
 
                 txtFullName.ReadOnly = true;
@@ -66,16 +73,19 @@ namespace TimelessTreasuresWeb1
             string fullName = txtFullName.Text;
             string surname = txtSurname.Text;
             string email = txtEmail.Text;
-            string role = txtRole.Text;
+            int role =int.Parse(ddlRole.SelectedValue);
+            int Memberid = int.Parse(Session["EditID"].ToString());
 
             if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(surname))
             {
                 Service1Client client = new Service1Client();
-                int result = client.EditStaffMember(fullName, surname, email, role);
+                int result = client.EditStaffMember(Memberid,fullName, surname, email, role);
 
                 if (result == 0)
                 {
                     lblResponse.Text = "Staff member details updated successfully.";
+                    Session.Remove("EditID");
+                    //add in code here to clear screen again
                 }
                 else
                 {

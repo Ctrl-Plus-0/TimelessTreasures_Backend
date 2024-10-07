@@ -24,8 +24,12 @@
             <label for="txtPassword">Password:</label>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
             <br />
-            <label for="txtRole">Role:</label>
-            <asp:TextBox ID="txtRole" runat="server"></asp:TextBox>
+
+            <asp:DropDownList ID="ddlRole" runat="server"  >
+                <asp:ListItem  Selected="True" Value="0">Select Manager Type</asp:ListItem>
+                <asp:ListItem Value="1">Head Manager</asp:ListItem>
+                <asp:ListItem Value="2">Standard Manager</asp:ListItem>
+            </asp:DropDownList>
             <br />
             <asp:Button ID="btnSubmit" runat="server" Text="Add Staff Member" OnClick="btnSubmit_Click" />
             <br />

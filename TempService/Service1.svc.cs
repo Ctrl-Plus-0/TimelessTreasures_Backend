@@ -7,7 +7,7 @@ using System.ServiceModel.Web;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using IFM2B10_2014_CS_Paper_A;
 
 
 namespace TempService
@@ -21,25 +21,46 @@ namespace TempService
 
         TempDatabaseDataContext DB = new TempDatabaseDataContext();
 
-        string IService1.login(string Email, string Password)
+        int IService1.login(string Email, string Password)
         {
             //using the join is not 100% necessary as only the username and password really matter at this point
             //but for later when this method needs to be updated for showing who signed in and so forth itll work
             var UserLogged = (from c in DB.PUsers
-                              where c.UEmail == Email && c.UPassword == Password
+                              where c.UEmail.Equals(Email) && c.UPassword.Equals(Password)
                               select c).FirstOrDefault();
-
+            if (UserLogged == null)
+            {
+                return -1;
+            }
 
             //simple logic from here
             //check if user returned is null,if not  say they logged in succesfully
             //Returns login role 
             //perform additional check in front end for admin type to see if manager or admin
-            if(UserLogged!=null){
-                return UserLogged.Urole;
+            if (UserLogged.Urole.Equals("Customer"))
+            {
+                return 0;
+            }
+            else if(UserLogged.Urole.Equals("Manager"))
+            {
+                var Admin = (from a in DB.Admins
+                             where a.AdminId == UserLogged.UId
+                             select a).FirstOrDefault();
+
+                if (Admin.AdminPerms == 1) //HEAD MANAGER PERMS 1
+                                           //BASE MANAGER PERMS 2
+                {
+                    return 1; //HEAD MANAGER LOGGED IN
+                }
+                else
+                {
+                    return 2; //BASE MANAGER LOGGED IN
+                }
+               
             }
             else
             {
-                return "Username Or Password is Incorrect";
+                return -1; //INCORRECT USERNAME OR PASSWORD
             }
            
             /*
@@ -489,53 +510,90 @@ namespace TempService
         }
 
 
-        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role)
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, int perms)
         {
             {
                 var checkUser = (from u in DB.PUsers
-                                 where u.UserName.Equals(userName) || u.UEmail.Equals(email)
+                                 where u.Urole.Equals("Manager") && u.UEmail.Equals(email)
                                  select u).FirstOrDefault();
 
-                if (checkUser == null)
+                //Address the issue of user email clashing with manager 
+                //leading to this return
+                if (checkUser != null)
                 {
-                    var staffToBeSaved = new PUser
+                    //before anthing check if the email is a cutomer email
+                    //if it isnt this block is skipped
+                    if (checkUser.Urole.Equals("Customer"))
+                    {
+                        return 2;
+                    }
+                    return 1; // STAFF MEMBER ALREADY EXISTS
+                }
+
+              
+                    var user = new PUser
                     {
                         UFullName = fullName,
                         USurname = surname,
                         UserName = userName,
                         UEmail = email,
-                        UPassword = IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password),
+                        UPassword = password,
                         Ucreationtime = DateTime.Now,
-                        Urole = role
+                        Urole ="Manager"
                     };
 
-                    DB.PUsers.InsertOnSubmit(staffToBeSaved);
+                    DB.PUsers.InsertOnSubmit(user);
                     try
                     {
                         DB.SubmitChanges();
-                        return 0; // STAFF MEMBER ADDED SUCCESSFULLY
+                        
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        Console.Write(e.Message); //ADD CONSOLE WRITE TO ASSIST WITH DEBUGGING
                         return -1; // INTERNAL SERVER ERROR
                     }
-                }
-                else
+
+                //Value of 1 For Head Manager perms
+                //Value of 2 for normal manager perms
+                var manager = new Admin
                 {
-                    return 1; // STAFF MEMBER ALREADY EXISTS
+                    AdminId = user.UId,
+                    AdminPerms = perms
+                };
+                DB.Admins.InsertOnSubmit(manager);
+
+                try
+                {
+                    DB.SubmitChanges();
+                    return 0; // STAFF MEMBER ADDED SUCCESSFULLY
                 }
+                catch (Exception e)
+                {
+                    Console.Write(e.Message); //ADD CONSOLE WRITE TO ASSIST WITH DEBUGGING
+                    return -1; // INTERNAL SERVER ERROR
+                }
+               
+
             }
         }
 
-        public int EditStaffMember(string fullName, string surname, string email, string role)
+        public int EditStaffMember(int Memberid,string fullName, string surname, string email, int perms)
         {
-            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            
             {
-                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                var staff = (from u in DB.PUsers
+                               where u.UId==Memberid
+                               select u).FirstOrDefault();
                 if (staff != null)
                 {
+                    var Manager = (from m in DB.Admins
+                                   where m.AdminId ==Memberid
+                                   select m).FirstOrDefault();
+                    staff.UFullName = fullName;
+                    staff.USurname = surname;
                     staff.UEmail = email;
-                    staff.Urole = role;
+                    Manager.AdminPerms = perms;
                     DB.SubmitChanges(); // Save changes to the database
                     return 0; // Success
                 }
@@ -546,8 +604,8 @@ namespace TempService
         public int DeleteStaffMember(string fullName, string surname)
         {
 
-            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
-            {
+          
+            
                 var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
                 if (staff != null)
                 {
@@ -564,26 +622,10 @@ namespace TempService
                     return 0; // Success
                 }
                 return -1; // Staff member not found
-            }
+            
         }
 
-        public StaffMember GetStaffMember(int userId)
-        {
-            var staffMember = (from u in DB.PUsers
-                               where u.UId == userId
-                               select new StaffMember
-                               {
-                                   UId = u.UId,
-                                   UserName = u.UserName,
-                                   UFullName = u.UFullName,
-                                   USurname = u.USurname,
-                                   UEmail = u.UEmail,
-                                   Ucreationtime = u.Ucreationtime,
-                                   Urole = u.Urole
-                               }).FirstOrDefault();
 
-            return staffMember;
-        }
 
         public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
         {
@@ -615,6 +657,8 @@ namespace TempService
             }
         }
 
+        //THis function needs to be redone to take into acoount shopping carts that have items in them already
+        //either change item visibility to false or remove from the carts 
         public int DeleteProduct(string title)
         {
             var existingItem = DB.Items.FirstOrDefault(i => i.Title == title);
@@ -678,12 +722,36 @@ namespace TempService
             return product;
         }
 
-        public PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname)
+        public StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname)
         {
-            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+
+            var staff = (from u in DB.PUsers
+                         where u.UFullName.Equals(fullName) &&
+                         u.USurname.Equals(surname) &&
+                         u.Urole.Equals("Manager")
+                         select u).FirstOrDefault();
+            if (staff == null)
             {
-                return DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                return null; //Handle in the front saying invalid details
             }
+            var Manager = (from m in DB.Admins
+                           where m.AdminId == staff.UId
+                           select m).FirstOrDefault();
+
+            StaffMember SM = new StaffMember
+            {
+                USurname = staff.USurname,
+                UFullName = staff.UFullName,
+                Ucreationtime = staff.Ucreationtime,
+                Urole = staff.Urole,
+                UserName = staff.UserName,
+                UEmail = staff.UEmail,
+                UId=staff.UId,
+                PermType=Manager.AdminPerms
+                
+            };
+
+            return SM;
         }
 
     }

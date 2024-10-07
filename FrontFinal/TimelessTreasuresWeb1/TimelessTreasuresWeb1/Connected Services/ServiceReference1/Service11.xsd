@@ -32,7 +32,7 @@
   <xs:element name="loginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="loginResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="loginResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -135,7 +135,7 @@
         <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="role" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="perms" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -149,10 +149,11 @@
   <xs:element name="EditStaffMember">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="Memberid" type="xs:int" />
         <xs:element minOccurs="0" name="fullName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="surname" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="role" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="perms" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -175,20 +176,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="DeleteStaffMemberResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffMember">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffMemberResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetStaffMemberResult" nillable="true" type="q4:StaffMember" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -256,7 +243,7 @@
   <xs:element name="GetProductByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetProductByNameResult" nillable="true" type="q5:Item" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetProductByNameResult" nillable="true" type="q4:Item" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -271,7 +258,7 @@
   <xs:element name="GetStaffMemberByFullNameAndSurnameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetStaffMemberByFullNameAndSurnameResult" nillable="true" type="q6:PUser" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetStaffMemberByFullNameAndSurnameResult" nillable="true" type="q5:StaffMember" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

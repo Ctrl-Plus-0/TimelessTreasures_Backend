@@ -35,7 +35,7 @@ namespace TimelessTreasuresWeb1
         {
 
             Service1Client client = new Service1Client();
-            var staff = client.GetStaffMemberByFullNameAndSurname(fullName, surname);
+            StaffMember staff = client.GetStaffMemberByFullNameAndSurname(fullName, surname);
 
             if (staff != null)
             {
