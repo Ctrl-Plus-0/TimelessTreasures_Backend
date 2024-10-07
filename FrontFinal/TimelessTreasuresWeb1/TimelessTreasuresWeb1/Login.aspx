@@ -46,7 +46,7 @@
                         </div>
 							<div class="col-md-12 form-group">
                           <asp:Button CssClass="primary-btn" ID="BtnLogin" runat="server" Text="Login" OnClick="BtnLogin_Click" type="submit" CausesValidation="True" />
-								<asp:Button  ID="btnUserLogin" runat="server" Text="Login" OnClick="btnUserLogin_Click" />
+							<!---<asp:Button  ID="btnUserLogin" runat="server" Text="Login" OnClick="btnUserLogin_Click" />--->
                           </div>
 							<div class="col-md-12 form-group">
                           <asp:Label ID="Msglabel" runat="server" Text=""
