@@ -49,6 +49,12 @@
   <wsdl:message name="IService1_AddItemToCart_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddItemToCartResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetCartItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCartItems" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCartItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCartItemsResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetUserID_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserID" />
   </wsdl:message>
@@ -131,6 +137,10 @@
     <wsdl:operation name="AddItemToCart">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddItemToCart" message="tns:IService1_AddItemToCart_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddItemToCartResponse" message="tns:IService1_AddItemToCart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCartItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCartItems" message="tns:IService1_GetCartItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCartItemsResponse" message="tns:IService1_GetCartItems_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserID">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUserID" message="tns:IService1_GetUserID_InputMessage" />
@@ -227,6 +237,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddItemToCart">
       <soap:operation soapAction="http://tempuri.org/IService1/AddItemToCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCartItems">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCartItems" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

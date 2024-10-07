@@ -71,7 +71,11 @@ namespace TempService
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
 
         [OperationContract]
-        string AddItemToCart(int Prodid, int UserId);
+        int AddItemToCart(int Prodid, int UserId);
+
+        [OperationContract]
+
+        List<TrackerWrapper> GetCartItems(int Userid);
 
         [OperationContract]
         int GetUserID(string email, string password);

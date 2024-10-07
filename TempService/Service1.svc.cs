@@ -75,7 +75,7 @@ namespace TempService
             {
                 var checkUser = (from u in DB.PUsers
                                  where u.UEmail.Equals(email) &&
-                                       u.UPassword.Equals(IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password))
+                                       u.UPassword.Equals(password)
                                  select u).FirstOrDefault();
 
                 if (checkUser == null)
@@ -427,7 +427,7 @@ namespace TempService
             return items;
         }
 
-        public string AddItemToCart(int Prodid, int UserId)
+        public int AddItemToCart(int Prodid, int UserId)
         {
             var CT = (from Tracker in DB.CartTrackers
                       join Cart in DB.UCarts
@@ -438,18 +438,24 @@ namespace TempService
             if (CT != null)
             {
                 //update the quantity if user tries to add same item
+                //if  quantity is already at 10 return and tell them max amount of items for one purchace reached
+                if (CT.Quantity == 10)
+                {
+                    return -3; //MAX QUANTITY FOR THIS ITEM REACHED
+                }
+
                 CT.Quantity += 1;
                 try
                 {
                     DB.SubmitChanges();
-                    return "Product Exists adding to quantity";
+                    return 1; //ITEM ALREADY IN CART INCREMENTING QUANTITY
 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    return "Error adding existing record to cart";
-                    //Problem encountred when trying to up quantity
+                    return -2; // ERROR WHEN TRYING TO INCREMENT BY A SINGLE VALUE
+                   
                 }
             }
             else
@@ -470,12 +476,12 @@ namespace TempService
                 try
                 {
                     DB.SubmitChanges();
-                    return Prod.Title + " added to cart";
+                    return 2; //PRODUCT ADDED TO CART
                 }
                 catch (Exception e1)
                 {
                     Console.WriteLine(e1.Message);
-                    return "Error inserting Product to cart,try again later";
+                    return -1; //ERROR WHILE INSERTING NEW ITEM TO THE CART
                     //Problem encountred when inserting product to cart;
                 }
             }
@@ -754,6 +760,35 @@ namespace TempService
             return SM;
         }
 
+        public List<TrackerWrapper> GetCartItems(int Userid)
+        {
+            dynamic CartItems = new List<TrackerWrapper>();
+
+            dynamic Temp = (from CTrack in DB.CartTrackers
+                            join CRT in DB.UCarts
+                            on CTrack.CartId equals CRT.Id
+                            where Userid == CRT.CustId
+                            select CTrack).DefaultIfEmpty();
+
+            foreach(var t in Temp)
+            {
+                if (t != null)
+                {
+                    TrackerWrapper TW = new TrackerWrapper();
+                    TW.CartID = t.CartId;
+                    TW.ProdId = t.ProdID;
+                    TW.Quantity = t.Quantity;
+                    TW.Price = t.Price;
+
+                    CartItems.Add(TW);
+
+    
+
+                }
+            }
+
+            return CartItems;
+        }
     }
 }
        

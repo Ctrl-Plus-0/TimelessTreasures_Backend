@@ -40,6 +40,7 @@ namespace TimelessTreasuresWeb1
 
                 Session["UserType"] = "Customer";  //*****//
                 Session["UserId"] = Client.GetUserID(email, password);
+                string check = Session["UserId"].ToString();
                 Response.Redirect("Home.aspx");
 
 
