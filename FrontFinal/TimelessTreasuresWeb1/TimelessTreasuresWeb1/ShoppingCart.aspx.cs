@@ -232,12 +232,8 @@ namespace TimelessTreasuresWeb1
 
         protected void CheckOut_Click(object sender, EventArgs e)
         {
-            Service1Client SC = new Service1Client();
-            int Uid = int.Parse(Session["UserId"].ToString());
-            SC.CreateInvoice(Uid);
-            SC.UpdateAfterSale(Uid);
-            SC.ClearCart(Uid);
-            Response.Redirect("Invoices.aspx");
+            VisibleCart.Visible = false;
+            VisibleForm.Visible = true;
 
         }
 
@@ -275,6 +271,31 @@ namespace TimelessTreasuresWeb1
             Vat.InnerText = "R" + VatCost;
             Discount.InnerText = "R0";
             SubTotal.InnerText = "R" + FinalTot;
+        }
+
+        protected void BtnProceed_Click(object sender, EventArgs e)
+        {
+            Service1Client SC = new Service1Client();
+            int Uid = int.Parse(Session["UserId"].ToString());
+
+            string message = txtMessage.Text;
+            string contact = txtContact.Text;
+            string address = txtAddy.Text;
+            string receipiant = txtName.Text;
+            string UnparsedDate = txtDeliveryDate.Text;
+            DateTime Delivery;
+
+           if(DateTime.TryParseExact(UnparsedDate, "yyyy/MM/dd", null, System.Globalization.DateTimeStyles.None,out Delivery))
+            {
+
+                SC.CreateInvoice(Uid,message,receipiant,address,Delivery,contact);
+                SC.UpdateAfterSale(Uid);
+                SC.ClearCart(Uid);
+                VisibleForm.Visible = false;
+                VisibleCart.Visible = true;
+                Response.Redirect("Invoices.aspx");
+            }
+
         }
     }
 }

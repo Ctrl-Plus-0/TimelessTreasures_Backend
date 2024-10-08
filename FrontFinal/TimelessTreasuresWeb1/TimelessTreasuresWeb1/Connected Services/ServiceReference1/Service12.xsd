@@ -91,10 +91,15 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="DeliveryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GiftMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
       <xs:element minOccurs="0" name="ProdID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Receipiant" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceipiantContact" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecepiantAdress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -164,12 +169,17 @@
   <xs:element name="ArrayOfInvoiceWrapper" nillable="true" type="tns:ArrayOfInvoiceWrapper" />
   <xs:complexType name="InvoiceWrapper">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contact" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="D" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Delivery" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ProductIDs" nillable="true" type="q1:ArrayOfint" />
       <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="QuantityProd" nillable="true" type="q2:ArrayOfint" />
       <xs:element minOccurs="0" name="UserID" type="xs:int" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="receipiant" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="InvoiceWrapper" nillable="true" type="tns:InvoiceWrapper" />

@@ -955,6 +955,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private TimelessTreasuresWeb1.ServiceReference1.Customer CustomerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DeliveryDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GiftMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -965,6 +971,15 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceipiantField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceipiantContactField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecepiantAdressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIDField;
@@ -1001,6 +1016,32 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((object.ReferenceEquals(this.CustomerField, value) != true)) {
                     this.CustomerField = value;
                     this.RaisePropertyChanged("Customer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DeliveryDate {
+            get {
+                return this.DeliveryDateField;
+            }
+            set {
+                if ((this.DeliveryDateField.Equals(value) != true)) {
+                    this.DeliveryDateField = value;
+                    this.RaisePropertyChanged("DeliveryDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GiftMessage {
+            get {
+                return this.GiftMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GiftMessageField, value) != true)) {
+                    this.GiftMessageField = value;
+                    this.RaisePropertyChanged("GiftMessage");
                 }
             }
         }
@@ -1053,6 +1094,45 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((object.ReferenceEquals(this.QuantityField, value) != true)) {
                     this.QuantityField = value;
                     this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Receipiant {
+            get {
+                return this.ReceipiantField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceipiantField, value) != true)) {
+                    this.ReceipiantField = value;
+                    this.RaisePropertyChanged("Receipiant");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceipiantContact {
+            get {
+                return this.ReceipiantContactField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceipiantContactField, value) != true)) {
+                    this.ReceipiantContactField = value;
+                    this.RaisePropertyChanged("ReceipiantContact");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RecepiantAdress {
+            get {
+                return this.RecepiantAdressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecepiantAdressField, value) != true)) {
+                    this.RecepiantAdressField = value;
+                    this.RaisePropertyChanged("RecepiantAdress");
                 }
             }
         }
@@ -1417,7 +1497,16 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContactField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DeliveryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal PriceField;
@@ -1434,6 +1523,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string messageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string receipiantField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1441,6 +1536,32 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Contact {
+            get {
+                return this.ContactField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContactField, value) != true)) {
+                    this.ContactField = value;
+                    this.RaisePropertyChanged("Contact");
+                }
             }
         }
         
@@ -1453,6 +1574,19 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((this.DField.Equals(value) != true)) {
                     this.DField = value;
                     this.RaisePropertyChanged("D");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Delivery {
+            get {
+                return this.DeliveryField;
+            }
+            set {
+                if ((this.DeliveryField.Equals(value) != true)) {
+                    this.DeliveryField = value;
+                    this.RaisePropertyChanged("Delivery");
                 }
             }
         }
@@ -1518,6 +1652,32 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string message {
+            get {
+                return this.messageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.messageField, value) != true)) {
+                    this.messageField = value;
+                    this.RaisePropertyChanged("message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string receipiant {
+            get {
+                return this.receipiantField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.receipiantField, value) != true)) {
+                    this.receipiantField = value;
+                    this.RaisePropertyChanged("receipiant");
                 }
             }
         }
@@ -1662,11 +1822,17 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartTotal", ReplyAction="http://tempuri.org/IService1/GetCartTotalResponse")]
         System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateInvoice", ReplyAction="http://tempuri.org/IService1/CreateInvoiceResponse")]
-        int CreateInvoice(int UserID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateInvoice", ReplyAction="http://tempuri.org/IService1/CreateInvoiceResponse")]
-        System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID);
+        int CreateInvoice(int UserID, string Message, string receipiant, string RAddress, System.DateTime Delivery, string contactnum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateInvoice", ReplyAction="http://tempuri.org/IService1/CreateInvoiceResponse")]
+        System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID, string Message, string receipiant, string RAddress, System.DateTime Delivery, string contactnum);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ClearCart", ReplyAction="http://tempuri.org/IService1/ClearCartResponse")]
         void ClearCart(int Uid);
@@ -1685,12 +1851,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateAfterSale", ReplyAction="http://tempuri.org/IService1/UpdateAfterSaleResponse")]
         System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
-        TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
-        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1888,12 +2048,20 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.GetCartTotalAsync(UserID);
         }
         
-        public int CreateInvoice(int UserID) {
-            return base.Channel.CreateInvoice(UserID);
+        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category) {
+            return base.Channel.getItemsByCategory(category);
         }
         
-        public System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID) {
-            return base.Channel.CreateInvoiceAsync(UserID);
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
+            return base.Channel.getItemsByCategoryAsync(category);
+        }
+        
+        public int CreateInvoice(int UserID, string Message, string receipiant, string RAddress, System.DateTime Delivery, string contactnum) {
+            return base.Channel.CreateInvoice(UserID, Message, receipiant, RAddress, Delivery, contactnum);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID, string Message, string receipiant, string RAddress, System.DateTime Delivery, string contactnum) {
+            return base.Channel.CreateInvoiceAsync(UserID, Message, receipiant, RAddress, Delivery, contactnum);
         }
         
         public void ClearCart(int Uid) {
@@ -1918,14 +2086,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID) {
             return base.Channel.UpdateAfterSaleAsync(userID);
-        }
-        
-        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category) {
-            return base.Channel.getItemsByCategory(category);
-        }
-        
-        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
-            return base.Channel.getItemsByCategoryAsync(category);
         }
     }
 }

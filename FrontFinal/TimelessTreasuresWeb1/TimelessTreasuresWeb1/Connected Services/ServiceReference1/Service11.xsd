@@ -335,10 +335,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getItemsByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="category" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getItemsByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="getItemsByCategoryResult" nillable="true" type="q7:ArrayOfItemWrapper" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateInvoice">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="UserID" type="xs:int" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="receipiant" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Delivery" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="contactnum" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -371,7 +390,7 @@
   <xs:element name="GetInvoicesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetInvoicesResult" nillable="true" type="q7:ArrayOfInvoiceWrapper" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetInvoicesResult" nillable="true" type="q8:ArrayOfInvoiceWrapper" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

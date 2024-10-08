@@ -115,7 +115,7 @@ namespace TempService
 
 
         [OperationContract]
-        int CreateInvoice(int UserID);
+        int CreateInvoice(int UserID,string Message,string receipiant,string RAddress,DateTime Delivery,string contactnum);
 
         [OperationContract]
         void ClearCart(int Uid);

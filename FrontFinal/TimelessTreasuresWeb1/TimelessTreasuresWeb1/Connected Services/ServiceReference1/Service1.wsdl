@@ -134,6 +134,12 @@
   <wsdl:message name="IService1_GetCartTotal_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCartTotalResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_getItemsByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:getItemsByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getItemsByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getItemsByCategoryResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_CreateInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateInvoice" />
   </wsdl:message>
@@ -157,12 +163,6 @@
   </wsdl:message>
   <wsdl:message name="IService1_UpdateAfterSale_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateAfterSaleResponse" />
-  </wsdl:message>
-  <wsdl:message name="IService1_getItemsByCategory_InputMessage">
-    <wsdl:part name="parameters" element="tns:getItemsByCategory" />
-  </wsdl:message>
-  <wsdl:message name="IService1_getItemsByCategory_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getItemsByCategoryResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Register">
@@ -249,6 +249,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCartTotal" message="tns:IService1_GetCartTotal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCartTotalResponse" message="tns:IService1_GetCartTotal_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getItemsByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getItemsByCategory" message="tns:IService1_getItemsByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getItemsByCategoryResponse" message="tns:IService1_getItemsByCategory_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateInvoice">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateInvoice" message="tns:IService1_CreateInvoice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateInvoiceResponse" message="tns:IService1_CreateInvoice_OutputMessage" />
@@ -264,10 +268,6 @@
     <wsdl:operation name="UpdateAfterSale">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateAfterSale" message="tns:IService1_UpdateAfterSale_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateAfterSaleResponse" message="tns:IService1_UpdateAfterSale_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="getItemsByCategory">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getItemsByCategory" message="tns:IService1_getItemsByCategory_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getItemsByCategoryResponse" message="tns:IService1_getItemsByCategory_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -461,6 +461,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getItemsByCategory">
+      <soap:operation soapAction="http://tempuri.org/IService1/getItemsByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateInvoice">
       <soap:operation soapAction="http://tempuri.org/IService1/CreateInvoice" style="document" />
       <wsdl:input>
@@ -490,15 +499,6 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateAfterSale">
       <soap:operation soapAction="http://tempuri.org/IService1/UpdateAfterSale" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getItemsByCategory">
-      <soap:operation soapAction="http://tempuri.org/IService1/getItemsByCategory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
