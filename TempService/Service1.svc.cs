@@ -923,6 +923,129 @@ namespace TempService
             }
             
         }
+
+        public int CreateInvoice(int UserID)
+        {
+            var inv = (from i in DB.Invoice_s
+                       where i.UserID == UserID && i.Id==0
+                       select i).FirstOrDefault();
+            if (inv != null)
+            {
+                return -1; //INVOICE ALREADY EXISTS
+            }
+            else
+            {
+                //get the users cart
+                var UserCart = (from u in DB.UCarts
+                                where u.CustId == UserID
+                                select u).FirstOrDefault();
+                dynamic CartItems = (from CT in DB.CartTrackers
+                                     where CT.CartId == UserCart.Id
+                                     select CT).DefaultIfEmpty();
+                var Ninv = new Invoice_();
+
+                Ninv.Price = UserCart.Total;
+                  foreach (var C in CartItems) {
+
+                    //add each products id as a string and corresponding quantities too
+                    Ninv.ProdID += C.ProdID.ToString() + "\\";
+                    Ninv.Quantity += C.Quantity.ToString() + "\\";
+                }
+                Ninv.UserID = UserID;
+                Ninv.CreationDate = DateTime.Now;
+
+                DB.Invoice_s.InsertOnSubmit(Ninv);
+
+                try
+                {
+                    DB.SubmitChanges();
+                    return 1; //Invoice made
+                }
+                catch(Exception E1)
+                {
+                    Console.WriteLine(E1.Message);
+                    return -2; //error adding invoice to table
+                }
+                
+            }
+            
+        }
+
+        public void ClearCart(int Uid)
+        {
+            try
+            {
+                var CartClear = (from CRT in DB.CartTrackers
+                                 join UT in DB.UCarts
+                                 on CRT.CartId equals UT.Id
+                                 where UT.CustId == Uid
+                                 select CRT).DefaultIfEmpty();
+                DB.CartTrackers.DeleteAllOnSubmit(CartClear);
+                DB.SubmitChanges();
+                var UpdateCart = (from CT in DB.UCarts
+                                  where CT.CustId == Uid
+                                  select CT).FirstOrDefault();
+
+                UpdateCart.Total = 0;
+                DB.SubmitChanges();
+                
+            }catch(Exception E1)
+            {
+                Console.WriteLine(E1.Message);
+            }
+           
+        }
+
+        public List<InvoiceWrapper> GetInvoices(int userID)
+        {
+            dynamic inv = new List<InvoiceWrapper>();
+
+            dynamic temp = (from I in DB.Invoice_s
+                            where I.UserID == userID
+                            select I).DefaultIfEmpty();
+
+            foreach(var i in temp)
+            {
+                InvoiceWrapper IW = new InvoiceWrapper();
+                IW.id = i.Id;
+                IW.UserID = i.UserID;
+                string[] SplitProds = i.ProdID.Split('\\');
+                string[] SplitQuantity = i.Quantity.Split('\\');
+                IW.SetProductIDs(SplitProds);
+                IW.SetUpQuantity(SplitQuantity);
+                IW.Price = i.Price;
+                IW.D = i.CreationDate;
+                inv.Add(IW);
+            }
+            return inv;
+        }
+
+        public void UpdateAfterSale(int userID)
+        {
+            dynamic UpdateWith = (from CRT in DB.CartTrackers
+                             join UT in DB.UCarts
+                             on CRT.CartId equals UT.Id
+                             where UT.CustId == userID
+                             select CRT).DefaultIfEmpty();
+
+            foreach(CartTracker CT in UpdateWith)
+            {
+                var ProdUpdate = (from P in DB.Items
+                                  where P.Id == CT.ProdID
+                                  select P).FirstOrDefault();
+
+                ProdUpdate.NumSold = CT.Quantity;
+
+                try
+                {
+                    DB.SubmitChanges();
+                }catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+          
+        }
     }
 }
        

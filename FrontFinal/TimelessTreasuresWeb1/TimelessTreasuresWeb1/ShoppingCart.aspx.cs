@@ -18,13 +18,13 @@ namespace TimelessTreasuresWeb1
                 Response.Redirect("Login.aspx");
 
             }
-
+            Service1Client SC = new Service1Client();
             //get user id from string
             int Uid = int.Parse(Session["UserId"].ToString());
 
             if (!IsPostBack)
             {
-                Service1Client SC = new Service1Client();
+                
                 if (Request.QueryString["Pid"] == null)
                 {
                     FillCart(Uid);
@@ -62,15 +62,32 @@ namespace TimelessTreasuresWeb1
                     }
                     //call method to fill with user specefic cart info
                     FillCart(Uid);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
                 }
                 else
                 {
                     FillCart(Uid);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
                 }
             }
             else
             {
                 FillCart(Uid);
+             
             }
 
 
@@ -215,6 +232,12 @@ namespace TimelessTreasuresWeb1
 
         protected void CheckOut_Click(object sender, EventArgs e)
         {
+            Service1Client SC = new Service1Client();
+            int Uid = int.Parse(Session["UserId"].ToString());
+            SC.CreateInvoice(Uid);
+            SC.UpdateAfterSale(Uid);
+            SC.ClearCart(Uid);
+            Response.Redirect("Invoices.aspx");
 
         }
 
