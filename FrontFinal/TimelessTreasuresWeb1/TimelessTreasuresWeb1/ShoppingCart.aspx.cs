@@ -24,36 +24,44 @@ namespace TimelessTreasuresWeb1
             if (!IsPostBack)
             {
                 Service1Client SC = new Service1Client();
-
+                if (Request.QueryString["Pid"] == null)
+                {
+                    FillCart(Uid);
+                    return;
+                }
                 int ProdToAdd = int.Parse(Request.QueryString["Pid"]);
+                if (ProdToAdd != 0)
+                {
+                    int Result = SC.AddItemToCart(ProdToAdd, Uid);
 
-                int Result = SC.AddItemToCart(ProdToAdd, Uid);
-
-                if (Result == -3)
-                {
-                    lblMsg.ForeColor = System.Drawing.Color.Yellow;
-                    lblMsg.Text = "Max Quantity Already In Cart For The Selected Item.";
+                    if (Result == -3)
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Yellow;
+                        lblMsg.Text = "Max Quantity Already In Cart For The Selected Item.";
+                    }
+                    else if (Result == -2)
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Red;
+                        lblMsg.Text = "Error Adding Existing Item To Cart;Try Again Later";
+                    }
+                    else if (Result == -1)
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Red;
+                        lblMsg.Text = "Error Adding New Item To Cart;Try Again Later";
+                    }
+                    else if (Result == 1)
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Green;
+                        lblMsg.Text = "Item Already In Cart,Increasing Quantity insstead";
+                    }
+                    else if (Result == 2)
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Green;
+                        lblMsg.Text = "New Item Added To Cart";
+                    }
+                    //call method to fill with user specefic cart info
+                    FillCart(Uid);
                 }
-                else if (Result == -2)
-                {
-                    lblMsg.ForeColor = System.Drawing.Color.Red;
-                    lblMsg.Text = "Error Adding Existing Item To Cart;Try Again Later";
-                }
-                else if (Result == -1)
-                {
-                    lblMsg.ForeColor = System.Drawing.Color.Red;
-                    lblMsg.Text = "Error Adding New Item To Cart;Try Again Later";
-                }else if(Result == 1)
-                {
-                    lblMsg.ForeColor = System.Drawing.Color.Green;
-                    lblMsg.Text = "Item Already In Cart,Increasing Quantity insstead";
-                }else if (Result == 2)
-                {
-                    lblMsg.ForeColor = System.Drawing.Color.Green;
-                    lblMsg.Text = "New Item Added To Cart";
-                }
-                //call method to fill with user specefic cart info
-                FillCart(Uid);
             }
 
 
@@ -107,23 +115,27 @@ namespace TimelessTreasuresWeb1
                     //Base Price Start
                     TableCell PriceCell = new TableCell();
                     PriceCell.ID = "P_BasePrice_" + Prod.ID; //Used in Calculations so it needs and ID
-                    PriceCell.Text ="<h5>"+Prod.Price.ToString()+"</h5>";
+                    PriceCell.Text ="<h5>R"+Prod.Price.ToString()+"</h5>";
                     TR.Controls.Add(PriceCell);
                     //Base Price End
 
                     //Quantity Begin
                     TableCell Quantity = new TableCell();
-                    LiteralControl divopen = new LiteralControl(@"div class=""product_count""");
+                    LiteralControl divopen = new LiteralControl(@"<div class=""product_count"">");
                     LiteralControl divclose = new LiteralControl("</div>");
 
                     Quantity.Controls.Add(divopen);
                     TextBox txtQuant = new TextBox();
                     txtQuant.CssClass = @"class=""input-text qty""";
-                    txtQuant.TextMode = @"""SingleLine""";
+                    txtQuant.TextMode = TextBoxMode.Number;
+                    txtQuant.ID = "P_Quantity_" + Prod.ID;
+                    txtQuant.Text = T.Quantity.ToString();
+                    txtQuant.Attributes["min"] = "1";
+                    txtQuant.Attributes["max"] = "10";
 
 
 
-                    Quantity.Controls.Add(QuantityList);
+                    Quantity.Controls.Add(txtQuant);
                     Quantity.Controls.Add(divclose);
                     TR.Controls.Add(Quantity);
                     //Quantity end
@@ -132,9 +144,9 @@ namespace TimelessTreasuresWeb1
                     TableCell TotalPrice = new TableCell();
                     TotalPrice.ID = "P_Total_" + Prod.ID;
                     decimal tot;
-                    tot = Prod.Price * int.Parse(QuantityList.SelectedValue); //Calculate the total and display it
+                    tot = Prod.Price * int.Parse(txtQuant.Text); //Calculate the total and display it
 
-                    TotalPrice.Text ="<h5>"+tot.ToString()+"</h5>";
+                    TotalPrice.Text ="<h5>R"+tot.ToString()+"</h5>";
                     TR.Controls.Add(TotalPrice);
 
                     //Total cost end
@@ -144,6 +156,7 @@ namespace TimelessTreasuresWeb1
                     TableCell RemoveProd = new TableCell();
                     Button BtnRemoveFromCart = new Button();
                     BtnRemoveFromCart.Text = "X";
+                    BtnRemoveFromCart.CssClass = "primary-btn";
                     BtnRemoveFromCart.ID = "P_Remove_" + Prod.ID;
                     BtnRemoveFromCart.Click += new EventHandler(BtnRemoveFromCart_Click);
                     RemoveProd.Controls.Add(BtnRemoveFromCart);

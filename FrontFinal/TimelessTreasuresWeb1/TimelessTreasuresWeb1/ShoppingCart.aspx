@@ -41,7 +41,81 @@
                           <!--do same for the update/checkout sections-->
                         <asp:Panel ID="TDHolder" runat="server"></asp:Panel>
                             
-                       
+                            <tr class="bottom_button">
+                                <td>
+                                    <a class="gray_btn" href="#">Update Cart</a>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                      <td>
+
+                                </td>
+                                      <td>
+
+                                </td>
+
+                                <td>
+                                    <div class="cupon_text d-flex align-items-center">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <a class="primary-btn" href="#">Apply</a>
+                                       
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                          <td>
+
+                                </td>
+                               
+                                 <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                <td>
+                                    <h5>Total</h5>
+                                    <h5>Vat Amount</h5>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    
+                                    <h5 id="Total" runat="server">$2160.00</h5>
+                                    <h5 id="Vat" runat="server">$2160.00</h5>
+                                    <h5 id="SubTotal" runat="server">$2160.00</h5>
+                                </td>
+                            </tr>
+                      
+                            <tr class="out_button_area">
+                              <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="#">Continue Shopping</a>
+                                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
