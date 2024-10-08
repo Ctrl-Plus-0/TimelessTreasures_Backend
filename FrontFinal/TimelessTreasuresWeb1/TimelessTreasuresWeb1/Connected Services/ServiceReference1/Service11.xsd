@@ -108,7 +108,21 @@
   <xs:element name="AddItemToCartResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddItemToCartResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="AddItemToCartResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCartItems">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Userid" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCartItemsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetCartItemsResult" nillable="true" type="q4:ArrayOfTrackerWrapper" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -243,7 +257,7 @@
   <xs:element name="GetProductByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetProductByNameResult" nillable="true" type="q4:Item" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetProductByNameResult" nillable="true" type="q5:Item" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -258,7 +272,66 @@
   <xs:element name="GetStaffMemberByFullNameAndSurnameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetStaffMemberByFullNameAndSurnameResult" nillable="true" type="q5:StaffMember" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetStaffMemberByFullNameAndSurnameResult" nillable="true" type="q6:StaffMember" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveItemFromCart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ProdID" type="xs:int" />
+        <xs:element minOccurs="0" name="UserID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveItemFromCartResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveItemFromCartResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCartTotal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCartTotalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateCartTotalResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItemQuantity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserID" type="xs:int" />
+        <xs:element minOccurs="0" name="NewQuantity" type="xs:int" />
+        <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItemQuantityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateItemQuantityResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCartTotal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCartTotalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCartTotalResult" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

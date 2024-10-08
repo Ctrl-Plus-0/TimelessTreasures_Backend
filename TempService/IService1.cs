@@ -71,7 +71,11 @@ namespace TempService
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
 
         [OperationContract]
-        string AddItemToCart(int Prodid, int UserId);
+        int AddItemToCart(int Prodid, int UserId);
+
+        [OperationContract]
+
+        List<TrackerWrapper> GetCartItems(int Userid);
 
         [OperationContract]
         int GetUserID(string email, string password);
@@ -92,5 +96,18 @@ namespace TempService
         Item GetProductByName(string title);
         [OperationContract]
         StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+
+        [OperationContract]
+
+        int RemoveItemFromCart(int ProdID, int UserID);
+
+        [OperationContract]
+        int UpdateCartTotal(int UserId);
+
+        [OperationContract]
+        int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
+
+        [OperationContract]
+        decimal GetCartTotal(int UserID);
     }
 }

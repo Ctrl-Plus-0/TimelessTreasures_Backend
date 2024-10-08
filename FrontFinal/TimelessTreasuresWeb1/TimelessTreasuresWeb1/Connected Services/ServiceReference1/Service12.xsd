@@ -108,6 +108,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUCart" nillable="true" type="tns:ArrayOfUCart" />
+  <xs:complexType name="ArrayOfTrackerWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrackerWrapper" nillable="true" type="tns:TrackerWrapper" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrackerWrapper" nillable="true" type="tns:ArrayOfTrackerWrapper" />
+  <xs:complexType name="TrackerWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CartID" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProdId" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TrackerWrapper" nillable="true" type="tns:TrackerWrapper" />
   <xs:complexType name="StaffMember">
     <xs:sequence>
       <xs:element minOccurs="0" name="PermType" type="xs:int" />
