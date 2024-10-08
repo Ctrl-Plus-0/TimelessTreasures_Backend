@@ -9,13 +9,38 @@ using System.Threading.Tasks;
 
 namespace TempService
 {
+
+
+    [DataContract]
+    public class StaffMember
+    {
+        [DataMember]
+        public int UId { get; set; }
+
+        [DataMember]
+        public string UserName { get; set; }
+
+        [DataMember]
+        public string UFullName { get; set; }
+
+        [DataMember]
+        public string USurname { get; set; }
+
+        [DataMember]
+        public string UEmail { get; set; }
+
+        [DataMember]
+        public DateTime Ucreationtime { get; set; }
+
+        [DataMember]
+        public string Urole { get; set; }
+    }
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IService1
     {
 
-       [OperationContract]
-       Product[] returnList();
+   
 
        [OperationContract] 
        //MEthod will assign customer role on its own as admins and managers not added this way
@@ -29,23 +54,18 @@ namespace TempService
         string login(string Email, string Password);
 
         [OperationContract]
-        // function to make http requestion and populate list of products
-        Task getProducts();
-
-
-        [OperationContract]
         string addItemsToDB(string title, decimal price, string desciption, string category, string image);
 
-        [OperationContract]
-        void AddDummyData();
+   
 
         [OperationContract]
-        Item[] getItems();
+        List<ItemWrapper> getItems(int SortType);
+
+        [OperationContract]
+        ItemWrapper GetItem(int Prodid);
 
         [OperationContract]
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
-<<<<<<< Updated upstream
-=======
 
         [OperationContract]
         string AddItemToCart(int Prodid, int UserId);
@@ -74,6 +94,5 @@ namespace TempService
         [OperationContract]
         List<ItemWrapper> getItemsByCategory(string category);
 
->>>>>>> Stashed changes
     }
 }
