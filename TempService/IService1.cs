@@ -113,5 +113,18 @@ namespace TempService
         [OperationContract]
         List<ItemWrapper> getItemsByCategory(string category);
 
+
+        [OperationContract]
+        int CreateInvoice(int UserID);
+
+        [OperationContract]
+        void ClearCart(int Uid);
+
+        [OperationContract]
+        List<InvoiceWrapper> GetInvoices(int userID);
+
+        [OperationContract]
+        void UpdateAfterSale(int userID);
     }
+    
 }
