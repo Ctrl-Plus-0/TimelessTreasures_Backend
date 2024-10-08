@@ -12,12 +12,12 @@
 						<div class="row single-slide align-items-center d-flex">
 							<div class="col-lg-5 col-md-6">
 								<div class="banner-content" style="margin-top: 120px;">
-									<h1>Gifts that withstand TIME</h1>
-									<p>Are you are looking for a gift for a loved one months or years in advance? Do you want to gift your future self and leave a message for them? Timeless Treasures is a gift shop like no other. We offer you a wide catalogue of gifts, with a lot of them being customizable to your liking.
+									<h1>Gifts that withstand <span style="color:#4f000b">TIME</span></h1>
+									<p style="color:black">Are you are looking for a gift for a loved one months or years in advance? Do you want to gift your future self and leave a message for them? Timeless Treasures is a gift shop like no other. We offer you a wide catalogue of gifts, with a lot of them being customizable to your liking.
 										Timeless Treasures allows you to schedule gifts for as far as 5 years into the future.</p>
 									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" href="#"><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Know us better</span>
+										<a class="add-btn" href="Shop.aspx"><span class="lnr lnr-cart"></span></a>
+										<span class="add-text text-uppercase">View our Products</span>
 									</div>
 								</div>
 							</div>
@@ -35,8 +35,8 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
 										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
 									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
+										<a class="add-btn" href="Shop.aspx"><span class="lnr lnr-cart"></span></a>
+										<span class="add-text text-uppercase">View our Products</span>
 									</div>
 								</div>
 							</div>
@@ -63,8 +63,8 @@
 						<div class="f-icon">
 							<img src="assets/img/features/f-icon1.png" alt="">
 						</div>
-						<h6>Free Delivery</h6>
-						<p>Free Shipping on all order</p>
+						<h6>Timed Delivery</h6>
+						<p>Deivery at your chosen date</p>
 					</div>
 				</div>
 				<!-- single features -->
@@ -74,7 +74,7 @@
 							<img src="assets/img/features/f-icon2.png" alt="">
 						</div>
 						<h6>Return Policy</h6>
-						<p>Free Shipping on all order</p>
+						<p>Free returns after delivery</p>
 					</div>
 				</div>
 				<!-- single features -->
@@ -84,7 +84,7 @@
 							<img src="assets/img/features/f-icon3.png" alt="">
 						</div>
 						<h6>24/7 Support</h6>
-						<p>Free Shipping on all order</p>
+						<p>Email and Phone Support available</p>
 					</div>
 				</div>
 				<!-- single features -->
@@ -94,7 +94,7 @@
 							<img src="assets/img/features/f-icon4.png" alt="">
 						</div>
 						<h6>Secure Payment</h6>
-						<p>Free Shipping on all order</p>
+						<p>Secure for all electronic transfers</p>
 					</div>
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 								<img class="img-fluid w-100" src="assets/img/category/c1.jpg" alt="">
 								<a href="assets/img/category/c1.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
+										<h6 class="deal-title">Christmas Gifts</h6>
 									</div>
 								</a>
 							</div>
@@ -125,7 +125,7 @@
 								<img class="img-fluid w-100" src="assets/img/category/c2.jpg" alt="">
 								<a href="assets/img/category/c2.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
+										<h6 class="deal-title">Sweaters</h6>
 									</div>
 								</a>
 							</div>
@@ -136,7 +136,7 @@
 								<img class="img-fluid w-100" src="assets/img/category/c3.jpg" alt="">
 								<a href="assets/img/category/c3.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
-										<h6 class="deal-title">Product for Couple</h6>
+										<h6 class="deal-title">Kitchenware</h6>
 									</div>
 								</a>
 							</div>
@@ -147,7 +147,7 @@
 								<img class="img-fluid w-100" src="assets/img/category/c4.jpg" alt="">
 								<a href="assets/img/category/c4.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
+										<h6 class="deal-title">Ornaments</h6>
 									</div>
 								</a>
 							</div>
@@ -160,7 +160,7 @@
 						<img class="img-fluid w-100" src="assets/img/category/c5.jpg" alt="">
 						<a href="assets/img/category/c5.jpg" class="img-pop-up" target="_blank">
 							<div class="deal-details">
-								<h6 class="deal-title">Sneaker for Sports</h6>
+								<h6 class="deal-title">Christmas Gifts</h6>
 							</div>
 						</a>
 					</div>
@@ -179,9 +179,7 @@
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
 							<h1>Latest Products</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<p>Get them while they are still fresh.</p>
 						</div>
 					</div>
 				</div>
@@ -317,138 +315,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="assets/img/product/p5.jpg" alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="assets/img/product/p6.jpg" alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="assets/img/product/p7.jpg" alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="assets/img/product/p8.jpg" alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
