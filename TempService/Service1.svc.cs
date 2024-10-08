@@ -92,7 +92,13 @@ namespace TempService
         {
             //First check the database to see if there already exists a user with a specefic email
             //If so return a string saying theyve already registered and that they should log in instead
-            
+            var UserCheck = (from u in DB.PUsers
+                             where u.UEmail.Equals(Email)
+                             select u).FirstOrDefault();
+            if (UserCheck != null)
+            {
+                return "Already Registered";
+            }
 
             var UserToStore = new PUser
             {
@@ -754,6 +760,42 @@ namespace TempService
             return SM;
         }
 
+        public int RemoveFromCart(int userID, int Prodid)
+        {
+            var ToRemove = (from CTrack in DB.CartTrackers
+                            join CRT in DB.UCarts
+                            on CTrack.CartId equals CRT.Id
+                            where CRT.CustId == userID && CTrack.ProdID == Prodid
+                            select CTrack).FirstOrDefault();
+           
+            if(ToRemove != null)
+            {
+                DB.CartTrackers.DeleteOnSubmit(ToRemove);
+
+                try
+                {
+                    DB.SubmitChanges();
+                    //Call the update cart method to update the total stored in it
+
+                    return 1; //ITEM SUCCESFULLY REMOVED FROM CART
+                }catch(Exception e1)
+                {
+                    Console.WriteLine(e1.Message);
+                    return -1;//UNABLE TO DELETE FROM CART
+                }
+            }
+            else
+            {
+                return -2; // ITEM NOT FOUND
+            }
+
+            
+        }
+
+        public int UpdateCart(int UserId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
        
