@@ -254,6 +254,314 @@ namespace TempService
 
             return items;
         }
+<<<<<<< Updated upstream
+=======
+
+        public string AddItemToCart(int Prodid, int UserId)
+        {
+            var CT = (from Tracker in DB.CartTrackers
+                      join Cart in DB.UCarts
+                      on Tracker.CartId equals Cart.Id
+                      where Cart.CustId == UserId && Tracker.ProdID == Prodid
+                      select Tracker).FirstOrDefault();
+
+            if (CT != null)
+            {
+                //update the quantity if user tries to add same item
+                CT.Quantity += 1;
+                try
+                {
+                    DB.SubmitChanges();
+                    return "Product Exists adding to quantity";
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return "Error adding existing record to cart";
+                    //Problem encountred when trying to up quantity
+                }
+            }
+            else
+            {
+                var Cartrack = new CartTracker();
+                //Get the cart and product record being used in this instance
+                var Prod = (from p in DB.Items
+                            where p.Id == Prodid
+                            select p).FirstOrDefault();
+                var Cart = (from c in DB.UCarts
+                            where c.CustId == UserId
+                            select c).FirstOrDefault();
+                Cartrack.ProdID = Prodid;
+                Cartrack.Price = Prod.Price;
+                Cartrack.CartId = Cart.Id; //set the id to the id of the cart associated to the user 
+                Cartrack.Quantity = 1; //set to 1 sice is first time adding to the cart
+                DB.CartTrackers.InsertOnSubmit(Cartrack);
+                try
+                {
+                    DB.SubmitChanges();
+                    return Prod.Title + " added to cart";
+                }
+                catch (Exception e1)
+                {
+                    Console.WriteLine(e1.Message);
+                    return "Error inserting Product to cart,try again later";
+                    //Problem encountred when inserting product to cart;
+                }
+            }
+        }
+
+        public ItemWrapper GetItem(int Prodid)
+        {
+            var Prod = (from p in DB.Items
+                        where p.Id == Prodid
+                        select p).FirstOrDefault();
+
+            if (Prod != null)
+            {
+                ItemWrapper IW = new ItemWrapper();
+                IW.ID = Prod.Id;
+                IW.Title = Prod.Title;
+                IW.Image = Prod.Image;
+                IW.Description = Prod.Description;
+                IW.Price = Prod.Price;
+                IW.Quantity = Prod.Quantity;
+                IW.Category = Prod.Category;
+                IW.NumSold = Prod.NumSold;
+                IW.Visibility = Prod.Visible_;
+
+                return IW;
+            }
+            else
+            {
+                return null;
+            }
+           
+        }
+
+
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role)
+        {
+            {
+                var checkUser = (from u in DB.PUsers
+                                 where u.UserName.Equals(userName) || u.UEmail.Equals(email)
+                                 select u).FirstOrDefault();
+
+                if (checkUser == null)
+                {
+                    var staffToBeSaved = new PUser
+                    {
+                        UFullName = fullName,
+                        USurname = surname,
+                        UserName = userName,
+                        UEmail = email,
+                        UPassword = IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password),
+                        Ucreationtime = DateTime.Now,
+                        Urole = role
+                    };
+
+                    DB.PUsers.InsertOnSubmit(staffToBeSaved);
+                    try
+                    {
+                        DB.SubmitChanges();
+                        return 0; // STAFF MEMBER ADDED SUCCESSFULLY
+                    }
+                    catch (Exception)
+                    {
+                        return -1; // INTERNAL SERVER ERROR
+                    }
+                }
+                else
+                {
+                    return 1; // STAFF MEMBER ALREADY EXISTS
+                }
+            }
+        }
+
+        public int EditStaffMember(string fullName, string surname, string email, string role)
+        {
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                if (staff != null)
+                {
+                    staff.UEmail = email;
+                    staff.Urole = role;
+                    DB.SubmitChanges(); // Save changes to the database
+                    return 0; // Success
+                }
+                return -1; // Staff member not found
+            }
+        }
+
+        public int DeleteStaffMember(string fullName, string surname)
+        {
+
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                if (staff != null)
+                {
+
+                    var admin = DB.Admins.FirstOrDefault(a => a.AdminId == staff.UId);
+                    if (admin != null)
+                    {
+                        DB.Admins.DeleteOnSubmit(admin);
+                    }
+
+                    // Remove from the PUser table
+                    DB.PUsers.DeleteOnSubmit(staff);
+                    DB.SubmitChanges(); // Save changes to the database
+                    return 0; // Success
+                }
+                return -1; // Staff member not found
+            }
+        }
+
+        public StaffMember GetStaffMember(int userId)
+        {
+            var staffMember = (from u in DB.PUsers
+                               where u.UId == userId
+                               select new StaffMember
+                               {
+                                   UId = u.UId,
+                                   UserName = u.UserName,
+                                   UFullName = u.UFullName,
+                                   USurname = u.USurname,
+                                   UEmail = u.UEmail,
+                                   Ucreationtime = u.Ucreationtime,
+                                   Urole = u.Urole
+                               }).FirstOrDefault();
+
+            return staffMember;
+        }
+
+        public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
+        {
+            var existingItem = GetProductByName(title);
+
+
+            if (existingItem == null)
+            {
+                return 1;
+            }
+
+
+            existingItem.Price = price;
+            existingItem.Description = description;
+            existingItem.Category = category;
+            existingItem.Image = image;
+            existingItem.Quantity = quantity;
+            existingItem.Visible_ = visible;
+
+            try
+            {
+
+                DB.SubmitChanges();
+                return 0;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public int DeleteProduct(string title)
+        {
+            var existingItem = DB.Items.FirstOrDefault(i => i.Title == title);
+
+            if (existingItem == null)
+            {
+                return 1;
+            }
+
+            DB.Items.DeleteOnSubmit(existingItem);
+
+            try
+            {
+                DB.SubmitChanges();
+                return 0; // Product deleted successfully
+            }
+            catch (Exception)
+            {
+                return -1; // Internal server error
+            }
+        }
+
+        public int AddProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
+        {
+            var existingItem = DB.Items.FirstOrDefault(i => i.Title == title);
+
+            if (existingItem != null)
+            {
+                return 1; // Product already exists
+            }
+
+            var newItem = new Item
+            {
+                Title = title,
+                Price = price,
+                Description = description,
+                Category = category,
+                Image = image,
+                Quantity = quantity,
+                Visible_ = visible,
+                NumSold = 0 // Default to not sold
+            };
+
+            DB.Items.InsertOnSubmit(newItem);
+
+            try
+            {
+                DB.SubmitChanges();
+                return 0; // Product added successfully
+            }
+            catch (Exception)
+            {
+                return -1; // Internal server error
+            }
+        }
+
+        public Item GetProductByName(string title)
+        {
+            var product = DB.Items.FirstOrDefault(i => i.Title.Equals(title));
+
+            return product;
+        }
+
+        public PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname)
+        {
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                return DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+            }
+        }
+
+        public List<ItemWrapper> getItemsByCategory(string category)
+        {
+            List<ItemWrapper> allProds = getItems(0);
+
+            List<ItemWrapper> filteredItems = new List<ItemWrapper>();
+
+            if (category.Equals("All"))
+            {
+                filteredItems = allProds;
+            }
+            else
+            {
+                foreach (ItemWrapper item in allProds)
+                {
+                    if (item.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
+                    {
+                        filteredItems.Add(item);
+                    }
+                }
+
+            }
+
+            return filteredItems;
+        }
+>>>>>>> Stashed changes
     }
 }
        

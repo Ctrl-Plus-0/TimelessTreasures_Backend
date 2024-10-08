@@ -44,5 +44,36 @@ namespace TempService
 
         [OperationContract]
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
+<<<<<<< Updated upstream
+=======
+
+        [OperationContract]
+        string AddItemToCart(int Prodid, int UserId);
+
+        [OperationContract]
+        int GetUserID(string email, string password);
+        [OperationContract]
+        int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role);
+        [OperationContract]
+        int EditStaffMember(string fullName, string surname, string email, string role);
+        [OperationContract]
+        int DeleteStaffMember(string fullName, string surname);
+        [OperationContract]
+        StaffMember GetStaffMember(int userId);
+        [OperationContract]
+        int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        [OperationContract]
+        int DeleteProduct(string title);
+        [OperationContract]
+        int AddProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        [OperationContract]
+        Item GetProductByName(string title);
+        [OperationContract]
+        PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+
+        [OperationContract]
+        List<ItemWrapper> getItemsByCategory(string category);
+
+>>>>>>> Stashed changes
     }
 }
