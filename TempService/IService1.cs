@@ -92,13 +92,5 @@ namespace TempService
         Item GetProductByName(string title);
         [OperationContract]
         StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
-
-        [OperationContract]
-
-        int RemoveFromCart(int userID, int Prodid);
-
-        [OperationContract]
-
-        int UpdateCart(int UserId);
     }
 }
