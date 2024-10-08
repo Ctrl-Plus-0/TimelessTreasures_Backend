@@ -1373,6 +1373,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
         System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartTotal", ReplyAction="http://tempuri.org/IService1/GetCartTotalResponse")]
+        decimal GetCartTotal(int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartTotal", ReplyAction="http://tempuri.org/IService1/GetCartTotalResponse")]
+        System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1560,6 +1566,14 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID) {
             return base.Channel.UpdateItemQuantityAsync(UserID, NewQuantity, ProductID);
+        }
+        
+        public decimal GetCartTotal(int UserID) {
+            return base.Channel.GetCartTotal(UserID);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID) {
+            return base.Channel.GetCartTotalAsync(UserID);
         }
     }
 }

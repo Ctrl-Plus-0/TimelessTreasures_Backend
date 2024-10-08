@@ -106,5 +106,8 @@ namespace TempService
 
         [OperationContract]
         int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
+
+        [OperationContract]
+        decimal GetCartTotal(int UserID);
     }
 }

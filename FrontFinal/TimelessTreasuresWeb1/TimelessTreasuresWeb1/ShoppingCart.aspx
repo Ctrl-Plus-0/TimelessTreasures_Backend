@@ -43,7 +43,7 @@
                             
                             <tr class="bottom_button">
                                 <td>
-                                    <a class="gray_btn" href="#">Update Cart</a>
+                                    <asp:Button ID="UpdateCart" runat="server" Text="Update Cart" CssClass="gray_btn" OnClick="UpdateCart_Click"/>
                                 </td>
                                 <td>
 
@@ -83,13 +83,15 @@
                                 <td>
                                     <h5>Total</h5>
                                     <h5>Vat Amount</h5>
+                                    <h5>Discount</h5>
                                     <h5>Subtotal</h5>
                                 </td>
                                 <td>
                                     
-                                    <h5 id="Total" runat="server">$2160.00</h5>
-                                    <h5 id="Vat" runat="server">$2160.00</h5>
-                                    <h5 id="SubTotal" runat="server">$2160.00</h5>
+                                    <h5 id="Total" runat="server"></h5>
+                                    <h5 id="Vat" runat="server"></h5>
+                                    <h5 id="Discount" runat="server"></h5>
+                                    <h5 id="SubTotal" runat="server"></h5>
                                 </td>
                             </tr>
                       
@@ -111,8 +113,8 @@
                                 </td>
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="#">Continue Shopping</a>
-                                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                                        <a class="gray_btn" href="Shop.aspx">Continue Shopping</a>
+                                        <asp:Button ID="CheckOut" CssClass="primary-btn" runat="server" Text="Proceed To Checkout" OnClick="CheckOut_Click"/>
                                     </div>
                                 </td>
                             </tr>

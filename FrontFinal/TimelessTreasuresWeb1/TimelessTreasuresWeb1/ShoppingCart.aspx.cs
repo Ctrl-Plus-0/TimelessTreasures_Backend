@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using TimelessTreasuresWeb1.ServiceReference1;
 
@@ -123,7 +124,8 @@ namespace TimelessTreasuresWeb1
                     //Base Price Start
                     TableCell PriceCell = new TableCell();
                     PriceCell.ID = "P_BasePrice_" + Prod.ID; //Used in Calculations so it needs and ID
-                    PriceCell.Text ="<h5>R"+Prod.Price.ToString()+"</h5>";
+                    PriceCell.Attributes["style"] = "font-weight: bold; color: black;";
+                    PriceCell.Text ="R"+Prod.Price.ToString();
                     TR.Controls.Add(PriceCell);
                     //Base Price End
 
@@ -151,10 +153,11 @@ namespace TimelessTreasuresWeb1
                     //Total Cost
                     TableCell TotalPrice = new TableCell();
                     TotalPrice.ID = "P_Total_" + Prod.ID;
+                    TotalPrice.Attributes["style"] = "font-weight: bold; color: black;";
                     decimal tot;
-                    tot = Prod.Price * int.Parse(txtQuant.Text); //Calculate the total and display it
+                    tot = Prod.Price * T.Quantity; //Calculate the total and display it
 
-                    TotalPrice.Text ="<h5>R"+tot.ToString()+"</h5>";
+                    TotalPrice.Text ="R"+tot.ToString();
                     TR.Controls.Add(TotalPrice);
 
                     //Total cost end
@@ -173,24 +176,7 @@ namespace TimelessTreasuresWeb1
                     TDHolder.Controls.Add(TR);
                 }
             }
-            /*<tr>
-                           
-                             
-                              <td>
-                                  <div class="product_count">
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                          class="input-text qty">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-      */
+    
         }
 
         protected void BtnRemoveFromCart_Click(object sender, EventArgs e)
@@ -227,6 +213,45 @@ namespace TimelessTreasuresWeb1
             Response.Redirect("ShoppingCart.aspx");
         }
 
-       
+        protected void CheckOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void UpdateCart_Click(object sender, EventArgs e)
+        {
+            Service1Client SC = new Service1Client();
+            int Uid = int.Parse(Session["UserId"].ToString());
+            dynamic items = SC.GetCartItems(Uid);
+
+
+            foreach (TrackerWrapper T in items) {
+
+                TextBox txtQuant = (TextBox)TDHolder.FindControl("P_Quantity_" + T.ProdId);
+                TableCell ItemTotalCell =(TableCell)TDHolder.FindControl("P_Total_" + T.ProdId);
+
+                ItemTotalCell.Text ="R"+T.Price * int.Parse(txtQuant.Text);
+                int QuantityResult = SC.UpdateItemQuantity(Uid, int.Parse(txtQuant.Text), T.ProdId);
+                int UpdateTotalResult = SC.UpdateCartTotal(Uid);
+
+                if(UpdateTotalResult==1 && (QuantityResult==1 || QuantityResult == 2))
+                {
+                    continue;
+                }else
+                {
+                    lblMsg.ForeColor = System.Drawing.Color.Yellow;
+                    lblMsg.Text = "Error Updating Cart";
+                    break;
+                }
+                    }
+            decimal total = SC.GetCartTotal(Uid);
+            decimal VatCost = (decimal)(15.0 / 100.0) * total;
+            VatCost = Math.Round(VatCost, 2);
+            decimal FinalTot = total + VatCost;
+            Total.InnerText = "R" + total;
+            Vat.InnerText = "R" + VatCost;
+            Discount.InnerText = "R0";
+            SubTotal.InnerText = "R" + FinalTot;
+        }
     }
 }

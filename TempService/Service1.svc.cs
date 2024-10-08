@@ -907,6 +907,22 @@ namespace TempService
             }
           
         }
+
+        public decimal GetCartTotal(int UserID)
+        {
+            var temp = (from UserCart in DB.UCarts
+                        where UserCart.CustId == UserID
+                        select UserCart).FirstOrDefault();
+
+            if (temp != null)
+            {
+                return temp.Total;
+            }
+            else 
+            { return 0;
+            }
+            
+        }
     }
 }
        
