@@ -62,6 +62,14 @@ namespace TimelessTreasuresWeb1
                     //call method to fill with user specefic cart info
                     FillCart(Uid);
                 }
+                else
+                {
+                    FillCart(Uid);
+                }
+            }
+            else
+            {
+                FillCart(Uid);
             }
 
 
@@ -187,7 +195,36 @@ namespace TimelessTreasuresWeb1
 
         protected void BtnRemoveFromCart_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            lblMsg.Text = "";
+            Service1Client SC = new Service1Client();
+            //get user id from string
+            int Uid = int.Parse(Session["UserId"].ToString());
+            Button BtnRemove = (Button)sender; //Get a copy of the button currently being worked in
+            string[] SplitID = BtnRemove.ID.Split('_');
+            int Prodid = int.Parse(SplitID[2]); //get id from the button
+
+            int Result = SC.RemoveItemFromCart(Prodid, Uid);
+            int UpdateTotalResult = SC.UpdateCartTotal(Uid);
+            if (Result == -1)
+            {
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Text = "Failed To Remove Item From Cart,Try Again Later"; 
+            }else if (Result == -2)
+            {
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Text = "Item Does Not Exist";
+            }
+            else if(Result==1)
+            {
+                lblMsg.ForeColor = System.Drawing.Color.Green;
+                lblMsg.Text = "Item Removed From Cart";
+            }
+            if (UpdateTotalResult != 1)
+            {
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Text = "Failed TO Update total";
+            }
+            Response.Redirect("ShoppingCart.aspx");
         }
 
        

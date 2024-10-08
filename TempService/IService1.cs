@@ -96,5 +96,15 @@ namespace TempService
         Item GetProductByName(string title);
         [OperationContract]
         StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+
+        [OperationContract]
+
+        int RemoveItemFromCart(int ProdID, int UserID);
+
+        [OperationContract]
+        int UpdateCartTotal(int UserId);
+
+        [OperationContract]
+        int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
     }
 }

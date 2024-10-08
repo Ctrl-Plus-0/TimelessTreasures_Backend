@@ -109,6 +109,24 @@
   <wsdl:message name="IService1_GetStaffMemberByFullNameAndSurname_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffMemberByFullNameAndSurnameResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_RemoveItemFromCart_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveItemFromCart" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RemoveItemFromCart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveItemFromCartResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateCartTotal_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCartTotal" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateCartTotal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCartTotalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateItemQuantity_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateItemQuantity" />
+  </wsdl:message>
+  <wsdl:message name="IService1_UpdateItemQuantity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateItemQuantityResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
@@ -177,6 +195,18 @@
     <wsdl:operation name="GetStaffMemberByFullNameAndSurname">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname" message="tns:IService1_GetStaffMemberByFullNameAndSurname_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse" message="tns:IService1_GetStaffMemberByFullNameAndSurname_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveItemFromCart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveItemFromCart" message="tns:IService1_RemoveItemFromCart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveItemFromCartResponse" message="tns:IService1_RemoveItemFromCart_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCartTotal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateCartTotal" message="tns:IService1_UpdateCartTotal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateCartTotalResponse" message="tns:IService1_UpdateCartTotal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateItemQuantity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateItemQuantity" message="tns:IService1_UpdateItemQuantity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateItemQuantityResponse" message="tns:IService1_UpdateItemQuantity_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -327,6 +357,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetStaffMemberByFullNameAndSurname">
       <soap:operation soapAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveItemFromCart">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveItemFromCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCartTotal">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateCartTotal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateItemQuantity">
+      <soap:operation soapAction="http://tempuri.org/IService1/UpdateItemQuantity" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

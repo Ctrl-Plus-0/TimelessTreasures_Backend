@@ -1355,6 +1355,24 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveItemFromCart", ReplyAction="http://tempuri.org/IService1/RemoveItemFromCartResponse")]
+        int RemoveItemFromCart(int ProdID, int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveItemFromCart", ReplyAction="http://tempuri.org/IService1/RemoveItemFromCartResponse")]
+        System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
+        int UpdateCartTotal(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
+        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
+        int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
+        System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1518,6 +1536,30 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
             return base.Channel.GetStaffMemberByFullNameAndSurnameAsync(fullName, surname);
+        }
+        
+        public int RemoveItemFromCart(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCart(ProdID, UserID);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCartAsync(ProdID, UserID);
+        }
+        
+        public int UpdateCartTotal(int UserId) {
+            return base.Channel.UpdateCartTotal(UserId);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId) {
+            return base.Channel.UpdateCartTotalAsync(UserId);
+        }
+        
+        public int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantity(UserID, NewQuantity, ProductID);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantityAsync(UserID, NewQuantity, ProductID);
         }
     }
 }

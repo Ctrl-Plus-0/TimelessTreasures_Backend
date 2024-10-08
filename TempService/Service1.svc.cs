@@ -92,7 +92,16 @@ namespace TempService
         {
             //First check the database to see if there already exists a user with a specefic email
             //If so return a string saying theyve already registered and that they should log in instead
-            
+
+            var CheckUser = (from u in DB.PUsers
+                             where Email.Equals(u.UEmail)
+                             select u).FirstOrDefault();
+
+            if (CheckUser != null)
+            {
+                return "Already Registered";
+            }
+
 
             var UserToStore = new PUser
             {
@@ -788,6 +797,115 @@ namespace TempService
             }
 
             return CartItems;
+        }
+
+        public int RemoveItemFromCart(int ProdID, int UserID)
+        {
+            var ToRemove = (from Track in DB.CartTrackers
+                            join Crt in DB.UCarts
+                            on Track.CartId equals Crt.Id
+                            where ProdID == Track.ProdID && UserID == Crt.CustId
+                            select Track).FirstOrDefault();
+
+
+            if (ToRemove != null)
+            {
+                DB.CartTrackers.DeleteOnSubmit(ToRemove);
+
+                try
+                {
+                    DB.SubmitChanges();
+
+                  
+
+
+                    return 1; //ITEM REMOVED SUCCESFULLY
+                }catch(Exception E1)
+                {
+                    Console.WriteLine(E1.Message);
+                    return -1; //ITEM FAILED TO BE REMOVED
+                }
+            }
+            else
+            {
+                return -2; //ITEM DOES NOT EXIST IN THE CART
+            }
+     
+        }
+
+        public int UpdateCartTotal(int UserId)
+        {
+            var temp = (from UserCart in DB.UCarts
+                        where UserCart.CustId == UserId
+                        select UserCart).FirstOrDefault();
+
+            if (temp != null)
+            {
+                dynamic Calc = (from CTrack in DB.CartTrackers
+                                join CRT in DB.UCarts
+                                on CTrack.CartId equals CRT.Id
+                                where UserId == CRT.CustId
+                                select CTrack).DefaultIfEmpty();
+                decimal NewTot=0;
+                foreach(CartTracker CT in Calc)
+                {
+                    if (CT != null)
+                    {
+                        decimal tempTotal = 0;
+                        tempTotal = CT.Price * CT.Quantity;
+                        NewTot += tempTotal;
+                    }
+                }
+                temp.Total = NewTot;
+                try
+                {
+                    DB.SubmitChanges();
+                    return 1; //SUCCESFULLY ADDED NEW TOTAL
+                }catch(Exception E1)
+                {
+                    Console.WriteLine(E1);
+                    return -1; //UNSUCCESFUL IN COMMITING CHANGES TO THE TOTAL
+                }
+            }
+            else
+            {
+                return -2; //COULDNT FIND USER CART
+            }
+            
+        }
+
+        public int UpdateItemQuantity(int UserID,int NewQuantity,int ProductID)
+        {
+            var CartItem = (from CTrack in DB.CartTrackers
+                            join CRT in DB.UCarts
+                            on CTrack.CartId equals CRT.Id
+                            where UserID == CRT.CustId && ProductID ==CTrack.ProdID
+                            select CTrack).FirstOrDefault();
+            if (CartItem != null)
+            {
+                if (CartItem.Quantity != NewQuantity)
+                {
+                    CartItem.Quantity = NewQuantity;
+                    try
+                    {
+                        DB.SubmitChanges();
+                        return 1;//QUANTITY UPDATED
+                    }catch(Exception E)
+                    {
+                        Console.WriteLine(E.Message);
+                        return -1; //Unable to Update Quantities
+                    }
+                }
+                else
+                {
+                    return 2; //NO CHANGE IN QUANTITY
+                }
+            }
+            else
+            {
+                return -2; // CART NOT LOCATED
+            }
+          
         }
     }
 }
