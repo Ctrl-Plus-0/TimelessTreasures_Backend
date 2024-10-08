@@ -13,6 +13,11 @@ namespace TempService
         public int[] QuantityProd;
         public decimal Price;
         public DateTime D;
+        public DateTime Delivery;
+        public string Address;
+        public string Contact;
+        public string receipiant;
+        public string message;
 
 
         public void SetProductIDs(string[] SplitArray)

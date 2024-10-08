@@ -924,7 +924,7 @@ namespace TempService
             
         }
 
-        public int CreateInvoice(int UserID)
+        public int CreateInvoice(int UserID, string Message, string receipiant, string RAddress, DateTime Delivery, string contactnum)
         {
             var inv = (from i in DB.Invoice_s
                        where i.UserID == UserID && i.Id==0
@@ -948,11 +948,18 @@ namespace TempService
                   foreach (var C in CartItems) {
 
                     //add each products id as a string and corresponding quantities too
+                    //will be split in the wrapper class and returned as array of integers
                     Ninv.ProdID += C.ProdID.ToString() + "\\";
                     Ninv.Quantity += C.Quantity.ToString() + "\\";
                 }
                 Ninv.UserID = UserID;
                 Ninv.CreationDate = DateTime.Now;
+                Ninv.GiftMessage = Message;
+                Ninv.Receipiant = receipiant;
+                Ninv.RecepiantAdress = RAddress;
+                Ninv.ReceipiantContact = contactnum;
+                Ninv.DeliveryDate = Delivery.Date;
+               
 
                 DB.Invoice_s.InsertOnSubmit(Ninv);
 
@@ -1004,7 +1011,7 @@ namespace TempService
                             where I.UserID == userID
                             select I).DefaultIfEmpty();
 
-            foreach(var i in temp)
+            foreach(Invoice_ i in temp)
             {
                 InvoiceWrapper IW = new InvoiceWrapper();
                 IW.id = i.Id;
@@ -1015,6 +1022,11 @@ namespace TempService
                 IW.SetUpQuantity(SplitQuantity);
                 IW.Price = i.Price;
                 IW.D = i.CreationDate;
+                IW.Delivery = i.DeliveryDate.Date;
+                IW.Address = i.RecepiantAdress;
+                IW.Contact = i.ReceipiantContact;
+                IW.message = i.GiftMessage;
+                IW.receipiant = i.Receipiant;
                 inv.Add(IW);
             }
             return inv;

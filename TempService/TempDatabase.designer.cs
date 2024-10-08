@@ -1487,6 +1487,16 @@ namespace TempService
 		
 		private System.DateTime _CreationDate;
 		
+		private string _GiftMessage;
+		
+		private string _Receipiant;
+		
+		private string _RecepiantAdress;
+		
+		private string _ReceipiantContact;
+		
+		private System.DateTime _DeliveryDate;
+		
 		private EntityRef<Customer> _Customer;
 		
     #region Extensibility Method Definitions
@@ -1505,6 +1515,16 @@ namespace TempService
     partial void OnPriceChanged();
     partial void OnCreationDateChanging(System.DateTime value);
     partial void OnCreationDateChanged();
+    partial void OnGiftMessageChanging(string value);
+    partial void OnGiftMessageChanged();
+    partial void OnReceipiantChanging(string value);
+    partial void OnReceipiantChanged();
+    partial void OnRecepiantAdressChanging(string value);
+    partial void OnRecepiantAdressChanged();
+    partial void OnReceipiantContactChanging(string value);
+    partial void OnReceipiantContactChanged();
+    partial void OnDeliveryDateChanging(System.DateTime value);
+    partial void OnDeliveryDateChanged();
     #endregion
 		
 		public Invoice_()
@@ -1633,6 +1653,106 @@ namespace TempService
 					this._CreationDate = value;
 					this.SendPropertyChanged("CreationDate");
 					this.OnCreationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GiftMessage", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string GiftMessage
+		{
+			get
+			{
+				return this._GiftMessage;
+			}
+			set
+			{
+				if ((this._GiftMessage != value))
+				{
+					this.OnGiftMessageChanging(value);
+					this.SendPropertyChanging();
+					this._GiftMessage = value;
+					this.SendPropertyChanged("GiftMessage");
+					this.OnGiftMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Receipiant", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Receipiant
+		{
+			get
+			{
+				return this._Receipiant;
+			}
+			set
+			{
+				if ((this._Receipiant != value))
+				{
+					this.OnReceipiantChanging(value);
+					this.SendPropertyChanging();
+					this._Receipiant = value;
+					this.SendPropertyChanged("Receipiant");
+					this.OnReceipiantChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecepiantAdress", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string RecepiantAdress
+		{
+			get
+			{
+				return this._RecepiantAdress;
+			}
+			set
+			{
+				if ((this._RecepiantAdress != value))
+				{
+					this.OnRecepiantAdressChanging(value);
+					this.SendPropertyChanging();
+					this._RecepiantAdress = value;
+					this.SendPropertyChanged("RecepiantAdress");
+					this.OnRecepiantAdressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceipiantContact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string ReceipiantContact
+		{
+			get
+			{
+				return this._ReceipiantContact;
+			}
+			set
+			{
+				if ((this._ReceipiantContact != value))
+				{
+					this.OnReceipiantContactChanging(value);
+					this.SendPropertyChanging();
+					this._ReceipiantContact = value;
+					this.SendPropertyChanged("ReceipiantContact");
+					this.OnReceipiantContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="Date NOT NULL")]
+		public System.DateTime DeliveryDate
+		{
+			get
+			{
+				return this._DeliveryDate;
+			}
+			set
+			{
+				if ((this._DeliveryDate != value))
+				{
+					this.OnDeliveryDateChanging(value);
+					this.SendPropertyChanging();
+					this._DeliveryDate = value;
+					this.SendPropertyChanged("DeliveryDate");
+					this.OnDeliveryDateChanged();
 				}
 			}
 		}

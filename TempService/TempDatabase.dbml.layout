@@ -73,17 +73,17 @@
         <classShapeMoniker Id="72b65680-636e-48b6-a495-b402b6902986" />
       </nodes>
     </associationConnector>
-    <classShape Id="6a19887e-8f67-4967-bc25-f1b7066cb236" absoluteBounds="4.875, 2.375, 2, 1.9631982421875">
+    <classShape Id="71519ff0-62cd-4bd0-8fc7-aadc48d7dfbf" absoluteBounds="4.75, 2, 2, 2.9247054036458331">
       <DataClassMoniker Name="/TempDatabaseDataContext/Invoice_" />
       <nestedChildShapes>
-        <elementListCompartment Id="2f8cd272-bb9a-4d0f-907d-6181c2ca75bf" absoluteBounds="4.89, 2.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="29308ab2-831a-40a5-846f-31fff614a30f" absoluteBounds="4.765, 2.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.125 : 6); (5.125 : 4.3381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.0625 : 6); (5.0625 : 4.92470540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/TempDatabaseDataContext/Customer/Customer_Invoice_" />
       <nodes>
         <classShapeMoniker Id="446cd4f2-6bde-43b1-a6e6-b5e4a19a65fe" />
-        <classShapeMoniker Id="6a19887e-8f67-4967-bc25-f1b7066cb236" />
+        <classShapeMoniker Id="71519ff0-62cd-4bd0-8fc7-aadc48d7dfbf" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
