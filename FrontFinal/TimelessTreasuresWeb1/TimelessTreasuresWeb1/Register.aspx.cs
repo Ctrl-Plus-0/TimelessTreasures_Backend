@@ -35,10 +35,10 @@ namespace TimelessTreasuresWeb1
                 //Redirect User To Login Page Upon Logging In
                 Response.Redirect("Login.aspx");
             }
-            else if (RegistrationStatus == "Already Registred")
+            else if (RegistrationStatus == "Already Registered")
             {
                 // Msglabel.Text = "User alredy registered, please login instead!"; // Unecessary, since the user is immediately redirected to login
-                Response.Redirect("Login.aspx");
+                Msglabel.Text = "Email Already In Use";
             }
             else
             {

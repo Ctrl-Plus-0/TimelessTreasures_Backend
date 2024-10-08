@@ -631,6 +631,9 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private System.DateTime DateOfBirthField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TimelessTreasuresWeb1.ServiceReference1.Invoice_[] Invoice_sField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TimelessTreasuresWeb1.ServiceReference1.PUser PUserField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -694,6 +697,19 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((this.DateOfBirthField.Equals(value) != true)) {
                     this.DateOfBirthField = value;
                     this.RaisePropertyChanged("DateOfBirth");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TimelessTreasuresWeb1.ServiceReference1.Invoice_[] Invoice_s {
+            get {
+                return this.Invoice_sField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Invoice_sField, value) != true)) {
+                    this.Invoice_sField = value;
+                    this.RaisePropertyChanged("Invoice_s");
                 }
             }
         }
@@ -925,6 +941,147 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Invoice_", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class Invoice_ : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreationDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TimelessTreasuresWeb1.ServiceReference1.Customer CustomerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProdIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreationDate {
+            get {
+                return this.CreationDateField;
+            }
+            set {
+                if ((this.CreationDateField.Equals(value) != true)) {
+                    this.CreationDateField = value;
+                    this.RaisePropertyChanged("CreationDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TimelessTreasuresWeb1.ServiceReference1.Customer Customer {
+            get {
+                return this.CustomerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomerField, value) != true)) {
+                    this.CustomerField = value;
+                    this.RaisePropertyChanged("Customer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProdID {
+            get {
+                return this.ProdIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProdIDField, value) != true)) {
+                    this.ProdIDField = value;
+                    this.RaisePropertyChanged("ProdID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuantityField, value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserID {
+            get {
+                return this.UserIDField;
+            }
+            set {
+                if ((this.UserIDField.Equals(value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Admin", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
     [System.SerializableAttribute()]
     public partial class Admin : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -986,6 +1143,99 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((object.ReferenceEquals(this.PUserField, value) != true)) {
                     this.PUserField = value;
                     this.RaisePropertyChanged("PUser");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TrackerWrapper", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class TrackerWrapper : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CartIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProdIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CartID {
+            get {
+                return this.CartIDField;
+            }
+            set {
+                if ((this.CartIDField.Equals(value) != true)) {
+                    this.CartIDField = value;
+                    this.RaisePropertyChanged("CartID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProdId {
+            get {
+                return this.ProdIdField;
+            }
+            set {
+                if ((this.ProdIdField.Equals(value) != true)) {
+                    this.ProdIdField = value;
+                    this.RaisePropertyChanged("ProdId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
                 }
             }
         }
@@ -1157,6 +1407,131 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvoiceWrapper", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class InvoiceWrapper : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int[] ProductIDsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int[] QuantityProdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime D {
+            get {
+                return this.DField;
+            }
+            set {
+                if ((this.DField.Equals(value) != true)) {
+                    this.DField = value;
+                    this.RaisePropertyChanged("D");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int[] ProductIDs {
+            get {
+                return this.ProductIDsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductIDsField, value) != true)) {
+                    this.ProductIDsField = value;
+                    this.RaisePropertyChanged("ProductIDs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int[] QuantityProd {
+            get {
+                return this.QuantityProdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuantityProdField, value) != true)) {
+                    this.QuantityProdField = value;
+                    this.RaisePropertyChanged("QuantityProd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserID {
+            get {
+                return this.UserIDField;
+            }
+            set {
+                if ((this.UserIDField.Equals(value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -1198,10 +1573,16 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Item[]> filterAndSortItemsAsync(string filterOrder, string sortOrder);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddItemToCart", ReplyAction="http://tempuri.org/IService1/AddItemToCartResponse")]
-        string AddItemToCart(int Prodid, int UserId);
+        int AddItemToCart(int Prodid, int UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddItemToCart", ReplyAction="http://tempuri.org/IService1/AddItemToCartResponse")]
-        System.Threading.Tasks.Task<string> AddItemToCartAsync(int Prodid, int UserId);
+        System.Threading.Tasks.Task<int> AddItemToCartAsync(int Prodid, int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartItems", ReplyAction="http://tempuri.org/IService1/GetCartItemsResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.TrackerWrapper[] GetCartItems(int Userid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartItems", ReplyAction="http://tempuri.org/IService1/GetCartItemsResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.TrackerWrapper[]> GetCartItemsAsync(int Userid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUserID", ReplyAction="http://tempuri.org/IService1/GetUserIDResponse")]
         int GetUserID(string email, string password);
@@ -1256,6 +1637,60 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurname", ReplyAction="http://tempuri.org/IService1/GetStaffMemberByFullNameAndSurnameResponse")]
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveItemFromCart", ReplyAction="http://tempuri.org/IService1/RemoveItemFromCartResponse")]
+        int RemoveItemFromCart(int ProdID, int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveItemFromCart", ReplyAction="http://tempuri.org/IService1/RemoveItemFromCartResponse")]
+        System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
+        int UpdateCartTotal(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
+        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
+        int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
+        System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartTotal", ReplyAction="http://tempuri.org/IService1/GetCartTotalResponse")]
+        decimal GetCartTotal(int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCartTotal", ReplyAction="http://tempuri.org/IService1/GetCartTotalResponse")]
+        System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateInvoice", ReplyAction="http://tempuri.org/IService1/CreateInvoiceResponse")]
+        int CreateInvoice(int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateInvoice", ReplyAction="http://tempuri.org/IService1/CreateInvoiceResponse")]
+        System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ClearCart", ReplyAction="http://tempuri.org/IService1/ClearCartResponse")]
+        void ClearCart(int Uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ClearCart", ReplyAction="http://tempuri.org/IService1/ClearCartResponse")]
+        System.Threading.Tasks.Task ClearCartAsync(int Uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInvoices", ReplyAction="http://tempuri.org/IService1/GetInvoicesResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper[] GetInvoices(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInvoices", ReplyAction="http://tempuri.org/IService1/GetInvoicesResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper[]> GetInvoicesAsync(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateAfterSale", ReplyAction="http://tempuri.org/IService1/UpdateAfterSaleResponse")]
+        void UpdateAfterSale(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateAfterSale", ReplyAction="http://tempuri.org/IService1/UpdateAfterSaleResponse")]
+        System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1333,12 +1768,20 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.filterAndSortItemsAsync(filterOrder, sortOrder);
         }
         
-        public string AddItemToCart(int Prodid, int UserId) {
+        public int AddItemToCart(int Prodid, int UserId) {
             return base.Channel.AddItemToCart(Prodid, UserId);
         }
         
-        public System.Threading.Tasks.Task<string> AddItemToCartAsync(int Prodid, int UserId) {
+        public System.Threading.Tasks.Task<int> AddItemToCartAsync(int Prodid, int UserId) {
             return base.Channel.AddItemToCartAsync(Prodid, UserId);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.TrackerWrapper[] GetCartItems(int Userid) {
+            return base.Channel.GetCartItems(Userid);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.TrackerWrapper[]> GetCartItemsAsync(int Userid) {
+            return base.Channel.GetCartItemsAsync(Userid);
         }
         
         public int GetUserID(string email, string password) {
@@ -1411,6 +1854,78 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
             return base.Channel.GetStaffMemberByFullNameAndSurnameAsync(fullName, surname);
+        }
+        
+        public int RemoveItemFromCart(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCart(ProdID, UserID);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCartAsync(ProdID, UserID);
+        }
+        
+        public int UpdateCartTotal(int UserId) {
+            return base.Channel.UpdateCartTotal(UserId);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId) {
+            return base.Channel.UpdateCartTotalAsync(UserId);
+        }
+        
+        public int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantity(UserID, NewQuantity, ProductID);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantityAsync(UserID, NewQuantity, ProductID);
+        }
+        
+        public decimal GetCartTotal(int UserID) {
+            return base.Channel.GetCartTotal(UserID);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID) {
+            return base.Channel.GetCartTotalAsync(UserID);
+        }
+        
+        public int CreateInvoice(int UserID) {
+            return base.Channel.CreateInvoice(UserID);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateInvoiceAsync(int UserID) {
+            return base.Channel.CreateInvoiceAsync(UserID);
+        }
+        
+        public void ClearCart(int Uid) {
+            base.Channel.ClearCart(Uid);
+        }
+        
+        public System.Threading.Tasks.Task ClearCartAsync(int Uid) {
+            return base.Channel.ClearCartAsync(Uid);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper[] GetInvoices(int userID) {
+            return base.Channel.GetInvoices(userID);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper[]> GetInvoicesAsync(int userID) {
+            return base.Channel.GetInvoicesAsync(userID);
+        }
+        
+        public void UpdateAfterSale(int userID) {
+            base.Channel.UpdateAfterSale(userID);
+        }
+        
+        public System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID) {
+            return base.Channel.UpdateAfterSaleAsync(userID);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category) {
+            return base.Channel.getItemsByCategory(category);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
+            return base.Channel.getItemsByCategoryAsync(category);
         }
     }
 }
