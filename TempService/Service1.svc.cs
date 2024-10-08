@@ -75,7 +75,7 @@ namespace TempService
             {
                 var checkUser = (from u in DB.PUsers
                                  where u.UEmail.Equals(email) &&
-                                       u.UPassword.Equals(password)
+                                       u.UPassword.Equals(IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password))
                                  select u).FirstOrDefault();
 
                 if (checkUser == null)
@@ -92,16 +92,7 @@ namespace TempService
         {
             //First check the database to see if there already exists a user with a specefic email
             //If so return a string saying theyve already registered and that they should log in instead
-
-            var CheckUser = (from u in DB.PUsers
-                             where Email.Equals(u.UEmail)
-                             select u).FirstOrDefault();
-
-            if (CheckUser != null)
-            {
-                return "Already Registered";
-            }
-
+            
 
             var UserToStore = new PUser
             {
@@ -436,7 +427,7 @@ namespace TempService
             return items;
         }
 
-        public int AddItemToCart(int Prodid, int UserId)
+        public string AddItemToCart(int Prodid, int UserId)
         {
             var CT = (from Tracker in DB.CartTrackers
                       join Cart in DB.UCarts
@@ -447,24 +438,18 @@ namespace TempService
             if (CT != null)
             {
                 //update the quantity if user tries to add same item
-                //if  quantity is already at 10 return and tell them max amount of items for one purchace reached
-                if (CT.Quantity == 10)
-                {
-                    return -3; //MAX QUANTITY FOR THIS ITEM REACHED
-                }
-
                 CT.Quantity += 1;
                 try
                 {
                     DB.SubmitChanges();
-                    return 1; //ITEM ALREADY IN CART INCREMENTING QUANTITY
+                    return "Product Exists adding to quantity";
 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    return -2; // ERROR WHEN TRYING TO INCREMENT BY A SINGLE VALUE
-                   
+                    return "Error adding existing record to cart";
+                    //Problem encountred when trying to up quantity
                 }
             }
             else
@@ -485,12 +470,12 @@ namespace TempService
                 try
                 {
                     DB.SubmitChanges();
-                    return 2; //PRODUCT ADDED TO CART
+                    return Prod.Title + " added to cart";
                 }
                 catch (Exception e1)
                 {
                     Console.WriteLine(e1.Message);
-                    return -1; //ERROR WHILE INSERTING NEW ITEM TO THE CART
+                    return "Error inserting Product to cart,try again later";
                     //Problem encountred when inserting product to cart;
                 }
             }
@@ -769,385 +754,63 @@ namespace TempService
             return SM;
         }
 
-        public List<TrackerWrapper> GetCartItems(int Userid)
+        public List<string> getItemNames()
         {
-            dynamic CartItems = new List<TrackerWrapper>();
+            dynamic prod = new List<String>();
 
-            dynamic Temp = (from CTrack in DB.CartTrackers
-                            join CRT in DB.UCarts
-                            on CTrack.CartId equals CRT.Id
-                            where Userid == CRT.CustId
-                            select CTrack).DefaultIfEmpty();
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
 
-            foreach(var t in Temp)
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
             {
-                if (t != null)
-                {
-                    TrackerWrapper TW = new TrackerWrapper();
-                    TW.CartID = t.CartId;
-                    TW.ProdId = t.ProdID;
-                    TW.Quantity = t.Quantity;
-                    TW.Price = t.Price;
-
-                    CartItems.Add(TW);
-
-    
-
-                }
+                prod.Add(i.Title);
             }
 
-            return CartItems;
+            return prod; 
         }
 
-        public int RemoveItemFromCart(int ProdID, int UserID)
+        public List<string> getItemOnHand()
         {
-            var ToRemove = (from Track in DB.CartTrackers
-                            join Crt in DB.UCarts
-                            on Track.CartId equals Crt.Id
-                            where ProdID == Track.ProdID && UserID == Crt.CustId
-                            select Track).FirstOrDefault();
+            dynamic prod = new List<String>();
 
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
 
-            if (ToRemove != null)
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
             {
-                DB.CartTrackers.DeleteOnSubmit(ToRemove);
-
-                try
-                {
-                    DB.SubmitChanges();
-
-                  
-
-
-                    return 1; //ITEM REMOVED SUCCESFULLY
-                }catch(Exception E1)
-                {
-                    Console.WriteLine(E1.Message);
-                    return -1; //ITEM FAILED TO BE REMOVED
-                }
+                string quant = i.Quantity.ToString();
+                prod.Add(quant);
             }
-            else
-            {
-                return -2; //ITEM DOES NOT EXIST IN THE CART
-            }
-     
+
+            return prod;
         }
 
-        public int UpdateCartTotal(int UserId)
+        public List<string> getSalesPerProduct()
         {
-            var temp = (from UserCart in DB.UCarts
-                        where UserCart.CustId == UserId
-                        select UserCart).FirstOrDefault();
+            dynamic prod = new List<String>();
 
-            if (temp != null)
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
             {
-                dynamic Calc = (from CTrack in DB.CartTrackers
-                                join CRT in DB.UCarts
-                                on CTrack.CartId equals CRT.Id
-                                where UserId == CRT.CustId
-                                select CTrack).DefaultIfEmpty();
-                decimal NewTot=0;
-                foreach(CartTracker CT in Calc)
-                {
-                    if (CT != null)
-                    {
-                        decimal tempTotal = 0;
-                        tempTotal = CT.Price * CT.Quantity;
-                        NewTot += tempTotal;
-                    }
-                }
-                temp.Total = NewTot;
-                try
-                {
-                    DB.SubmitChanges();
-                    return 1; //SUCCESFULLY ADDED NEW TOTAL
-                }catch(Exception E1)
-                {
-                    Console.WriteLine(E1);
-                    return -1; //UNSUCCESFUL IN COMMITING CHANGES TO THE TOTAL
-                }
-            }
-            else
-            {
-                return -2; //COULDNT FIND USER CART
-            }
-            
-        }
-
-        public int UpdateItemQuantity(int UserID,int NewQuantity,int ProductID)
-        {
-            var CartItem = (from CTrack in DB.CartTrackers
-                            join CRT in DB.UCarts
-                            on CTrack.CartId equals CRT.Id
-                            where UserID == CRT.CustId && ProductID ==CTrack.ProdID
-                            select CTrack).FirstOrDefault();
-            if (CartItem != null)
-            {
-                if (CartItem.Quantity != NewQuantity)
-                {
-                    CartItem.Quantity = NewQuantity;
-                    try
-                    {
-                        DB.SubmitChanges();
-                        return 1;//QUANTITY UPDATED
-                    }catch(Exception E)
-                    {
-                        Console.WriteLine(E.Message);
-                        return -1; //Unable to Update Quantities
-                    }
-                }
-                else
-                {
-                    return 2; //NO CHANGE IN QUANTITY
-                }
-            }
-            else
-            {
-                return -2; // CART NOT LOCATED
-            }
-          
-        }
-
-        public decimal GetCartTotal(int UserID)
-        {
-            var temp = (from UserCart in DB.UCarts
-                        where UserCart.CustId == UserID
-                        select UserCart).FirstOrDefault();
-
-            if (temp != null)
-            {
-                return temp.Total;
-            }
-            else 
-            { return 0;
-            }
-            
-        }
-
-        public int CreateInvoice(int UserID)
-        {
-            var inv = (from i in DB.Invoice_s
-                       where i.UserID == UserID && i.Id==0
-                       select i).FirstOrDefault();
-            if (inv != null)
-            {
-                return -1; //INVOICE ALREADY EXISTS
-            }
-            else
-            {
-                //get the users cart
-                var UserCart = (from u in DB.UCarts
-                                where u.CustId == UserID
-                                select u).FirstOrDefault();
-                dynamic CartItems = (from CT in DB.CartTrackers
-                                     where CT.CartId == UserCart.Id
-                                     select CT).DefaultIfEmpty();
-                var Ninv = new Invoice_();
-
-                Ninv.Price = UserCart.Total;
-                  foreach (var C in CartItems) {
-
-                    //add each products id as a string and corresponding quantities too
-                    Ninv.ProdID += C.ProdID.ToString() + "\\";
-                    Ninv.Quantity += C.Quantity.ToString() + "\\";
-                }
-                Ninv.UserID = UserID;
-                Ninv.CreationDate = DateTime.Now;
-
-                DB.Invoice_s.InsertOnSubmit(Ninv);
-
-                try
-                {
-                    DB.SubmitChanges();
-                    return 1; //Invoice made
-                }
-                catch(Exception E1)
-                {
-                    Console.WriteLine(E1.Message);
-                    return -2; //error adding invoice to table
-                }
-                
-            }
-            
-        }
-
-        public void ClearCart(int Uid)
-        {
-            try
-            {
-                var CartClear = (from CRT in DB.CartTrackers
-                                 join UT in DB.UCarts
-                                 on CRT.CartId equals UT.Id
-                                 where UT.CustId == Uid
-                                 select CRT).DefaultIfEmpty();
-                DB.CartTrackers.DeleteAllOnSubmit(CartClear);
-                DB.SubmitChanges();
-                var UpdateCart = (from CT in DB.UCarts
-                                  where CT.CustId == Uid
-                                  select CT).FirstOrDefault();
-
-                UpdateCart.Total = 0;
-                DB.SubmitChanges();
-                
-            }catch(Exception E1)
-            {
-                Console.WriteLine(E1.Message);
-            }
-           
-        }
-
-        public List<InvoiceWrapper> GetInvoices(int userID)
-        {
-            dynamic inv = new List<InvoiceWrapper>();
-
-            dynamic temp = (from I in DB.Invoice_s
-                            where I.UserID == userID
-                            select I).DefaultIfEmpty();
-
-            foreach(var i in temp)
-            {
-                InvoiceWrapper IW = new InvoiceWrapper();
-                IW.id = i.Id;
-                IW.UserID = i.UserID;
-                string[] SplitProds = i.ProdID.Split('\\');
-                string[] SplitQuantity = i.Quantity.Split('\\');
-                IW.SetProductIDs(SplitProds);
-                IW.SetUpQuantity(SplitQuantity);
-                IW.Price = i.Price;
-                IW.D = i.CreationDate;
-                inv.Add(IW);
-            }
-            return inv;
-        }
-
-        public void UpdateAfterSale(int userID)
-        {
-            dynamic UpdateWith = (from CRT in DB.CartTrackers
-                             join UT in DB.UCarts
-                             on CRT.CartId equals UT.Id
-                             where UT.CustId == userID
-                             select CRT).DefaultIfEmpty();
-
-            foreach(CartTracker CT in UpdateWith)
-            {
-                var ProdUpdate = (from P in DB.Items
-                                  where P.Id == CT.ProdID
-                                  select P).FirstOrDefault();
-
-                ProdUpdate.NumSold = CT.Quantity;
-
-                try
-                {
-                    DB.SubmitChanges();
-                }catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-          
-        }
-
-
-
-
-        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role)
-        {
-            {
-                var checkUser = (from u in DB.PUsers
-                                 where u.UserName.Equals(userName) || u.UEmail.Equals(email)
-                                 select u).FirstOrDefault();
-
-                if (checkUser == null)
-                {
-                    var staffToBeSaved = new PUser
-                    {
-                        UFullName = fullName,
-                        USurname = surname,
-                        UserName = userName,
-                        UEmail = email,
-                        UPassword = IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password),
-                        Ucreationtime = DateTime.Now,
-                        Urole = role
-                    };
-
-                    DB.PUsers.InsertOnSubmit(staffToBeSaved);
-                    try
-                    {
-                        DB.SubmitChanges();
-                        return 0; // STAFF MEMBER ADDED SUCCESSFULLY
-                    }
-                    catch (Exception)
-                    {
-                        return -1; // INTERNAL SERVER ERROR
-                    }
-                }
-                else
-                {
-                    return 1; // STAFF MEMBER ALREADY EXISTS
-                }
-            }
-        }
-
-        public int EditStaffMember(string fullName, string surname, string email, string role)
-        {
-            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
-            {
-                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
-                if (staff != null)
-                {
-                    staff.UEmail = email;
-                    staff.Urole = role;
-                    DB.SubmitChanges(); // Save changes to the database
-                    return 0; // Success
-                }
-                return -1; // Staff member not found
-            }
-        }
-
-       
-
-        public StaffMember GetStaffMember(int userId)
-        {
-            var staffMember = (from u in DB.PUsers
-                               where u.UId == userId
-                               select new StaffMember
-                               {
-                                   UId = u.UId,
-                                   UserName = u.UserName,
-                                   UFullName = u.UFullName,
-                                   USurname = u.USurname,
-                                   UEmail = u.UEmail,
-                                   Ucreationtime = u.Ucreationtime,
-                                   Urole = u.Urole
-                               }).FirstOrDefault();
-
-            return staffMember;
-        }
-
-
-        public List<ItemWrapper> getItemsByCategory(string category)
-        {
-            List<ItemWrapper> allProds = getItems(0);
-
-            List<ItemWrapper> filteredItems = new List<ItemWrapper>();
-
-            if (category.Equals("All"))
-            {
-                filteredItems = allProds;
-            }
-            else
-            {
-                foreach (ItemWrapper item in allProds)
-                {
-                    if (item.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
-                    {
-                        filteredItems.Add(item);
-                    }
-                }
-
+                string quant = i.NumSold.ToString();
+                prod.Add(quant);
             }
 
-            return filteredItems;
+            return prod;
         }
     }
 }

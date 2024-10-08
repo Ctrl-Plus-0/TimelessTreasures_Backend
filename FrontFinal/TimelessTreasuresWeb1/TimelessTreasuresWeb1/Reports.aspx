@@ -1,0 +1,54 @@
+﻿<%@ Page Title="Reports | Timeless Treasures" Language="C#" MasterPageFile="~/Web.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="TimelessTreasuresWeb1.WebForm2" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Reports</h1>
+					<nav class="d-flex align-items-center">
+						<a href="Home.aspx">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="Reports.aspx">Reports</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="reports_side" style="padding: 20px; color: black;">
+						<p>Choose Chart</p>
+						<asp:DropDownList ID="chart_name" runat="server" style="min-width: 100px; margin: 20px;">
+							<asp:ListItem Value="SalesbyProd">Sales by Product</asp:ListItem>
+							<asp:ListItem Value="Prodonhand">Stock on Hand by Product</asp:ListItem>
+							<asp:ListItem Value="Monthlysales">Total monthly Sales</asp:ListItem>
+						</asp:DropDownList>
+
+						<asp:DropDownList ID="chart_type" runat="server" style="min-width: 100px; margin: 20px;">
+							<asp:ListItem Value="Pie">Pie Chart</asp:ListItem>
+							<asp:ListItem Value="Column">Column Cart</asp:ListItem>
+							<asp:ListItem Value="Bar">Bar Chart</asp:ListItem>
+						</asp:DropDownList>
+						<asp:Button CssClass="genric-btn info-border" ID="btnGetChart" runat="server" Text="Get Report" OnClick="btnGetChart_Click" />
+					</div>
+				</div>
+				<div class="col-lg-10">
+					
+					
+					<div id="report_chart" runat="server">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+</asp:Content>
