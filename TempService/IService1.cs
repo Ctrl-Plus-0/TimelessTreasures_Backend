@@ -34,6 +34,9 @@ namespace TempService
 
         [DataMember]
         public string Urole { get; set; }
+
+        [DataMember]
+        public int PermType { get; set; }
     }
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
@@ -51,7 +54,7 @@ namespace TempService
         [OperationContract]
         //hash pass in backend when trying to login
         //hash in registering when reading
-        string login(string Email, string Password);
+        int login(string Email, string Password);
 
         [OperationContract]
         string addItemsToDB(string title, decimal price, string desciption, string category, string image);
@@ -68,18 +71,21 @@ namespace TempService
         Item[] filterAndSortItems(String filterOrder, string sortOrder);
 
         [OperationContract]
-        string AddItemToCart(int Prodid, int UserId);
+        int AddItemToCart(int Prodid, int UserId);
+
+        [OperationContract]
+
+        List<TrackerWrapper> GetCartItems(int Userid);
 
         [OperationContract]
         int GetUserID(string email, string password);
         [OperationContract]
-        int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role);
+        int AddStaffMember(string fullName, string surname, string userName, string email, string password, int perms);
         [OperationContract]
-        int EditStaffMember(string fullName, string surname, string email, string role);
+        int EditStaffMember(int Memberid,string fullName, string surname, string email, int perms);
         [OperationContract]
         int DeleteStaffMember(string fullName, string surname);
-        [OperationContract]
-        StaffMember GetStaffMember(int userId);
+   
         [OperationContract]
         int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
         [OperationContract]
@@ -89,7 +95,20 @@ namespace TempService
         [OperationContract]
         Item GetProductByName(string title);
         [OperationContract]
-        PUser GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+        StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+
+        [OperationContract]
+
+        int RemoveItemFromCart(int ProdID, int UserID);
+
+        [OperationContract]
+        int UpdateCartTotal(int UserId);
+
+        [OperationContract]
+        int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
+
+        [OperationContract]
+        decimal GetCartTotal(int UserID);
 
         [OperationContract]
         List<ItemWrapper> getItemsByCategory(string category);

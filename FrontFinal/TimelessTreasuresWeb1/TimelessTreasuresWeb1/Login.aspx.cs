@@ -24,70 +24,41 @@ namespace TimelessTreasuresWeb1
             string email = txtEmail.Text;
             string password = Secrecy.HashPassword(txtPass.Text);
 
-            string loginstatus = Client.login(email, password);
+            int loginstatus = Client.login(email, password);
 
-            if (loginstatus == "Username Or Password is Incorrect")
+            if (loginstatus == -1)
             {
 
                 Msglabel.Text = "Incorrect Username or Passowrd";
 
             }
-            else
-            {
-                //create a session variable fot the login status
-                //this will be used by  landing page to change the navbar type
-                Session["UserType"] = loginstatus;
-
-                Response.Redirect("Home.aspx");
-
-
-            }
-        }
-
-        protected void btnUserLogin_Click(object sender, EventArgs e)
-        {
-            Service1Client Client = new Service1Client();
-
-            string email = txtEmail.Text;
-            string password = Secrecy.HashPassword(txtPass.Text);
-
-            string loginstatus = Client.login(email, password);
-
-            if (loginstatus == "Username Or Password is Incorrect")
-            {
-
-                Msglabel.Text = "Incorrect Username or Passowrd";
-
-            }
-            else if(loginstatus == "Customer")
+            else if (loginstatus == 0)
             {
                 //create a session variable fot the login status
                 //this will be used by  landing page to change the navbar type
 
 
-                Session["UserType"] = loginstatus;  //*****//
-                Session["LoggedInUserID"] = Client.GetUserID(email, password);
+                Session["UserType"] = "Customer";  //*****//
+                Session["UserId"] = Client.GetUserID(email, password);
+                string check = Session["UserId"].ToString();
                 Response.Redirect("Home.aspx");
 
 
             }
-            else if (loginstatus == "Manager")
+            else if (loginstatus == 1)
             {
-                Session["UserType"] = loginstatus;  //*****//
-                Session["LoggedInUserID"] = Client.GetUserID(email, password);
+                Session["UserType"] = "Head Manager";  //*****//
+                Session["UserId"] = Client.GetUserID(email, password);
                 Response.Redirect("Home.aspx");
             }
-            else if (loginstatus == "Head Manager")
+            else if (loginstatus == 2)
             {
-                Session["UserType"] = loginstatus;  //*****//
-                Session["LoggedInUserID"] = Client.GetUserID(email, password);
+                Session["UserType"] = "Manager";  //*****//
+                Session["UserId"] = Client.GetUserID(email, password);
                 Response.Redirect("Home.aspx");
             }
         }
 
-        protected void txtPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

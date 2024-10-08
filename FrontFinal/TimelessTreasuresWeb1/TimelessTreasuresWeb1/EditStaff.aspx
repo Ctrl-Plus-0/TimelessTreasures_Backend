@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditStaff.aspx.cs" Inherits="TimelessTreasuresWeb1.EditStaff" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.Master" AutoEventWireup="true" CodeBehind="EditStaff.aspx.cs" Inherits="TimelessTreasuresWeb1.EditStaff" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   
+   
+         <div>
             <h2>Edit Staff Member</h2>
             <asp:Label ID="lblResponse" runat="server" ForeColor="Red"></asp:Label><br />
 
@@ -32,11 +29,17 @@
                 <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label><br />
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox><br />
 
-                <asp:Label ID="lblRole" runat="server" Text="Role:"></asp:Label><br />
-                <asp:TextBox ID="txtRole" runat="server"></asp:TextBox><br />
+                
+                
+                <asp:DropDownList ID="ddlRole" runat="server"  >
+                <asp:ListItem  Selected="True" Value="0">Select Manager Type</asp:ListItem>
+                <asp:ListItem Value="1">Head Manager</asp:ListItem>
+                <asp:ListItem Value="2">Standard Manager</asp:ListItem>
+            </asp:DropDownList>
+                <br />
 
                 <asp:Button ID="btnEdit" runat="server" Text="Edit Staff" OnClick="btnEdit_Click" />
             </asp:Panel>
         </div>
-    </form>
-</body></html>
+   
+</asp:Content>

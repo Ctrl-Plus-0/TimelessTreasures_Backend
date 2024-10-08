@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProduct.aspx.cs" Inherits="TimelessTreasuresWeb1.AddProduct" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.Master" AutoEventWireup="true" CodeBehind="AddProduct.aspx.cs" Inherits="TimelessTreasuresWeb1.AddProduct" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   
+   
+       <div>
             <h2>Add Product</h2>
             <label>Title:</label>
             <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox><br />
@@ -27,6 +24,5 @@
             <asp:Button ID="btnSubmit" Text="Add Product" runat="server" OnClick="btnSubmit_Click" />
             <asp:Label ID="lblResponse" runat="server"></asp:Label>
         </div>
-    </form>
-</body>
-</html>
+   
+</asp:Content>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TimelessTreasuresWeb1.ServiceReference1;
+using HashPass;
 
 
 namespace TimelessTreasuresWeb1
@@ -23,12 +24,23 @@ namespace TimelessTreasuresWeb1
             string surname = txtSurname.Text;
             string userName = txtUserName.Text;
             string email = txtEmail.Text;
-            string password = txtPassword.Text;
-            string role = txtRole.Text;
+            string password = Secrecy.HashPassword(txtPassword.Text);
+            int role = int.Parse(ddlRole.SelectedValue);
+
+            //if no role is selected dont let them proceed with registration
+            //stop and send message
+            if (role == 0)
+            {
+                lblResponse.ForeColor = System.Drawing.Color.Yellow;
+                lblResponse.Text = "Please Select a Valid Manager Type";
+                return;
+            }
+
+
 
             Service1Client client = new Service1Client();
-            int result = client.AddStaffMember(fullName, surname, userName, email, password, role);
-
+            int result = client.AddStaffMember(fullName, surname, userName, email, password,role);
+            
             if (result == 0)
             {
                 lblResponse.ForeColor = System.Drawing.Color.Green;
@@ -38,6 +50,11 @@ namespace TimelessTreasuresWeb1
             {
                 lblResponse.ForeColor = System.Drawing.Color.Yellow;
                 lblResponse.Text = "Staff Member Already Exists";
+            }
+            else if (result == 2)
+            {
+                lblResponse.ForeColor = System.Drawing.Color.Yellow;
+                lblResponse.Text = "Email Already In Use";
             }
             else
             {
