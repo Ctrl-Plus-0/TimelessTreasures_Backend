@@ -1549,5 +1549,45 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.StaffMember> GetStaffMemberByFullNameAndSurnameAsync(string fullName, string surname) {
             return base.Channel.GetStaffMemberByFullNameAndSurnameAsync(fullName, surname);
         }
+        
+        public int RemoveItemFromCart(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCart(ProdID, UserID);
+        }
+        
+        public System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID) {
+            return base.Channel.RemoveItemFromCartAsync(ProdID, UserID);
+        }
+        
+        public int UpdateCartTotal(int UserId) {
+            return base.Channel.UpdateCartTotal(UserId);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId) {
+            return base.Channel.UpdateCartTotalAsync(UserId);
+        }
+        
+        public int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantity(UserID, NewQuantity, ProductID);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateItemQuantityAsync(int UserID, int NewQuantity, int ProductID) {
+            return base.Channel.UpdateItemQuantityAsync(UserID, NewQuantity, ProductID);
+        }
+        
+        public decimal GetCartTotal(int UserID) {
+            return base.Channel.GetCartTotal(UserID);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetCartTotalAsync(int UserID) {
+            return base.Channel.GetCartTotalAsync(UserID);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category) {
+            return base.Channel.getItemsByCategory(category);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
+            return base.Channel.getItemsByCategoryAsync(category);
+        }
     }
 }
