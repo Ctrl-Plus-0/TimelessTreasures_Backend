@@ -1046,6 +1046,109 @@ namespace TempService
             }
           
         }
+
+
+
+
+        public int AddStaffMember(string fullName, string surname, string userName, string email, string password, string role)
+        {
+            {
+                var checkUser = (from u in DB.PUsers
+                                 where u.UserName.Equals(userName) || u.UEmail.Equals(email)
+                                 select u).FirstOrDefault();
+
+                if (checkUser == null)
+                {
+                    var staffToBeSaved = new PUser
+                    {
+                        UFullName = fullName,
+                        USurname = surname,
+                        UserName = userName,
+                        UEmail = email,
+                        UPassword = IFM2B10_2014_CS_Paper_A.Secrecy.HashPassword(password),
+                        Ucreationtime = DateTime.Now,
+                        Urole = role
+                    };
+
+                    DB.PUsers.InsertOnSubmit(staffToBeSaved);
+                    try
+                    {
+                        DB.SubmitChanges();
+                        return 0; // STAFF MEMBER ADDED SUCCESSFULLY
+                    }
+                    catch (Exception)
+                    {
+                        return -1; // INTERNAL SERVER ERROR
+                    }
+                }
+                else
+                {
+                    return 1; // STAFF MEMBER ALREADY EXISTS
+                }
+            }
+        }
+
+        public int EditStaffMember(string fullName, string surname, string email, string role)
+        {
+            using (TempDatabaseDataContext DB = new TempDatabaseDataContext())
+            {
+                var staff = DB.PUsers.FirstOrDefault(u => u.UFullName == fullName && u.USurname == surname);
+                if (staff != null)
+                {
+                    staff.UEmail = email;
+                    staff.Urole = role;
+                    DB.SubmitChanges(); // Save changes to the database
+                    return 0; // Success
+                }
+                return -1; // Staff member not found
+            }
+        }
+
+       
+
+        public StaffMember GetStaffMember(int userId)
+        {
+            var staffMember = (from u in DB.PUsers
+                               where u.UId == userId
+                               select new StaffMember
+                               {
+                                   UId = u.UId,
+                                   UserName = u.UserName,
+                                   UFullName = u.UFullName,
+                                   USurname = u.USurname,
+                                   UEmail = u.UEmail,
+                                   Ucreationtime = u.Ucreationtime,
+                                   Urole = u.Urole
+                               }).FirstOrDefault();
+
+            return staffMember;
+        }
+
+
+        public List<ItemWrapper> getItemsByCategory(string category)
+        {
+            List<ItemWrapper> allProds = getItems(0);
+
+            List<ItemWrapper> filteredItems = new List<ItemWrapper>();
+
+            if (category.Equals("All"))
+            {
+                filteredItems = allProds;
+            }
+            else
+            {
+                foreach (ItemWrapper item in allProds)
+                {
+                    if (item.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
+                    {
+                        filteredItems.Add(item);
+                    }
+                }
+
+            }
+
+            return filteredItems;
+        }
     }
 }
        

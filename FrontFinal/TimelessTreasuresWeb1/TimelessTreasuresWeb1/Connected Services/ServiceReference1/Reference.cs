@@ -1685,6 +1685,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateAfterSale", ReplyAction="http://tempuri.org/IService1/UpdateAfterSaleResponse")]
         System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1912,6 +1918,14 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID) {
             return base.Channel.UpdateAfterSaleAsync(userID);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[] getItemsByCategory(string category) {
+            return base.Channel.getItemsByCategory(category);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
+            return base.Channel.getItemsByCategoryAsync(category);
         }
     }
 }

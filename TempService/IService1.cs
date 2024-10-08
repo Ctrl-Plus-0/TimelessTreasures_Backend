@@ -111,6 +111,10 @@ namespace TempService
         decimal GetCartTotal(int UserID);
 
         [OperationContract]
+        List<ItemWrapper> getItemsByCategory(string category);
+
+
+        [OperationContract]
         int CreateInvoice(int UserID);
 
         [OperationContract]
