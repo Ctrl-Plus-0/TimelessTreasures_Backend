@@ -140,7 +140,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvoiceWrapper.cs" />
     <Compile Include="ItemWrapper.cs" />
+    <Compile Include="Secrecy.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
