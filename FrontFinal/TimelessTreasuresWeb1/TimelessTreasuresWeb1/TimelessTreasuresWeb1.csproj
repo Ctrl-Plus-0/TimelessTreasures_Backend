@@ -294,6 +294,7 @@
     <Content Include="EditProduct.aspx" />
     <Content Include="EditStaff.aspx" />
     <Content Include="Logout.aspx" />
+    <Content Include="WebForm1.aspx" />
     <Content Include="Wishlist.aspx" />
     <None Include="Connected Services\ServiceReference1\Service1.disco" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
@@ -433,6 +434,13 @@
     </Compile>
     <Compile Include="Web.Master.designer.cs">
       <DependentUpon>Web.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Wishlist.aspx.cs">
       <DependentUpon>Wishlist.aspx</DependentUpon>

@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditProduct.aspx.cs" Inherits="TimelessTreasuresWeb1.EditProduct" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.Master" AutoEventWireup="true" CodeBehind="EditProduct.aspx.cs" Inherits="TimelessTreasuresWeb1.EditProduct" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   
+   
+         <div>
             <h2>Edit Product</h2>
 
         
@@ -63,5 +60,5 @@
          
             <asp:Label ID="lblResponse" runat="server" ForeColor="Red"></asp:Label>
         </div>
-    </form>
-</body></html>
+   
+</asp:Content>
