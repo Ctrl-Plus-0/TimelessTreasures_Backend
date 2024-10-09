@@ -54,11 +54,13 @@ namespace TimelessTreasuresWeb1
                 ddlRole.SelectedValue = staff.PermType.ToString();
 
 
-                txtFullName.ReadOnly = true;
-                txtSurname.ReadOnly = true;
+                txtFullName.ReadOnly = false;
+                txtSurname.ReadOnly = false;
+                txtEmail.ReadOnly = false;
 
 
                 StaffPanel.Visible = true;
+                VisibleForm.Visible = false;
                 lblResponse.Text = "Staff member found. You can now edit their details.";
             }
             else
@@ -86,6 +88,9 @@ namespace TimelessTreasuresWeb1
                     lblResponse.Text = "Staff member details updated successfully.";
                     Session.Remove("EditID");
                     //add in code here to clear screen again
+                    txtFullName.ReadOnly = true;
+                    txtSurname.ReadOnly = true;
+                    txtEmail.ReadOnly = true;
                 }
                 else
                 {

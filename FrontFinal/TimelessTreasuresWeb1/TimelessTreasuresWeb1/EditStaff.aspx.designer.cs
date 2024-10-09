@@ -15,22 +15,13 @@ namespace TimelessTreasuresWeb1
     {
 
         /// <summary>
-        /// lblResponse control.
+        /// VisibleForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResponse;
-
-        /// <summary>
-        /// lblSearchName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VisibleForm;
 
         /// <summary>
         /// txtSearchName control.
@@ -40,15 +31,6 @@ namespace TimelessTreasuresWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearchName;
-
-        /// <summary>
-        /// lblSearchSurname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchSurname;
 
         /// <summary>
         /// txtSearchSurname control.
@@ -69,13 +51,22 @@ namespace TimelessTreasuresWeb1
         protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
         /// StaffPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel StaffPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl StaffPanel;
 
         /// <summary>
         /// lblFullName control.
@@ -148,5 +139,14 @@ namespace TimelessTreasuresWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEdit;
+
+        /// <summary>
+        /// lblResponse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResponse;
     }
 }

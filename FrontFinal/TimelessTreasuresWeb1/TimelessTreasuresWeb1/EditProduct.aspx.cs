@@ -74,7 +74,7 @@ namespace TimelessTreasuresWeb1
             Service1Client client = new Service1Client();
 
 
-            int result = client.EditProduct(title, price, description, category, imageUrl, quantity, visible);
+            int result = client.EditProduct(0, title, price, description, category, imageUrl, quantity, visible);
 
 
             if (result == 0)
