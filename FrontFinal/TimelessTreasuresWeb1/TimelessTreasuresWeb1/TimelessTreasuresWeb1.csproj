@@ -297,7 +297,6 @@
     <Content Include="Invoices.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Contact.aspx" />
-    <Content Include="Wishlist.aspx" />
     <None Include="Connected Services\ServiceReference1\Service1.disco" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
@@ -457,13 +456,6 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Wishlist.aspx.cs">
-      <DependentUpon>Wishlist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Wishlist.aspx.designer.cs">
-      <DependentUpon>Wishlist.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
