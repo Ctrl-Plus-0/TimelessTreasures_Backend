@@ -324,8 +324,8 @@ namespace TimelessTreasuresWeb1
             string receipiant = txtName.Text;
             string UnparsedDate = txtDeliveryDate.Text;
             DateTime Delivery;
-
-           if(DateTime.TryParseExact(UnparsedDate, "yyyy/MM/dd", null, System.Globalization.DateTimeStyles.None,out Delivery))
+            string[] formats = { "yyyy/MM/dd", "yyyy-MM-dd" };
+            if (DateTime.TryParseExact(UnparsedDate,formats, null, System.Globalization.DateTimeStyles.None,out Delivery))
             {
 
                 SC.CreateInvoice(Uid,message,receipiant,address,Delivery,contact);

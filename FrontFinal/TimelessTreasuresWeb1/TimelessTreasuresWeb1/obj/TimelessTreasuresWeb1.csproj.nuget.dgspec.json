@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
+        "projectName": "TimelessTreasuresWeb1",
+        "projectPath": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
+        "packagesPath": "C:\\Users\\ndzal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ndzal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNet.Razor": {
+              "target": "Package",
+              "version": "[3.2.7, )"
+            },
+            "Microsoft.AspNet.WebPages": {
+              "target": "Package",
+              "version": "[3.2.7, )"
+            },
+            "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Microsoft.Web.Infrastructure": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

@@ -642,35 +642,48 @@ namespace TempService
 
 
 
-        public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible)
+        public int EditProduct(int id, string title, decimal price, string description, string category, string image, int quantity, int visible)
         {
-            var existingItem = GetProductByName(title);
-
-
-            if (existingItem == null)
-            {
-                return 1;
-            }
-
-
-            existingItem.Price = price;
-            existingItem.Description = description;
-            existingItem.Category = category;
-            existingItem.Image = image;
-            existingItem.Quantity = quantity;
-            existingItem.Visible_ = visible;
-
             try
             {
+                using (var context = new TempDatabaseDataContext()) 
+                {
+                    System.Diagnostics.Debug.WriteLine($"Fetching product by ID: {id}");
+                    var existingItem = context.Items.FirstOrDefault(i => i.Id == id);
+                    if (existingItem == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Product not found with ID: " + id);
+                        return 1; // Product not found
+                    }
 
-                DB.SubmitChanges();
-                return 0;
+                    // Update the properties
+                    existingItem.Title = title;
+                    existingItem.Price = price;
+                    existingItem.Description = description;
+                    existingItem.Category = category;
+
+                    if (!string.IsNullOrEmpty(image))
+                    {
+                        existingItem.Image = image;
+                    }
+
+                    existingItem.Quantity = quantity;
+                    existingItem.Visible_ = visible;
+
+                    // Save changes
+                    context.SubmitChanges();
+                    System.Diagnostics.Debug.WriteLine("Product update successful for ID: " + id);
+                    return 0; // Successful update
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -1;
+                System.Diagnostics.Debug.WriteLine("Error in EditProduct: " + ex.Message);
+                return -1; 
             }
         }
+
+
 
         //THis function needs to be redone to take into acoount shopping carts that have items in them already
         //either change item visibility to false or remove from the carts 
@@ -1243,6 +1256,125 @@ namespace TempService
             }
             
         }
+
+        public List<string> getItemNames()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                prod.Add(i.Title);
+            }
+
+            return prod;
+        }
+
+        public List<string> getItemOnHand()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.Quantity.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getSalesPerProduct()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.NumSold.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getRegisteredUsersPerMonth()
+        {
+
+            List<string> regPerMonth = new List<string>(31);
+
+            List<int> usersPerMonthInt = new List<int>(31);
+
+            dynamic allUsers = (from u in DB.PUsers
+                             orderby u.Ucreationtime ascending
+                             select u).DefaultIfEmpty();
+
+            foreach (dynamic us in allUsers) {
+                DateTime creationTime = us.Ucreationtime;
+
+                int index = us.Ucreationtime.Day-1;
+
+                int currentValue = usersPerMonthInt[index] + 1;
+
+
+                usersPerMonthInt.Insert(index, currentValue);
+            } 
+
+            foreach (int number in usersPerMonthInt)
+            {
+                regPerMonth.Add(number.ToString());
+            }
+
+            return regPerMonth;
+        }
+
+        public int deleteItem(int id)
+        {
+            try
+            {
+                using (var context = new TempDatabaseDataContext()) 
+                {
+                    var existingItem = context.Items.FirstOrDefault(i => i.Id == id);
+                    if (existingItem == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Product not found for ID: " + id);
+                        return 1; // Product not found
+                    }
+
+                    // Set visibility to 0 instead of deleting
+                    existingItem.Visible_ = 0;
+
+                    // Save changes
+                    context.SubmitChanges();
+                    System.Diagnostics.Debug.WriteLine("Product visibility set to 0 for product ID: " + id);
+                    return 0; // Indicate success
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in DeleteItem: " + ex.Message);
+                return -1; // Indicate failure
+            }
+        }
+
     }
 }
        

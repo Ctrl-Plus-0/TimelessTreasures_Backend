@@ -71,10 +71,12 @@ namespace TimelessTreasuresWeb1
 				SB.Append(@"<span class=""ti-bag""></span>");
 				SB.Append(@"<p class=""hover-text"">Add To Bag</p>");
 				SB.Append("</a>");
+				/*
 				SB.Append($@"<a href =""Wishlist.aspx?Pid={ProdId}"" class=""social-info"">");
 				SB.Append(@"<span class=""lnr lnr-heart""></span>");
 				SB.Append(@"<p class=""hover-text"">Wishlist</p>");
 				SB.Append("</a>");
+				*/
 				SB.Append("</div>");
 				SB.Append("</div>");
 				SB.Append("</div>");

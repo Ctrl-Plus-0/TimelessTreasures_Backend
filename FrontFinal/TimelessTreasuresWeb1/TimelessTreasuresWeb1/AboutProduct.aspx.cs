@@ -45,7 +45,7 @@ namespace TimelessTreasuresWeb1
                 Sb.Append($"{ItemDescription}");
                 Sb.Append(@"<div class=""card_area d-flex align-items-center"">");
                 Sb.Append($@"<a class=""primary-btn"" href=""ShoppingCart.aspx?Pid={ProdId}"">Add to Cart</a>");
-                Sb.Append($@"<a class=""primary-btn"" href=""Wishlist.aspx?Pid={ProdId}"">Add to Wishlist</a>");
+                //Sb.Append($@"<a class=""primary-btn"" href=""Wishlist.aspx?Pid={ProdId}"">Add to Wishlist</a>");
                 Sb.Append("</div>");
                 Sb.Append("</div>");
                 Sb.Append("</div>");
