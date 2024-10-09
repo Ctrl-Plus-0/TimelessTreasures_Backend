@@ -4,33 +4,92 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
+    <section class="login_box_area section_gap" id="VisibleForm" runat="server" visible="true" >
+		<div class="container">
+			<div class="row">
+			
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+                        <h3 id="form-head">Delete Staff Member</h3>
+                    <div class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+						
+							<div class="col-md-12 form-group">
+							<asp:TextBox CssClass="form-control" ID="txtSearchName" runat="server" style="color:black" placeholder="Manager To Remove Name*" required="required"></asp:TextBox>
+                        </div>
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="txtSearchSurname" runat="server" style="color:black" placeholder="Manager To Remove Surname*" required="required" TextMode="SingleLine"></asp:TextBox>
+                        </div>
+				
+						
+							<div class="col-md-12 form-group">
+								<asp:Button CssClass="primary-btn" ID="btnSearch" runat="server" Text="Search Staff"  type="submit" OnClick="btnSearch_Click" />
+                        </div>
+							<div class="col-md-12 form-group">
+                            <asp:Label ID="lblResponse" runat="server" Text=""
+                                ></asp:Label>
+                        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
    
-        <div>
-            <h2>Delete Staff Member</h2>
-            <asp:Label ID="lblResponse" runat="server" ForeColor="Red"></asp:Label><br />
+     <section class="login_box_area section_gap" id="StaffPanel" runat="server" visible="false" >
+		<div class="container">
+			<div class="row">
+			
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+                        <h3 id="form-head1">Staff Details</h3>
+                    <div class="row login_form" action="contact_process.php" method="post" id="contactForm1" novalidate="novalidate">
+						
+							<div class="col-md-12 form-group" style="background-color: transparent; border: none;">
+							<asp:Label CssClass="form-control"   ID="lblFullName" runat="server" style="color:black;background-color: transparent; border: none;"  Readonly="true">Full Name</asp:Label>
+                        </div>
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="lblFullNameValue" runat="server" style="color:black" Readonly="true" TextMode="SingleLine"></asp:TextBox>
+                        </div>
+				
 
-            <asp:Label ID="lblSearchName" runat="server" Text="Enter Staff Full Name:"></asp:Label><br />
-            <asp:TextBox ID="txtSearchName" runat="server"></asp:TextBox><br />
+							<div class="col-md-12 form-group">
+                          <asp:Label CssClass="form-control" ID="lblSurname" runat="server" style="color:black;background-color: transparent; border: none;" Readonly="true" TextMode="SingleLine">Surname</asp:Label>
+                        </div>
 
-            <asp:Label ID="lblSearchSurname" runat="server" Text="Enter Staff Surname:"></asp:Label><br />
-            <asp:TextBox ID="txtSearchSurname" runat="server"></asp:TextBox><br />
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="lblSurnameValue" runat="server" style="color:black" Readonly="true" TextMode="SingleLine"></asp:TextBox>
+                        </div>
 
-            <asp:Button ID="btnSearch" runat="server" Text="Search Staff" OnClick="btnSearch_Click" /><br /><br />
+								<div class="col-md-12 form-group">
+                          <asp:Label CssClass="form-control" ID="lblEmail" runat="server" style="color:black;background-color: transparent; border: none;" Readonly="true" TextMode="SingleLine">Email</asp:Label>
+                        </div>
 
-            <!-- Staff details section (visible only when staff is found) -->
-            <asp:Panel ID="StaffPanel" runat="server" Visible="false">
-                <h3>Staff Details</h3>
-                <asp:Label ID="lblFullName" runat="server" Text="Full Name:"></asp:Label><br />
-                <asp:Label ID="lblFullNameValue" runat="server"></asp:Label><br />
-                <asp:Label ID="lblSurname" runat="server" Text="Surname:"></asp:Label><br />
-                <asp:Label ID="lblSurnameValue" runat="server"></asp:Label><br />
-                <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label><br />
-                <asp:Label ID="lblEmailValue" runat="server"></asp:Label><br />
-                <asp:Label ID="lblRole" runat="server" Text="Role:"></asp:Label><br />
-                <asp:Label ID="lblRoleValue" runat="server"></asp:Label><br />
+								<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="lblEmailValue" runat="server" style="color:black;background-color: transparent; border: none;" Readonly="true" TextMode="SingleLine"></asp:TextBox>
+                        </div>
 
-                <asp:Button ID="btnDelete" runat="server" Text="Delete Staff" OnClick="btnDelete_Click" />
-            </asp:Panel>
-        </div>
+									<div class="col-md-12 form-group">
+                          <asp:Label CssClass="form-control" ID="lblRole" runat="server" style="color:black;background-color: transparent; border: none;" Readonly="true" TextMode="SingleLine">Role</asp:Label>
+                        </div>
+									<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="lblRoleValue" runat="server" style="color:black" Readonly="true" TextMode="SingleLine"></asp:TextBox>
+                        </div>
+						
+							<div class="col-md-12 form-group">
+								<asp:Button CssClass="primary-btn" ID="btnDelete" runat="server" Text="Delete Staff"  type="submit" OnClick="btnDelete_Click" />
+                        </div>
+
+							<div class="col-md-12 form-group">
+                            <asp:Label ID="Label1" runat="server" Text=""
+                                ></asp:Label>
+                        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+   
    
 </asp:Content>
