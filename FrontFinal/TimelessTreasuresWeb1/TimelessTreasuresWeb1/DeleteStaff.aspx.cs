@@ -46,6 +46,7 @@ namespace TimelessTreasuresWeb1
                 lblRoleValue.Text = staff.Urole;
 
                 // Show the staff panel
+                VisibleForm.Visible = false;
                 StaffPanel.Visible = true;
 
                 lblResponse.Text = "Staff member found. You can now delete them.";
