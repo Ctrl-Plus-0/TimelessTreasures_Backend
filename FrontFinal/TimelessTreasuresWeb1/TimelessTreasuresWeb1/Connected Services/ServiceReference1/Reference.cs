@@ -1708,9 +1708,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private decimal DiscountPercentageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime ExpirationDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1745,19 +1742,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((this.DiscountPercentageField.Equals(value) != true)) {
                     this.DiscountPercentageField = value;
                     this.RaisePropertyChanged("DiscountPercentage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ExpirationDate {
-            get {
-                return this.ExpirationDateField;
-            }
-            set {
-                if ((this.ExpirationDateField.Equals(value) != true)) {
-                    this.ExpirationDateField = value;
-                    this.RaisePropertyChanged("ExpirationDate");
                 }
             }
         }
@@ -1962,6 +1946,30 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveFromDiscountPool", ReplyAction="http://tempuri.org/IService1/RemoveFromDiscountPoolResponse")]
         System.Threading.Tasks.Task RemoveFromDiscountPoolAsync(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemNames", ReplyAction="http://tempuri.org/IService1/getItemNamesResponse")]
+        string[] getItemNames();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemNames", ReplyAction="http://tempuri.org/IService1/getItemNamesResponse")]
+        System.Threading.Tasks.Task<string[]> getItemNamesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemOnHand", ReplyAction="http://tempuri.org/IService1/getItemOnHandResponse")]
+        string[] getItemOnHand();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemOnHand", ReplyAction="http://tempuri.org/IService1/getItemOnHandResponse")]
+        System.Threading.Tasks.Task<string[]> getItemOnHandAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getSalesPerProduct", ReplyAction="http://tempuri.org/IService1/getSalesPerProductResponse")]
+        string[] getSalesPerProduct();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getSalesPerProduct", ReplyAction="http://tempuri.org/IService1/getSalesPerProductResponse")]
+        System.Threading.Tasks.Task<string[]> getSalesPerProductAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getRegisteredUsersPerMonth", ReplyAction="http://tempuri.org/IService1/getRegisteredUsersPerMonthResponse")]
+        string[] getRegisteredUsersPerMonth();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getRegisteredUsersPerMonth", ReplyAction="http://tempuri.org/IService1/getRegisteredUsersPerMonthResponse")]
+        System.Threading.Tasks.Task<string[]> getRegisteredUsersPerMonthAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2221,6 +2229,38 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task RemoveFromDiscountPoolAsync(string code) {
             return base.Channel.RemoveFromDiscountPoolAsync(code);
+        }
+        
+        public string[] getItemNames() {
+            return base.Channel.getItemNames();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getItemNamesAsync() {
+            return base.Channel.getItemNamesAsync();
+        }
+        
+        public string[] getItemOnHand() {
+            return base.Channel.getItemOnHand();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getItemOnHandAsync() {
+            return base.Channel.getItemOnHandAsync();
+        }
+        
+        public string[] getSalesPerProduct() {
+            return base.Channel.getSalesPerProduct();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getSalesPerProductAsync() {
+            return base.Channel.getSalesPerProductAsync();
+        }
+        
+        public string[] getRegisteredUsersPerMonth() {
+            return base.Channel.getRegisteredUsersPerMonth();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getRegisteredUsersPerMonthAsync() {
+            return base.Channel.getRegisteredUsersPerMonthAsync();
         }
     }
 }
