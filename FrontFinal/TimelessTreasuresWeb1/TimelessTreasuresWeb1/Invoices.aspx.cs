@@ -47,7 +47,7 @@ namespace TimelessTreasuresWeb1
                 //View More
                 TableCell InvViewMore = new TableCell();
                 InvViewMore.Attributes["style"] = "font-weight: bold; color: black;";
-                InvViewMore.Text = $@"<a href=""Gift.aspx?{IW.id}"">View More </a>";
+                InvViewMore.Text = $@"<a href=""Gift.aspx?InvID={IW.id}"">View More </a>";
                 TR.Controls.Add(InvViewMore);
 
                 InvoiceHolder.Controls.Add(TR);

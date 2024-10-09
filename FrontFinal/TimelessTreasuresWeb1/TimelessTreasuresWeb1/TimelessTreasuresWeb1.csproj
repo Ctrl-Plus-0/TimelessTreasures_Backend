@@ -293,6 +293,7 @@
     <Content Include="DeleteStaff.aspx" />
     <Content Include="EditProduct.aspx" />
     <Content Include="EditStaff.aspx" />
+    <Content Include="Gift.aspx" />
     <Content Include="Invoices.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Contact.aspx" />
@@ -384,6 +385,13 @@
     </Compile>
     <Compile Include="EditStaff.aspx.designer.cs">
       <DependentUpon>EditStaff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gift.aspx.cs">
+      <DependentUpon>Gift.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gift.aspx.designer.cs">
+      <DependentUpon>Gift.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

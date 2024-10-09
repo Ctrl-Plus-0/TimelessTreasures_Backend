@@ -1851,6 +1851,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateAfterSale", ReplyAction="http://tempuri.org/IService1/UpdateAfterSaleResponse")]
         System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInvoice", ReplyAction="http://tempuri.org/IService1/GetInvoiceResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper GetInvoice(int invoiceID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInvoice", ReplyAction="http://tempuri.org/IService1/GetInvoiceResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper> GetInvoiceAsync(int invoiceID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2086,6 +2092,14 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task UpdateAfterSaleAsync(int userID) {
             return base.Channel.UpdateAfterSaleAsync(userID);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper GetInvoice(int invoiceID) {
+            return base.Channel.GetInvoice(invoiceID);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper> GetInvoiceAsync(int invoiceID) {
+            return base.Channel.GetInvoiceAsync(invoiceID);
         }
     }
 }

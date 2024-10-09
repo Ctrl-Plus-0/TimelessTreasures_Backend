@@ -28,6 +28,14 @@ namespace TimelessTreasuresWeb1
                 if (Request.QueryString["Pid"] == null)
                 {
                     FillCart(Uid);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
                     return;
                 }
                 int ProdToAdd = int.Parse(Request.QueryString["Pid"]);
@@ -70,6 +78,7 @@ namespace TimelessTreasuresWeb1
                     Vat.InnerText = "R" + VatCost;
                     Discount.InnerText = "R0";
                     SubTotal.InnerText = "R" + FinalTot;
+
                 }
                 else
                 {
@@ -82,12 +91,22 @@ namespace TimelessTreasuresWeb1
                     Vat.InnerText = "R" + VatCost;
                     Discount.InnerText = "R0";
                     SubTotal.InnerText = "R" + FinalTot;
+
                 }
+           
             }
             else
             {
                 FillCart(Uid);
-             
+                decimal total = SC.GetCartTotal(Uid);
+                decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                decimal FinalTot = total + VatCost;
+                Total.InnerText = "R" + total;
+                Vat.InnerText = "R" + VatCost;
+                Discount.InnerText = "R0";
+                SubTotal.InnerText = "R" + FinalTot;
+
             }
 
 

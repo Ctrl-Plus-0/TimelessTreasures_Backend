@@ -406,4 +406,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetInvoice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="invoiceID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInvoiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetInvoiceResult" nillable="true" type="q9:InvoiceWrapper" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
