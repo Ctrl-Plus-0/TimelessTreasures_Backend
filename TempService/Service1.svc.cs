@@ -1243,6 +1243,95 @@ namespace TempService
             }
             
         }
+
+        public List<string> getItemNames()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                prod.Add(i.Title);
+            }
+
+            return prod;
+        }
+
+        public List<string> getItemOnHand()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.Quantity.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getSalesPerProduct()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.NumSold.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getRegisteredUsersPerMonth()
+        {
+
+            List<string> regPerMonth = new List<string>(31);
+
+            List<int> usersPerMonthInt = new List<int>(31);
+
+            dynamic allUsers = (from u in DB.PUsers
+                             orderby u.Ucreationtime ascending
+                             select u).DefaultIfEmpty();
+
+            foreach (dynamic us in allUsers) {
+                DateTime creationTime = us.Ucreationtime;
+
+                int index = us.Ucreationtime.Day-1;
+
+                int currentValue = usersPerMonthInt[index] + 1;
+
+
+                usersPerMonthInt.Insert(index, currentValue);
+            } 
+
+            foreach (int number in usersPerMonthInt)
+            {
+                regPerMonth.Add(number.ToString());
+            }
+
+            return regPerMonth;
+        }
     }
 }
        

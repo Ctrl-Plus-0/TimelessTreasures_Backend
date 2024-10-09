@@ -134,6 +134,18 @@ namespace TempService
 
         [OperationContract]
         void RemoveFromDiscountPool(string code);
+
+        [OperationContract]
+        List<String> getItemNames();
+
+        [OperationContract]
+        List<String> getItemOnHand();
+
+        [OperationContract]
+        List<String> getSalesPerProduct();
+
+        [OperationContract]
+        List<String> getRegisteredUsersPerMonth();
     }
     
 }
