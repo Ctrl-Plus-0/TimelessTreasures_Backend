@@ -51,6 +51,9 @@ namespace TempService
     partial void InsertInvoice_(Invoice_ instance);
     partial void UpdateInvoice_(Invoice_ instance);
     partial void DeleteInvoice_(Invoice_ instance);
+    partial void InsertCupon(Cupon instance);
+    partial void UpdateCupon(Cupon instance);
+    partial void DeleteCupon(Cupon instance);
     #endregion
 		
 		public TempDatabaseDataContext() : 
@@ -136,6 +139,14 @@ namespace TempService
 			get
 			{
 				return this.GetTable<Invoice_>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cupon> Cupons
+		{
+			get
+			{
+				return this.GetTable<Cupon>();
 			}
 		}
 	}
@@ -1787,6 +1798,116 @@ namespace TempService
 						this._UserID = default(int);
 					}
 					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cupon")]
+	public partial class Cupon : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Code;
+		
+		private decimal _DiscountPercentage;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    partial void OnDiscountPercentageChanging(decimal value);
+    partial void OnDiscountPercentageChanged();
+    #endregion
+		
+		public Cupon()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this.OnCodeChanging(value);
+					this.SendPropertyChanging();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountPercentage", DbType="Decimal(4,2) NOT NULL")]
+		public decimal DiscountPercentage
+		{
+			get
+			{
+				return this._DiscountPercentage;
+			}
+			set
+			{
+				if ((this._DiscountPercentage != value))
+				{
+					this.OnDiscountPercentageChanging(value);
+					this.SendPropertyChanging();
+					this._DiscountPercentage = value;
+					this.SendPropertyChanged("DiscountPercentage");
+					this.OnDiscountPercentageChanged();
 				}
 			}
 		}

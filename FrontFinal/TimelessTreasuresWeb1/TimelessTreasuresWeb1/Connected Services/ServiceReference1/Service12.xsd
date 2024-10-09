@@ -183,4 +183,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="InvoiceWrapper" nillable="true" type="tns:InvoiceWrapper" />
+  <xs:complexType name="Cupon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DiscountPercentage" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ExpirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Cupon" nillable="true" type="tns:Cupon" />
 </xs:schema>

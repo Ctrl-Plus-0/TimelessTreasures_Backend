@@ -1692,6 +1692,99 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Cupon", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
+    [System.SerializableAttribute()]
+    public partial class Cupon : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal DiscountPercentageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ExpirationDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal DiscountPercentage {
+            get {
+                return this.DiscountPercentageField;
+            }
+            set {
+                if ((this.DiscountPercentageField.Equals(value) != true)) {
+                    this.DiscountPercentageField = value;
+                    this.RaisePropertyChanged("DiscountPercentage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ExpirationDate {
+            get {
+                return this.ExpirationDateField;
+            }
+            set {
+                if ((this.ExpirationDateField.Equals(value) != true)) {
+                    this.ExpirationDateField = value;
+                    this.RaisePropertyChanged("ExpirationDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -1805,10 +1898,10 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
-        int UpdateCartTotal(int UserId);
+        int UpdateCartTotal(int UserId, decimal subtotal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
-        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId);
+        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal subtotal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
         int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
@@ -1857,6 +1950,18 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInvoice", ReplyAction="http://tempuri.org/IService1/GetInvoiceResponse")]
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper> GetInvoiceAsync(int invoiceID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ApplyDiscount", ReplyAction="http://tempuri.org/IService1/ApplyDiscountResponse")]
+        TimelessTreasuresWeb1.ServiceReference1.Cupon ApplyDiscount(string Code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ApplyDiscount", ReplyAction="http://tempuri.org/IService1/ApplyDiscountResponse")]
+        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Cupon> ApplyDiscountAsync(string Code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveFromDiscountPool", ReplyAction="http://tempuri.org/IService1/RemoveFromDiscountPoolResponse")]
+        void RemoveFromDiscountPool(string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RemoveFromDiscountPool", ReplyAction="http://tempuri.org/IService1/RemoveFromDiscountPoolResponse")]
+        System.Threading.Tasks.Task RemoveFromDiscountPoolAsync(string code);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2030,12 +2135,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.RemoveItemFromCartAsync(ProdID, UserID);
         }
         
-        public int UpdateCartTotal(int UserId) {
-            return base.Channel.UpdateCartTotal(UserId);
+        public int UpdateCartTotal(int UserId, decimal subtotal) {
+            return base.Channel.UpdateCartTotal(UserId, subtotal);
         }
         
-        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId) {
-            return base.Channel.UpdateCartTotalAsync(UserId);
+        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal subtotal) {
+            return base.Channel.UpdateCartTotalAsync(UserId, subtotal);
         }
         
         public int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID) {
@@ -2100,6 +2205,22 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.InvoiceWrapper> GetInvoiceAsync(int invoiceID) {
             return base.Channel.GetInvoiceAsync(invoiceID);
+        }
+        
+        public TimelessTreasuresWeb1.ServiceReference1.Cupon ApplyDiscount(string Code) {
+            return base.Channel.ApplyDiscount(Code);
+        }
+        
+        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.Cupon> ApplyDiscountAsync(string Code) {
+            return base.Channel.ApplyDiscountAsync(Code);
+        }
+        
+        public void RemoveFromDiscountPool(string code) {
+            base.Channel.RemoveFromDiscountPool(code);
+        }
+        
+        public System.Threading.Tasks.Task RemoveFromDiscountPoolAsync(string code) {
+            return base.Channel.RemoveFromDiscountPoolAsync(code);
         }
     }
 }

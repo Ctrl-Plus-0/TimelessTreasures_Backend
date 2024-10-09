@@ -81,4 +81,11 @@
       <Association Name="Customer_Invoice_" Member="Customer" ThisKey="UserID" OtherKey="CustId" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Cupon" Member="Cupons">
+    <Type Name="Cupon">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountPercentage" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

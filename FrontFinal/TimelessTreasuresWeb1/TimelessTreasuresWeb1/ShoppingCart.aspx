@@ -60,8 +60,8 @@
 
                                 <td>
                                     <div class="cupon_text d-flex align-items-center">
-                                        <input type="text" placeholder="Coupon Code">
-                                        <a class="primary-btn" href="#">Apply</a>
+                                        <asp:TextBox ID="txtCuponCOde" runat="server" Placeholder="Enter Discount Code"></asp:TextBox>
+                                        
                                        
                                     </div>
                                 </td>

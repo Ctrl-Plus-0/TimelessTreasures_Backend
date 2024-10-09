@@ -833,7 +833,7 @@ namespace TempService
      
         }
 
-        public int UpdateCartTotal(int UserId)
+        public int UpdateCartTotal(int UserId, decimal subtotal)
         {
             var temp = (from UserCart in DB.UCarts
                         where UserCart.CustId == UserId
@@ -841,22 +841,29 @@ namespace TempService
 
             if (temp != null)
             {
-                dynamic Calc = (from CTrack in DB.CartTrackers
-                                join CRT in DB.UCarts
-                                on CTrack.CartId equals CRT.Id
-                                where UserId == CRT.CustId
-                                select CTrack).DefaultIfEmpty();
-                decimal NewTot=0;
-                foreach(CartTracker CT in Calc)
+                if (subtotal == -3)
                 {
-                    if (CT != null)
+                    dynamic Calc = (from CTrack in DB.CartTrackers
+                                    join CRT in DB.UCarts
+                                    on CTrack.CartId equals CRT.Id
+                                    where UserId == CRT.CustId
+                                    select CTrack).DefaultIfEmpty();
+                    decimal NewTot = 0;
+                    foreach (CartTracker CT in Calc)
                     {
-                        decimal tempTotal = 0;
-                        tempTotal = CT.Price * CT.Quantity;
-                        NewTot += tempTotal;
+                        if (CT != null)
+                        {
+                            decimal tempTotal = 0;
+                            tempTotal = CT.Price * CT.Quantity;
+                            NewTot += tempTotal;
+                        }
                     }
+                    temp.Total = NewTot;
                 }
-                temp.Total = NewTot;
+                else
+                {
+                    temp.Total = subtotal;
+                }
                 try
                 {
                     DB.SubmitChanges();
@@ -1193,6 +1200,48 @@ namespace TempService
                 return null;
             }
         
+        }
+
+        public Cupon  ApplyDiscount(string Code)
+        {
+            var Discount = (from C in DB.Cupons
+                            where C.Code.Equals(Code)
+                            select C).FirstOrDefault();
+
+            if (Discount != null)
+            {
+                Cupon disc = new Cupon();
+                disc = Discount;
+                return disc;
+            }
+            else
+            {
+                return null;
+            }
+          
+        }
+
+        public void RemoveFromDiscountPool(string Code)
+        {
+
+            var Discount = (from C in DB.Cupons
+                            where C.Code.Equals(Code)
+                            select C).FirstOrDefault();
+
+            if (Discount != null)
+            {
+                DB.Cupons.DeleteOnSubmit(Discount);
+
+                try
+                {
+                    DB.SubmitChanges();
+                }catch(Exception E1)
+                {
+                    Console.WriteLine(E1.Message);
+                }
+
+            }
+            
         }
     }
 }

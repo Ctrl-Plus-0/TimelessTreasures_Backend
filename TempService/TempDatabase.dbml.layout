@@ -20,7 +20,7 @@
         <elementListCompartment Id="a5c55be1-6556-45f7-bf32-abe98f5d3ccb" absoluteBounds="2.015, 2.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.6875 : 4.72280110677083); (3.6875 : 6)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.6875 : 4.72280110677083); (3.6875 : 6)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TempDatabaseDataContext/PUser/PUser_Customer" />
       <nodes>
         <classShapeMoniker Id="8e3f4bf8-3405-4797-9d9e-ddcd8ae0a4f1" />
@@ -79,12 +79,18 @@
         <elementListCompartment Id="29308ab2-831a-40a5-846f-31fff614a30f" absoluteBounds="4.765, 2.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.0625 : 6); (5.0625 : 4.92470540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.0625 : 6); (5.0625 : 4.92470540364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TempDatabaseDataContext/Customer/Customer_Invoice_" />
       <nodes>
         <classShapeMoniker Id="446cd4f2-6bde-43b1-a6e6-b5e4a19a65fe" />
         <classShapeMoniker Id="71519ff0-62cd-4bd0-8fc7-aadc48d7dfbf" />
       </nodes>
     </associationConnector>
+    <classShape Id="3b0ad36c-83b9-4eed-9b59-4231b9b64591" absoluteBounds="0.625, 0.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/TempDatabaseDataContext/Cupon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7c05a1b2-d00d-44aa-8dcf-3b3336343992" absoluteBounds="0.64, 1.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

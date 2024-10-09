@@ -295,6 +295,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="UserId" type="xs:int" />
+        <xs:element minOccurs="0" name="subtotal" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -418,6 +419,32 @@
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetInvoiceResult" nillable="true" type="q9:InvoiceWrapper" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyDiscount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyDiscountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="ApplyDiscountResult" nillable="true" type="q10:Cupon" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromDiscountPool">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromDiscountPoolResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>
