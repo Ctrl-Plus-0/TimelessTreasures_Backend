@@ -24,7 +24,7 @@ namespace TimelessTreasuresWeb1
               
                 getLogin.Visible = true;
                 getLogout.Visible = true;
-                getinvoice.Visible = true;
+                
                getLogin.Visible = false;
 
             }
@@ -33,7 +33,7 @@ namespace TimelessTreasuresWeb1
                 getManageProducts.Visible = true;
 
                getWishlist.Visible = false;
-           getShoppingBag.Visible = false;
+               getShoppingBag.Visible = false;
                 getLogin.Visible = true;
                 getUser.Visible = true;
                 getLogout.Visible = true;
@@ -47,7 +47,7 @@ namespace TimelessTreasuresWeb1
                getWishlist.Visible = false;
                 getShoppingBag.Visible = false;
                getLogin.Visible = true;
-
+                getinvoice.Visible = true;
                 getLogout.Visible = true;
                 getLogin.Visible = false;
 

@@ -60,7 +60,7 @@
                         <li class="nav-item"><a class="nav-link" href="Shop.aspx">Shop</a></li>
                         <li class="nav-item"><a class="nav-link" href="Contact.aspx">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="Login.aspx" runat="server" visible="true" id="LOGIN" >Login</a></li>
-						 <li class="nav-item"><a class="nav-link" href="Invoices.aspx" id="INVOICETAG" runat="server" visible="false">Invoices</a></li>
+					<li class="nav-item"><a class="nav-link" href="Invoices.aspx" id="INVOICETAG" runat="server" visible="false">Reports</a></li>
 						  <li class="nav-item"><a class="nav-link" href="Logout.aspx" runat="server" visible="false" id="LOGOUT" >Logout</a></li>
 
                         <!-- Manage Staff Dropdown -->
@@ -84,11 +84,11 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="Wishlist.aspx" class="cart"><span class="ti-heart" runat="server" Visible="false" id="WISHLIST" ></span></a></li>
+                       <!-- <li class="nav-item"><a href="Wishlist.aspx" class="cart"><span class="ti-heart" runat="server" Visible="false" id="WISHLIST" ></span></a></li>-->
                         <li class="nav-item"><a href="ShoppingCart.aspx" class="cart"><span class="ti-bag"  runat="server" Visible="false" id="SHOPPINGBAG"></span></a></li>
-                        <li class="nav-item"><a href="ShoppingCart.aspx" class="cart"><span class="ti-user"  runat="server" Visible="false" id="USER"></span></a></li>
+                        <li class="nav-item"><a href="Invoices.aspx" class="cart"><span class="ti-user"  runat="server" Visible="false" id="USER"></span></a></li>
                         <li class="nav-item">
-                            <button class="search"><span class="lnr lnr-magnifier" id="search"  runat="server" Visible="true"></span></button>
+                           <!-- <button class="search"><span class="lnr lnr-magnifier" id="search"  runat="server" Visible="false"></span></button>-->
                         </li>
                     </ul>
                 </div>
