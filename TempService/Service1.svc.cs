@@ -754,6 +754,64 @@ namespace TempService
             return SM;
         }
 
+        public List<string> getItemNames()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                prod.Add(i.Title);
+            }
+
+            return prod; 
+        }
+
+        public List<string> getItemOnHand()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.Quantity.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getSalesPerProduct()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.NumSold.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
     }
 }
        

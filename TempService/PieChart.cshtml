@@ -1,0 +1,18 @@
+﻿
+
+@using TempService
+    
+@Model SalesbyProduct
+
+@{
+
+    var salesby = new SalesbyProduct();
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Chart Title")
+        .AddSeries(
+            name: "Employee",
+            xValue: salesby.getItemNames(),
+            yValues: salesby.getItemOnHand())
+        .Write();
+}
+

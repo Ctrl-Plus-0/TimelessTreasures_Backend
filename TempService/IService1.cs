@@ -92,5 +92,14 @@ namespace TempService
         Item GetProductByName(string title);
         [OperationContract]
         StaffMember GetStaffMemberByFullNameAndSurname(string fullName, string surname);
+
+        [OperationContract]
+        List<String> getItemNames();
+
+        [OperationContract]
+        List<String> getItemOnHand();
+
+        [OperationContract]
+        List<String> getSalesPerProduct();
     }
 }
