@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "2osVOJF+aIws+9mRN8hMt+sB51qVINhVXFK8fj7vbT7qz1vVmLalogkSHgAkRlLpMqHPMZovkKN8KqSGHzT/gQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ndzal\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
+    "C:\\Users\\ndzal\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.7\\microsoft.aspnet.razor.3.2.7.nupkg.sha512",
+    "C:\\Users\\ndzal\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.7\\microsoft.aspnet.webpages.3.2.7.nupkg.sha512",
+    "C:\\Users\\ndzal\\.nuget\\packages\\microsoft.codedom.providers.dotnetcompilerplatform\\4.1.0\\microsoft.codedom.providers.dotnetcompilerplatform.4.1.0.nupkg.sha512",
+    "C:\\Users\\ndzal\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

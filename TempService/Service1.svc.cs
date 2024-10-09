@@ -846,7 +846,7 @@ namespace TempService
      
         }
 
-        public int UpdateCartTotal(int UserId)
+        public int UpdateCartTotal(int UserId, decimal subtotal)
         {
             var temp = (from UserCart in DB.UCarts
                         where UserCart.CustId == UserId
@@ -854,22 +854,29 @@ namespace TempService
 
             if (temp != null)
             {
-                dynamic Calc = (from CTrack in DB.CartTrackers
-                                join CRT in DB.UCarts
-                                on CTrack.CartId equals CRT.Id
-                                where UserId == CRT.CustId
-                                select CTrack).DefaultIfEmpty();
-                decimal NewTot=0;
-                foreach(CartTracker CT in Calc)
+                if (subtotal == -3)
                 {
-                    if (CT != null)
+                    dynamic Calc = (from CTrack in DB.CartTrackers
+                                    join CRT in DB.UCarts
+                                    on CTrack.CartId equals CRT.Id
+                                    where UserId == CRT.CustId
+                                    select CTrack).DefaultIfEmpty();
+                    decimal NewTot = 0;
+                    foreach (CartTracker CT in Calc)
                     {
-                        decimal tempTotal = 0;
-                        tempTotal = CT.Price * CT.Quantity;
-                        NewTot += tempTotal;
+                        if (CT != null)
+                        {
+                            decimal tempTotal = 0;
+                            tempTotal = CT.Price * CT.Quantity;
+                            NewTot += tempTotal;
+                        }
                     }
+                    temp.Total = NewTot;
                 }
-                temp.Total = NewTot;
+                else
+                {
+                    temp.Total = subtotal;
+                }
                 try
                 {
                     DB.SubmitChanges();
@@ -935,6 +942,141 @@ namespace TempService
             { return 0;
             }
             
+        }
+
+        public int CreateInvoice(int UserID, string Message, string receipiant, string RAddress, DateTime Delivery, string contactnum)
+        {
+            var inv = (from i in DB.Invoice_s
+                       where i.UserID == UserID && i.Id==0
+                       select i).FirstOrDefault();
+            if (inv != null)
+            {
+                return -1; //INVOICE ALREADY EXISTS
+            }
+            else
+            {
+                //get the users cart
+                var UserCart = (from u in DB.UCarts
+                                where u.CustId == UserID
+                                select u).FirstOrDefault();
+                dynamic CartItems = (from CT in DB.CartTrackers
+                                     where CT.CartId == UserCart.Id
+                                     select CT).DefaultIfEmpty();
+                var Ninv = new Invoice_();
+
+                Ninv.Price = UserCart.Total;
+                  foreach (var C in CartItems) {
+
+                    //add each products id as a string and corresponding quantities too
+                    //will be split in the wrapper class and returned as array of integers
+                    Ninv.ProdID += C.ProdID.ToString() + "\\";
+                    Ninv.Quantity += C.Quantity.ToString() + "\\";
+                }
+                Ninv.UserID = UserID;
+                Ninv.CreationDate = DateTime.Now;
+                Ninv.GiftMessage = Message;
+                Ninv.Receipiant = receipiant;
+                Ninv.RecepiantAdress = RAddress;
+                Ninv.ReceipiantContact = contactnum;
+                Ninv.DeliveryDate = Delivery.Date;
+               
+
+                DB.Invoice_s.InsertOnSubmit(Ninv);
+
+                try
+                {
+                    DB.SubmitChanges();
+                    return 1; //Invoice made
+                }
+                catch(Exception E1)
+                {
+                    Console.WriteLine(E1.Message);
+                    return -2; //error adding invoice to table
+                }
+                
+            }
+            
+        }
+
+        public void ClearCart(int Uid)
+        {
+            try
+            {
+                var CartClear = (from CRT in DB.CartTrackers
+                                 join UT in DB.UCarts
+                                 on CRT.CartId equals UT.Id
+                                 where UT.CustId == Uid
+                                 select CRT).DefaultIfEmpty();
+                DB.CartTrackers.DeleteAllOnSubmit(CartClear);
+                DB.SubmitChanges();
+                var UpdateCart = (from CT in DB.UCarts
+                                  where CT.CustId == Uid
+                                  select CT).FirstOrDefault();
+
+                UpdateCart.Total = 0;
+                DB.SubmitChanges();
+                
+            }catch(Exception E1)
+            {
+                Console.WriteLine(E1.Message);
+            }
+           
+        }
+
+        public List<InvoiceWrapper> GetInvoices(int userID)
+        {
+            dynamic inv = new List<InvoiceWrapper>();
+
+            dynamic temp = (from I in DB.Invoice_s
+                            where I.UserID == userID
+                            select I).DefaultIfEmpty();
+
+            foreach(Invoice_ i in temp)
+            {
+                InvoiceWrapper IW = new InvoiceWrapper();
+                IW.id = i.Id;
+                IW.UserID = i.UserID;
+                string[] SplitProds = i.ProdID.Split('\\');
+                string[] SplitQuantity = i.Quantity.Split('\\');
+                IW.SetProductIDs(SplitProds);
+                IW.SetUpQuantity(SplitQuantity);
+                IW.Price = i.Price;
+                IW.D = i.CreationDate;
+                IW.Delivery = i.DeliveryDate.Date;
+                IW.Address = i.RecepiantAdress;
+                IW.Contact = i.ReceipiantContact;
+                IW.message = i.GiftMessage;
+                IW.receipiant = i.Receipiant;
+                inv.Add(IW);
+            }
+            return inv;
+        }
+
+        public void UpdateAfterSale(int userID)
+        {
+            dynamic UpdateWith = (from CRT in DB.CartTrackers
+                             join UT in DB.UCarts
+                             on CRT.CartId equals UT.Id
+                             where UT.CustId == userID
+                             select CRT).DefaultIfEmpty();
+
+            foreach(CartTracker CT in UpdateWith)
+            {
+                var ProdUpdate = (from P in DB.Items
+                                  where P.Id == CT.ProdID
+                                  select P).FirstOrDefault();
+
+                ProdUpdate.NumSold = CT.Quantity;
+
+                try
+                {
+                    DB.SubmitChanges();
+                }catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+          
         }
 
 
@@ -1038,6 +1180,170 @@ namespace TempService
             }
 
             return filteredItems;
+        }
+
+        public InvoiceWrapper GetInvoice(int invoiceID)
+        {
+            var Inv = (from i in DB.Invoice_s
+                       where i.Id == invoiceID
+                       select i).FirstOrDefault();
+
+            if (Inv != null)
+            {
+                InvoiceWrapper IW = new InvoiceWrapper();
+                
+                IW.id = Inv.Id;
+                IW.UserID = Inv.UserID;
+                string[] SplitProds = Inv.ProdID.Split('\\');
+                string[] SplitQuantity = Inv.Quantity.Split('\\');
+                IW.SetProductIDs(SplitProds);
+                IW.SetUpQuantity(SplitQuantity);
+                IW.Price = Inv.Price;
+                IW.D = Inv.CreationDate;
+                IW.Delivery = Inv.DeliveryDate.Date;
+                IW.Address = Inv.RecepiantAdress;
+                IW.Contact = Inv.ReceipiantContact;
+                IW.message = Inv.GiftMessage;
+                IW.receipiant = Inv.Receipiant;
+
+                return IW;
+            }
+            else
+            {
+                return null;
+            }
+        
+        }
+
+        public Cupon  ApplyDiscount(string Code)
+        {
+            var Discount = (from C in DB.Cupons
+                            where C.Code.Equals(Code)
+                            select C).FirstOrDefault();
+
+            if (Discount != null)
+            {
+                Cupon disc = new Cupon();
+                disc = Discount;
+                return disc;
+            }
+            else
+            {
+                return null;
+            }
+          
+        }
+
+        public void RemoveFromDiscountPool(string Code)
+        {
+
+            var Discount = (from C in DB.Cupons
+                            where C.Code.Equals(Code)
+                            select C).FirstOrDefault();
+
+            if (Discount != null)
+            {
+                DB.Cupons.DeleteOnSubmit(Discount);
+
+                try
+                {
+                    DB.SubmitChanges();
+                }catch(Exception E1)
+                {
+                    Console.WriteLine(E1.Message);
+                }
+
+            }
+            
+        }
+
+        public List<string> getItemNames()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                prod.Add(i.Title);
+            }
+
+            return prod;
+        }
+
+        public List<string> getItemOnHand()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.Quantity.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getSalesPerProduct()
+        {
+            dynamic prod = new List<String>();
+
+            dynamic Sorted = (from i in DB.Items
+                              where i.Quantity > 0 && i.Visible_ == 1
+                              orderby i.Price descending
+                              select i).DefaultIfEmpty();
+
+            //Instead of using the table use the wrapper and return list of the wrappers
+            //used in front end as well in exact same way
+            foreach (dynamic i in Sorted)
+            {
+                string quant = i.NumSold.ToString();
+                prod.Add(quant);
+            }
+
+            return prod;
+        }
+
+        public List<string> getRegisteredUsersPerMonth()
+        {
+
+            List<string> regPerMonth = new List<string>(31);
+
+            List<int> usersPerMonthInt = new List<int>(31);
+
+            dynamic allUsers = (from u in DB.PUsers
+                             orderby u.Ucreationtime ascending
+                             select u).DefaultIfEmpty();
+
+            foreach (dynamic us in allUsers) {
+                DateTime creationTime = us.Ucreationtime;
+
+                int index = us.Ucreationtime.Day-1;
+
+                int currentValue = usersPerMonthInt[index] + 1;
+
+
+                usersPerMonthInt.Insert(index, currentValue);
+            } 
+
+            foreach (int number in usersPerMonthInt)
+            {
+                regPerMonth.Add(number.ToString());
+            }
+
+            return regPerMonth;
         }
 
         public int deleteItem(int id)

@@ -21,10 +21,10 @@ namespace TimelessTreasuresWeb1
                 getWishlist.Visible = true;
                 getShoppingBag.Visible = true;
                 getUser.Visible = true;
-
+              
                 getLogin.Visible = true;
                 getLogout.Visible = true;
-
+                getinvoice.Visible = true;
                getLogin.Visible = false;
 
             }
@@ -95,6 +95,11 @@ namespace TimelessTreasuresWeb1
         public HtmlControl getLogout
         {
             get { return LOGOUT; }
+        }
+     
+        public HtmlControl getinvoice
+        {
+            get { return INVOICETAG; }
         }
     }
 }

@@ -48,6 +48,12 @@ namespace TempService
     partial void InsertItem(Item instance);
     partial void UpdateItem(Item instance);
     partial void DeleteItem(Item instance);
+    partial void InsertInvoice_(Invoice_ instance);
+    partial void UpdateInvoice_(Invoice_ instance);
+    partial void DeleteInvoice_(Invoice_ instance);
+    partial void InsertCupon(Cupon instance);
+    partial void UpdateCupon(Cupon instance);
+    partial void DeleteCupon(Cupon instance);
     #endregion
 		
 		public TempDatabaseDataContext() : 
@@ -127,6 +133,22 @@ namespace TempService
 				return this.GetTable<Item>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Invoice_> Invoice_s
+		{
+			get
+			{
+				return this.GetTable<Invoice_>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cupon> Cupons
+		{
+			get
+			{
+				return this.GetTable<Cupon>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
@@ -144,6 +166,8 @@ namespace TempService
 		private System.DateTime _DateOfBirth;
 		
 		private EntitySet<UCart> _UCarts;
+		
+		private EntitySet<Invoice_> _Invoice_s;
 		
 		private EntityRef<PUser> _PUser;
 		
@@ -164,6 +188,7 @@ namespace TempService
 		public Customer()
 		{
 			this._UCarts = new EntitySet<UCart>(new Action<UCart>(this.attach_UCarts), new Action<UCart>(this.detach_UCarts));
+			this._Invoice_s = new EntitySet<Invoice_>(new Action<Invoice_>(this.attach_Invoice_s), new Action<Invoice_>(this.detach_Invoice_s));
 			this._PUser = default(EntityRef<PUser>);
 			OnCreated();
 		}
@@ -265,6 +290,19 @@ namespace TempService
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice_", Storage="_Invoice_s", ThisKey="CustId", OtherKey="UserID")]
+		public EntitySet<Invoice_> Invoice_s
+		{
+			get
+			{
+				return this._Invoice_s;
+			}
+			set
+			{
+				this._Invoice_s.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PUser_Customer", Storage="_PUser", ThisKey="CustId", OtherKey="UId", IsForeignKey=true)]
 		public PUser PUser
 		{
@@ -326,6 +364,18 @@ namespace TempService
 		}
 		
 		private void detach_UCarts(UCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
+		}
+		
+		private void attach_Invoice_s(Invoice_ entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_Invoice_s(Invoice_ entity)
 		{
 			this.SendPropertyChanging();
 			entity.Customer = null;
@@ -1427,6 +1477,459 @@ namespace TempService
 		{
 			this.SendPropertyChanging();
 			entity.Item = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invoice_")]
+	public partial class Invoice_ : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _UserID;
+		
+		private string _ProdID;
+		
+		private string _Quantity;
+		
+		private decimal _Price;
+		
+		private System.DateTime _CreationDate;
+		
+		private string _GiftMessage;
+		
+		private string _Receipiant;
+		
+		private string _RecepiantAdress;
+		
+		private string _ReceipiantContact;
+		
+		private System.DateTime _DeliveryDate;
+		
+		private EntityRef<Customer> _Customer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnProdIDChanging(string value);
+    partial void OnProdIDChanged();
+    partial void OnQuantityChanging(string value);
+    partial void OnQuantityChanged();
+    partial void OnPriceChanging(decimal value);
+    partial void OnPriceChanged();
+    partial void OnCreationDateChanging(System.DateTime value);
+    partial void OnCreationDateChanged();
+    partial void OnGiftMessageChanging(string value);
+    partial void OnGiftMessageChanged();
+    partial void OnReceipiantChanging(string value);
+    partial void OnReceipiantChanged();
+    partial void OnRecepiantAdressChanging(string value);
+    partial void OnRecepiantAdressChanged();
+    partial void OnReceipiantContactChanging(string value);
+    partial void OnReceipiantContactChanged();
+    partial void OnDeliveryDateChanging(System.DateTime value);
+    partial void OnDeliveryDateChanged();
+    #endregion
+		
+		public Invoice_()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProdID", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string ProdID
+		{
+			get
+			{
+				return this._ProdID;
+			}
+			set
+			{
+				if ((this._ProdID != value))
+				{
+					this.OnProdIDChanging(value);
+					this.SendPropertyChanging();
+					this._ProdID = value;
+					this.SendPropertyChanged("ProdID");
+					this.OnProdIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(10,2) NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreationDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreationDate
+		{
+			get
+			{
+				return this._CreationDate;
+			}
+			set
+			{
+				if ((this._CreationDate != value))
+				{
+					this.OnCreationDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreationDate = value;
+					this.SendPropertyChanged("CreationDate");
+					this.OnCreationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GiftMessage", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string GiftMessage
+		{
+			get
+			{
+				return this._GiftMessage;
+			}
+			set
+			{
+				if ((this._GiftMessage != value))
+				{
+					this.OnGiftMessageChanging(value);
+					this.SendPropertyChanging();
+					this._GiftMessage = value;
+					this.SendPropertyChanged("GiftMessage");
+					this.OnGiftMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Receipiant", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Receipiant
+		{
+			get
+			{
+				return this._Receipiant;
+			}
+			set
+			{
+				if ((this._Receipiant != value))
+				{
+					this.OnReceipiantChanging(value);
+					this.SendPropertyChanging();
+					this._Receipiant = value;
+					this.SendPropertyChanged("Receipiant");
+					this.OnReceipiantChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecepiantAdress", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string RecepiantAdress
+		{
+			get
+			{
+				return this._RecepiantAdress;
+			}
+			set
+			{
+				if ((this._RecepiantAdress != value))
+				{
+					this.OnRecepiantAdressChanging(value);
+					this.SendPropertyChanging();
+					this._RecepiantAdress = value;
+					this.SendPropertyChanged("RecepiantAdress");
+					this.OnRecepiantAdressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceipiantContact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string ReceipiantContact
+		{
+			get
+			{
+				return this._ReceipiantContact;
+			}
+			set
+			{
+				if ((this._ReceipiantContact != value))
+				{
+					this.OnReceipiantContactChanging(value);
+					this.SendPropertyChanging();
+					this._ReceipiantContact = value;
+					this.SendPropertyChanged("ReceipiantContact");
+					this.OnReceipiantContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryDate", DbType="Date NOT NULL")]
+		public System.DateTime DeliveryDate
+		{
+			get
+			{
+				return this._DeliveryDate;
+			}
+			set
+			{
+				if ((this._DeliveryDate != value))
+				{
+					this.OnDeliveryDateChanging(value);
+					this.SendPropertyChanging();
+					this._DeliveryDate = value;
+					this.SendPropertyChanged("DeliveryDate");
+					this.OnDeliveryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice_", Storage="_Customer", ThisKey="UserID", OtherKey="CustId", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Invoice_s.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Invoice_s.Add(this);
+						this._UserID = value.CustId;
+					}
+					else
+					{
+						this._UserID = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cupon")]
+	public partial class Cupon : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Code;
+		
+		private decimal _DiscountPercentage;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    partial void OnDiscountPercentageChanging(decimal value);
+    partial void OnDiscountPercentageChanged();
+    #endregion
+		
+		public Cupon()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this.OnCodeChanging(value);
+					this.SendPropertyChanging();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountPercentage", DbType="Decimal(4,2) NOT NULL")]
+		public decimal DiscountPercentage
+		{
+			get
+			{
+				return this._DiscountPercentage;
+			}
+			set
+			{
+				if ((this._DiscountPercentage != value))
+				{
+					this.OnDiscountPercentageChanging(value);
+					this.SendPropertyChanging();
+					this._DiscountPercentage = value;
+					this.SendPropertyChanged("DiscountPercentage");
+					this.OnDiscountPercentageChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
