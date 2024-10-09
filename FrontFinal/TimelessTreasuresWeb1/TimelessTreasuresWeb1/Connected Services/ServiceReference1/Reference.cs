@@ -1327,10 +1327,10 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<int> DeleteStaffMemberAsync(string fullName, string surname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditProduct", ReplyAction="http://tempuri.org/IService1/EditProductResponse")]
-        int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        int EditProduct(int id, string title, decimal price, string description, string category, string image, int quantity, int visible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditProduct", ReplyAction="http://tempuri.org/IService1/EditProductResponse")]
-        System.Threading.Tasks.Task<int> EditProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        System.Threading.Tasks.Task<int> EditProductAsync(int id, string title, decimal price, string description, string category, string image, int quantity, int visible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteProduct", ReplyAction="http://tempuri.org/IService1/DeleteProductResponse")]
         int DeleteProduct(string title);
@@ -1385,6 +1385,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getItemsByCategory", ReplyAction="http://tempuri.org/IService1/getItemsByCategoryResponse")]
         System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/deleteItem", ReplyAction="http://tempuri.org/IService1/deleteItemResponse")]
+        int deleteItem(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/deleteItem", ReplyAction="http://tempuri.org/IService1/deleteItemResponse")]
+        System.Threading.Tasks.Task<int> deleteItemAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1510,12 +1516,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.DeleteStaffMemberAsync(fullName, surname);
         }
         
-        public int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible) {
-            return base.Channel.EditProduct(title, price, description, category, image, quantity, visible);
+        public int EditProduct(int id, string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.EditProduct(id, title, price, description, category, image, quantity, visible);
         }
         
-        public System.Threading.Tasks.Task<int> EditProductAsync(string title, decimal price, string description, string category, string image, int quantity, int visible) {
-            return base.Channel.EditProductAsync(title, price, description, category, image, quantity, visible);
+        public System.Threading.Tasks.Task<int> EditProductAsync(int id, string title, decimal price, string description, string category, string image, int quantity, int visible) {
+            return base.Channel.EditProductAsync(id, title, price, description, category, image, quantity, visible);
         }
         
         public int DeleteProduct(string title) {
@@ -1588,6 +1594,14 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         
         public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.ItemWrapper[]> getItemsByCategoryAsync(string category) {
             return base.Channel.getItemsByCategoryAsync(category);
+        }
+        
+        public int deleteItem(int id) {
+            return base.Channel.deleteItem(id);
+        }
+        
+        public System.Threading.Tasks.Task<int> deleteItemAsync(int id) {
+            return base.Channel.deleteItemAsync(id);
         }
     }
 }

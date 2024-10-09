@@ -87,7 +87,7 @@ namespace TempService
         int DeleteStaffMember(string fullName, string surname);
    
         [OperationContract]
-        int EditProduct(string title, decimal price, string description, string category, string image, int quantity, int visible);
+        int EditProduct(int id, string title, decimal price, string description, string category, string image, int quantity, int visible);
         [OperationContract]
         int DeleteProduct(string title);
         [OperationContract]
@@ -112,6 +112,9 @@ namespace TempService
 
         [OperationContract]
         List<ItemWrapper> getItemsByCategory(string category);
+
+        [OperationContract]
+        int deleteItem(int id);
 
     }
 }

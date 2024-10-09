@@ -139,6 +139,12 @@
   <wsdl:message name="IService1_getItemsByCategory_OutputMessage">
     <wsdl:part name="parameters" element="tns:getItemsByCategoryResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_deleteItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:deleteItem" />
+  </wsdl:message>
+  <wsdl:message name="IService1_deleteItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:deleteItemResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
@@ -227,6 +233,10 @@
     <wsdl:operation name="getItemsByCategory">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/getItemsByCategory" message="tns:IService1_getItemsByCategory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/getItemsByCategoryResponse" message="tns:IService1_getItemsByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/deleteItem" message="tns:IService1_deleteItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/deleteItemResponse" message="tns:IService1_deleteItem_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -422,6 +432,15 @@
     </wsdl:operation>
     <wsdl:operation name="getItemsByCategory">
       <soap:operation soapAction="http://tempuri.org/IService1/getItemsByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteItem">
+      <soap:operation soapAction="http://tempuri.org/IService1/deleteItem" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

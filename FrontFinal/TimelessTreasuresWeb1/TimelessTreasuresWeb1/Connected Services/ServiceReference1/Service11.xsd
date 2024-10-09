@@ -196,6 +196,7 @@
   <xs:element name="EditProduct">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
         <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="price" type="xs:decimal" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
@@ -346,6 +347,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="getItemsByCategoryResult" nillable="true" type="q7:ArrayOfItemWrapper" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="deleteItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="deleteItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="deleteItemResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
    
- <div>
+ <div style="padding-top: 400px;">
             <label for="txtFullName">Full Name:</label>
             <asp:TextBox ID="txtFullName" runat="server"></asp:TextBox>
             <br />
