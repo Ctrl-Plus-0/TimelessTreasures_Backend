@@ -517,6 +517,9 @@
     <Content Include="Connected Services\ServiceReference1\TimelessTreasuresWeb1.ServiceReference1.TrackerWrapper1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceReference1\TimelessTreasuresWeb1.ServiceReference1.Cupon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

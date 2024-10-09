@@ -226,7 +226,7 @@ namespace TimelessTreasuresWeb1
             int Prodid = int.Parse(SplitID[2]); //get id from the button
 
             int Result = SC.RemoveItemFromCart(Prodid, Uid);
-            int UpdateTotalResult = SC.UpdateCartTotal(Uid);
+            int UpdateTotalResult = SC.UpdateCartTotal(Uid,-3);
             if (Result == -1)
             {
                 lblMsg.ForeColor = System.Drawing.Color.Red;
@@ -262,17 +262,21 @@ namespace TimelessTreasuresWeb1
             int Uid = int.Parse(Session["UserId"].ToString());
             dynamic items = SC.GetCartItems(Uid);
 
-
+            decimal total = 0;
+            decimal VatCost = 0;
+            decimal DiscountAmount = 0;
+            decimal FinalTot = 0;
             foreach (TrackerWrapper T in items) {
 
                 TextBox txtQuant = (TextBox)TDHolder.FindControl("P_Quantity_" + T.ProdId);
                 TableCell ItemTotalCell =(TableCell)TDHolder.FindControl("P_Total_" + T.ProdId);
 
                 ItemTotalCell.Text ="R"+T.Price * int.Parse(txtQuant.Text);
+                total += T.Price * int.Parse(txtQuant.Text);
                 int QuantityResult = SC.UpdateItemQuantity(Uid, int.Parse(txtQuant.Text), T.ProdId);
-                int UpdateTotalResult = SC.UpdateCartTotal(Uid);
+    
 
-                if(UpdateTotalResult==1 && (QuantityResult==1 || QuantityResult == 2))
+                if(QuantityResult==1 || QuantityResult == 2)
                 {
                     continue;
                 }else
@@ -282,13 +286,30 @@ namespace TimelessTreasuresWeb1
                     break;
                 }
                     }
-            decimal total = SC.GetCartTotal(Uid);
-            decimal VatCost = (decimal)(15.0 / 100.0) * total;
-            VatCost = Math.Round(VatCost, 2);
-            decimal FinalTot = total + VatCost;
+            string TxtDisct = txtCuponCOde.Text;
+            Cupon Disc = SC.ApplyDiscount(TxtDisct);
+            if (TxtDisct.Equals("") || Disc==null)
+            {
+                VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                FinalTot = total + VatCost - DiscountAmount;
+            }else if (Disc != null)
+            {
+                VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                DiscountAmount = (decimal)(Disc.DiscountPercentage / (decimal)100.00) * total;
+                DiscountAmount = Math.Round(DiscountAmount, 2);
+                FinalTot = total + VatCost - DiscountAmount;
+            }
+
+
+            SC.UpdateCartTotal(Uid, FinalTot);
+            SC.RemoveFromDiscountPool(TxtDisct);
+            
+             
             Total.InnerText = "R" + total;
             Vat.InnerText = "R" + VatCost;
-            Discount.InnerText = "R0";
+            Discount.InnerText = "R"+ DiscountAmount;
             SubTotal.InnerText = "R" + FinalTot;
         }
 
@@ -316,5 +337,7 @@ namespace TimelessTreasuresWeb1
             }
 
         }
+
+        
     }
 }

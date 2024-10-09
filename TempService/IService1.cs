@@ -102,7 +102,7 @@ namespace TempService
         int RemoveItemFromCart(int ProdID, int UserID);
 
         [OperationContract]
-        int UpdateCartTotal(int UserId);
+        int UpdateCartTotal(int UserId,decimal subtotal);
 
         [OperationContract]
         int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
@@ -128,6 +128,12 @@ namespace TempService
 
         [OperationContract]
         InvoiceWrapper GetInvoice(int invoiceID);
+
+        [OperationContract]
+        Cupon ApplyDiscount(string Code);
+
+        [OperationContract]
+        void RemoveFromDiscountPool(string code);
     }
     
 }
