@@ -125,6 +125,9 @@ namespace TempService
 
         [OperationContract]
         void UpdateAfterSale(int userID);
+
+        [OperationContract]
+        InvoiceWrapper GetInvoice(int invoiceID);
     }
     
 }

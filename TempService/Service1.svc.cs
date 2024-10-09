@@ -1161,6 +1161,39 @@ namespace TempService
 
             return filteredItems;
         }
+
+        public InvoiceWrapper GetInvoice(int invoiceID)
+        {
+            var Inv = (from i in DB.Invoice_s
+                       where i.Id == invoiceID
+                       select i).FirstOrDefault();
+
+            if (Inv != null)
+            {
+                InvoiceWrapper IW = new InvoiceWrapper();
+                
+                IW.id = Inv.Id;
+                IW.UserID = Inv.UserID;
+                string[] SplitProds = Inv.ProdID.Split('\\');
+                string[] SplitQuantity = Inv.Quantity.Split('\\');
+                IW.SetProductIDs(SplitProds);
+                IW.SetUpQuantity(SplitQuantity);
+                IW.Price = Inv.Price;
+                IW.D = Inv.CreationDate;
+                IW.Delivery = Inv.DeliveryDate.Date;
+                IW.Address = Inv.RecepiantAdress;
+                IW.Contact = Inv.ReceipiantContact;
+                IW.message = Inv.GiftMessage;
+                IW.receipiant = Inv.Receipiant;
+
+                return IW;
+            }
+            else
+            {
+                return null;
+            }
+        
+        }
     }
 }
        

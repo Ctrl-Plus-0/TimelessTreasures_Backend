@@ -164,6 +164,12 @@
   <wsdl:message name="IService1_UpdateAfterSale_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateAfterSaleResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Register">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
@@ -268,6 +274,10 @@
     <wsdl:operation name="UpdateAfterSale">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/UpdateAfterSale" message="tns:IService1_UpdateAfterSale_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateAfterSaleResponse" message="tns:IService1_UpdateAfterSale_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetInvoice" message="tns:IService1_GetInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetInvoiceResponse" message="tns:IService1_GetInvoice_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -499,6 +509,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateAfterSale">
       <soap:operation soapAction="http://tempuri.org/IService1/UpdateAfterSale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetInvoice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
