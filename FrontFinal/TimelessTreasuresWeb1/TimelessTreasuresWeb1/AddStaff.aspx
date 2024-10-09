@@ -4,33 +4,53 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
-   
- <div>
-            <label for="txtFullName">Full Name:</label>
-            <asp:TextBox ID="txtFullName" runat="server"></asp:TextBox>
-            <br />
-            <label for="txtSurname">Surname:</label>
-            <asp:TextBox ID="txtSurname" runat="server"></asp:TextBox>
-            <br />
-            <label for="txtUserName">User Name:</label>
-            <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
-            <br />
-            <label for="txtEmail">Email:</label>
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-            <br />
-            <label for="txtPassword">Password:</label>
-            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
-            <br />
-
-            <asp:DropDownList ID="ddlRole" runat="server"  >
+  <section class="login_box_area section_gap" id="VisibleForm" runat="server" >
+		<div class="container">
+			<div class="row">
+			
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+                        <h3 id="form-head">Add Manager</h3>
+                    <div class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+						
+							<div class="col-md-12 form-group">
+							<asp:TextBox CssClass="form-control" ID="txtFullName" runat="server" style="color:black" placeholder="Manager Name*" required="required"></asp:TextBox>
+                        </div>
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="txtSurname" runat="server" style="color:black" placeholder="Manager Surname*" required="required" TextMode="SingleLine"></asp:TextBox>
+                        </div>
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="txtUserName" runat="server" style="color:black" placeholder="Manager Username*" required="required"></asp:TextBox>
+                        </div>
+							<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="txtEmail" runat="server" style="color:black" placeholder="Email*" TextMode="Email" required="required"></asp:TextBox>
+                        </div>
+                        	<div class="col-md-12 form-group">
+                          <asp:TextBox CssClass="form-control" ID="txtPassword" runat="server" style="color:black" placeholder="Password*" TextMode="Password" required="required"></asp:TextBox>
+                        </div>
+						<div class="col-md-12 form-group">
+                        <asp:DropDownList ID="ddlRole" runat="server"  >
                 <asp:ListItem  Selected="True" Value="0">Select Manager Type</asp:ListItem>
                 <asp:ListItem Value="1">Head Manager</asp:ListItem>
                 <asp:ListItem Value="2">Standard Manager</asp:ListItem>
             </asp:DropDownList>
-            <br />
-            <asp:Button ID="btnSubmit" runat="server" Text="Add Staff Member" OnClick="btnSubmit_Click" />
-            <br />
-            <asp:Label ID="lblResponse" runat="server" ForeColor="Green"></asp:Label>
-        </div>
+                        </div>
+						
+							<div class="col-md-12 form-group">
+								<asp:Button CssClass="primary-btn" ID="btnSubmit" runat="server" Text="Add Manager"  type="submit" OnClick="btnSubmit_Click" />
+                        </div>
+							<div class="col-md-12 form-group">
+                            <asp:Label ID="lblResponse" runat="server" Text=""
+                                ></asp:Label>
+                        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
    
 </asp:Content>
