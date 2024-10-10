@@ -23,8 +23,7 @@ namespace TempService
 
         int IService1.login(string Email, string Password)
         {
-            //using the join is not 100% necessary as only the username and password really matter at this point
-            //but for later when this method needs to be updated for showing who signed in and so forth itll work
+          
             var UserLogged = (from c in DB.PUsers
                               where c.UEmail.Equals(Email) && c.UPassword.Equals(Password)
                               select c).FirstOrDefault();
@@ -33,10 +32,7 @@ namespace TempService
                 return -1;
             }
 
-            //simple logic from here
-            //check if user returned is null,if not  say they logged in succesfully
-            //Returns login role 
-            //perform additional check in front end for admin type to see if manager or admin
+  
             if (UserLogged.Urole.Equals("Customer"))
             {
                 return 0;
@@ -809,7 +805,9 @@ namespace TempService
                 }
             }
 
-            return CartItems;
+           
+                return CartItems;
+            
         }
 
         public int RemoveItemFromCart(int ProdID, int UserID)
@@ -846,7 +844,7 @@ namespace TempService
      
         }
 
-        public int UpdateCartTotal(int UserId, decimal subtotal)
+        public int UpdateCartTotal(int UserId, decimal discounts)
         {
             var temp = (from UserCart in DB.UCarts
                         where UserCart.CustId == UserId
@@ -854,29 +852,57 @@ namespace TempService
 
             if (temp != null)
             {
-                if (subtotal == -3)
-                {
+              
+                
                     dynamic Calc = (from CTrack in DB.CartTrackers
                                     join CRT in DB.UCarts
                                     on CTrack.CartId equals CRT.Id
                                     where UserId == CRT.CustId
                                     select CTrack).DefaultIfEmpty();
-                    decimal NewTot = 0;
+                decimal CurrentTotal = temp.Total;
+                decimal NewTotal = 0;
+                decimal DiscountPercentage = temp.ActiveDiscount;
+                decimal NewDiscount = discounts;
+                decimal NewTax =0;
                     foreach (CartTracker CT in Calc)
                     {
                         if (CT != null)
                         {
-                            decimal tempTotal = 0;
+                            decimal tempTotal;
                             tempTotal = CT.Price * CT.Quantity;
-                            NewTot += tempTotal;
+                            NewTotal += tempTotal;
                         }
                     }
-                    temp.Total = NewTot;
-                }
-                else
+                //If the total we calculate is not the same as the one originally stored
+                //Recalculate the discount and tax
+                decimal Calcs = NewTotal;
+                decimal DiscoutCalc = NewDiscount + DiscountPercentage;
+                if (CurrentTotal != NewTotal)
                 {
-                    temp.Total = subtotal;
+                    
+                    if (NewDiscount != 0)
+                    {
+                 
+                        temp.Total = NewTotal;
+                    }   
                 }
+                if (DiscoutCalc >= 100)
+                {
+                    DiscoutCalc = (decimal)99.99; //dont offer 100% discounts
+                }
+                if (DiscoutCalc != 0)
+                {
+                    temp.ActiveDiscount = DiscoutCalc;
+                }
+
+                decimal DiscountValue = 0;
+                DiscountValue = (DiscoutCalc / (decimal)100.00) * Calcs;
+                Calcs = Calcs - DiscountValue;
+                NewTax = Calcs * 15 / 100;
+                temp.TaxCosts = Math.Round(NewTax, 2);
+                temp.Total = Math.Round(NewTotal);
+                
+
                 try
                 {
                     DB.SubmitChanges();
@@ -963,8 +989,9 @@ namespace TempService
                                      where CT.CartId == UserCart.Id
                                      select CT).DefaultIfEmpty();
                 var Ninv = new Invoice_();
-
-                Ninv.Price = UserCart.Total;
+                decimal discountValue = UserCart.Total * UserCart.ActiveDiscount/100;
+                discountValue = Math.Round(discountValue, 2);
+                Ninv.Price = UserCart.Total + UserCart.TaxCosts-discountValue;
                   foreach (var C in CartItems) {
 
                     //add each products id as a string and corresponding quantities too
@@ -1014,6 +1041,9 @@ namespace TempService
                                   select CT).FirstOrDefault();
 
                 UpdateCart.Total = 0;
+                UpdateCart.ActiveDiscount = 0;
+                UpdateCart.TaxCosts = 0;
+                
                 DB.SubmitChanges();
                 
             }catch(Exception E1)
@@ -1375,6 +1405,28 @@ namespace TempService
             }
         }
 
+        public UserCartWrapper GetCart(int UserId)
+        {
+            var ToReturn = (from u in DB.UCarts
+                            where u.CustId == UserId
+                            select u).FirstOrDefault();
+
+            if(ToReturn !=null)
+            {
+                UserCartWrapper UW = new UserCartWrapper
+                {
+                    Total = ToReturn.Total,
+                    TaxCost = ToReturn.TaxCosts,
+                    DiscountPercentage=ToReturn.ActiveDiscount
+                };
+                return UW;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
     }
 }
        
