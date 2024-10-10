@@ -25,9 +25,9 @@
 					<div class="login_box_img">
 						<img class="img-fluid" src="assets/img/login.jpg" alt="">
 						<div class="hover">
-						<h4>New to our website?</h4>
-							<p>You can create an account by simply clicking on the button below</p>
-							<a class="primary-btn" href="Register.aspx">Create an Account</a>
+							<h4>Why choose us?</h4>
+							<p>You can view testimonials from customers on the link below</p>
+							<a class="primary-btn" href="Testimonials.aspx">Create an Account</a>
 						</div>
 					</div>
 				</div>

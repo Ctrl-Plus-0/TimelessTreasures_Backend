@@ -1,10 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Web.Master" AutoEventWireup="true" CodeBehind="ShoppingCart.aspx.cs" Inherits="TimelessTreasuresWeb1.ShoppingCart" %>
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
        <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
@@ -63,7 +60,7 @@
 
                                 <td>
                                     <div class="cupon_text d-flex align-items-center">
-                                        <asp:TextBox ID="txtCuponCOde" runat="server" Placeholder="Enter Discount Code"  ></asp:TextBox>
+                                        <asp:TextBox ID="txtCuponCOde" runat="server" Placeholder="Enter Discount Code"></asp:TextBox>
                                         
                                        
                                     </div>
@@ -106,22 +103,19 @@
 
                                 </td>
                                  <td>
-                                      
+
                                 </td>
                                  <td>
 
                                 </td>
                                  <td>
-                                     
-                                        <asp:button ID="BtnBackToShop" runat="server" CssClass="gray_btn" Text="Continue Shopping" OnClick="BtnBackToShop_Click" />
-                                      
+
                                 </td>
-                             
                                 <td>
-                                    
-                                        
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="Shop.aspx">Continue Shopping</a>
                                         <asp:Button ID="CheckOut" CssClass="primary-btn" runat="server" Text="Proceed To Checkout" OnClick="CheckOut_Click"/>
-                                  
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

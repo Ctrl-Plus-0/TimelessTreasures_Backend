@@ -151,7 +151,8 @@ namespace TimelessTreasuresWeb1
 			DisplayProducts(productsToDisplay);
         }
 
-        protected void UpdatePaginationControls(int currentPage)
+
+		protected void UpdatePaginationControls(int currentPage)
         {
 			//top one
             Page1.CssClass = currentPage == 1 ? "active" : "";

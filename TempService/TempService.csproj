@@ -157,7 +157,6 @@
       <DependentUpon>TempDatabase.dbml</DependentUpon>
     </Compile>
     <Compile Include="TrackerWrapper.cs" />
-    <Compile Include="UserCartWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TempDatabase.dbml">

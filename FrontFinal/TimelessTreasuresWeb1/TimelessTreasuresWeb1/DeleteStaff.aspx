@@ -3,19 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-		<section class="banner-area organic-breadcrumb">
-		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-				<div class="col-first">
-					<h1>Delete Staff</h1>
-				
-				</div>
-			</div>
-		</div>
-	</section>
    
-    <section class="login_box_area section_gap" id="VisibleForm" runat="server" visible="true">
+    <section class="login_box_area section_gap" id="VisibleForm" runat="server" visible="true" >
 		<div class="container">
 			<div class="row">
 			

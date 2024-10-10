@@ -28,7 +28,14 @@ namespace TimelessTreasuresWeb1
                 if (Request.QueryString["Pid"] == null)
                 {
                     FillCart(Uid);
-                    UpdateCart_Click(sender, e);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
                     return;
                 }
                 int ProdToAdd = int.Parse(Request.QueryString["Pid"]);
@@ -63,13 +70,27 @@ namespace TimelessTreasuresWeb1
                     }
                     //call method to fill with user specefic cart info
                     FillCart(Uid);
-                    UpdateCart_Click(sender, e);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
 
                 }
                 else
                 {
                     FillCart(Uid);
-                    UpdateCart_Click(sender, e);
+                    decimal total = SC.GetCartTotal(Uid);
+                    decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                    VatCost = Math.Round(VatCost, 2);
+                    decimal FinalTot = total + VatCost;
+                    Total.InnerText = "R" + total;
+                    Vat.InnerText = "R" + VatCost;
+                    Discount.InnerText = "R0";
+                    SubTotal.InnerText = "R" + FinalTot;
 
                 }
            
@@ -77,7 +98,14 @@ namespace TimelessTreasuresWeb1
             else
             {
                 FillCart(Uid);
-                UpdateCart_Click(sender, e);
+                decimal total = SC.GetCartTotal(Uid);
+                decimal VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                decimal FinalTot = total + VatCost;
+                Total.InnerText = "R" + total;
+                Vat.InnerText = "R" + VatCost;
+                Discount.InnerText = "R0";
+                SubTotal.InnerText = "R" + FinalTot;
 
             }
 
@@ -198,7 +226,7 @@ namespace TimelessTreasuresWeb1
             int Prodid = int.Parse(SplitID[2]); //get id from the button
 
             int Result = SC.RemoveItemFromCart(Prodid, Uid);
-           
+            int UpdateTotalResult = SC.UpdateCartTotal(Uid,-3);
             if (Result == -1)
             {
                 lblMsg.ForeColor = System.Drawing.Color.Red;
@@ -213,25 +241,16 @@ namespace TimelessTreasuresWeb1
                 lblMsg.ForeColor = System.Drawing.Color.Green;
                 lblMsg.Text = "Item Removed From Cart";
             }
-          
+            if (UpdateTotalResult != 1)
+            {
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Text = "Failed TO Update total";
+            }
             Response.Redirect("ShoppingCart.aspx");
         }
 
         protected void CheckOut_Click(object sender, EventArgs e)
         {
-            Service1Client SC = new Service1Client();
-            int Uid = int.Parse(Session["UserId"].ToString());
-
-
-            var Temp=SC.GetCartItems(Uid);
-
-            if (!Temp.Any())
-            { 
-                lblMsg.ForeColor = System.Drawing.Color.Red;
-                lblMsg.Text = "Cannot Checkout With Empty Cart.";
-                return;
-            }
-
             VisibleCart.Visible = false;
             VisibleForm.Visible = true;
 
@@ -242,55 +261,56 @@ namespace TimelessTreasuresWeb1
             Service1Client SC = new Service1Client();
             int Uid = int.Parse(Session["UserId"].ToString());
             dynamic items = SC.GetCartItems(Uid);
-         
-            foreach (TrackerWrapper T in items)
-            {
-                if (T != null)
+
+            decimal total = 0;
+            decimal VatCost = 0;
+            decimal DiscountAmount = 0;
+            decimal FinalTot = 0;
+            foreach (TrackerWrapper T in items) {
+
+                TextBox txtQuant = (TextBox)TDHolder.FindControl("P_Quantity_" + T.ProdId);
+                TableCell ItemTotalCell =(TableCell)TDHolder.FindControl("P_Total_" + T.ProdId);
+
+                ItemTotalCell.Text ="R"+T.Price * int.Parse(txtQuant.Text);
+                total += T.Price * int.Parse(txtQuant.Text);
+                int QuantityResult = SC.UpdateItemQuantity(Uid, int.Parse(txtQuant.Text), T.ProdId);
+    
+
+                if(QuantityResult==1 || QuantityResult == 2)
                 {
-                    TextBox txtQuant = (TextBox)TDHolder.FindControl("P_Quantity_" + T.ProdId);
-
-                    SC.UpdateItemQuantity(Uid, int.Parse(txtQuant.Text), T.ProdId);
+                    continue;
+                }else
+                {
+                    lblMsg.ForeColor = System.Drawing.Color.Yellow;
+                    lblMsg.Text = "Error Updating Cart";
+                    break;
                 }
-            }
-               
-                    string TxtDisct = txtCuponCOde.Text;
-
-                    decimal total = 0;
-                    decimal VatCost = 0;
-                    decimal DiscountPercentage = 0;
-                    decimal FinalTot = 0;
-                    
-                    Cupon Disc = SC.ApplyDiscount(TxtDisct);
-
-            if (Disc != null)
+                    }
+            string TxtDisct = txtCuponCOde.Text;
+            Cupon Disc = SC.ApplyDiscount(TxtDisct);
+            if (TxtDisct.Equals("") || Disc==null)
             {
-
-                DiscountPercentage = Disc.DiscountPercentage;
+                VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                FinalTot = total + VatCost - DiscountAmount;
+            }else if (Disc != null)
+            {
+                VatCost = (decimal)(15.0 / 100.0) * total;
+                VatCost = Math.Round(VatCost, 2);
+                DiscountAmount = (decimal)(Disc.DiscountPercentage / (decimal)100.00) * total;
+                DiscountAmount = Math.Round(DiscountAmount, 2);
+                FinalTot = total + VatCost - DiscountAmount;
             }
-                    SC.UpdateCartTotal(Uid, DiscountPercentage);
-                    SC.RemoveFromDiscountPool(TxtDisct); //discounts are tracked permanently so we can safely remove a used cupon from the discount pool
-
-                     var UserCart = SC.GetCart(Uid);
-                     total = UserCart.Total;
-                     VatCost = UserCart.TaxCost;
-                     DiscountPercentage = UserCart.DiscountPercentage;
-
-                     decimal DiscountAmount = total * (DiscountPercentage / 100);
-                     DiscountAmount = Math.Round(DiscountAmount, 2);
-                     FinalTot = total + VatCost - DiscountAmount;
-                    Total.InnerText = "R" + total;
-                    Vat.InnerText = "R" + VatCost;
-                    Discount.InnerText = "R" + DiscountAmount;
-                    SubTotal.InnerText = "R" + FinalTot;
-
-                    
 
 
-
-                    lblMsg.ForeColor = System.Drawing.Color.Green;
-                    lblMsg.Text = "Cart Updated";
-
+            SC.UpdateCartTotal(Uid, FinalTot);
+            SC.RemoveFromDiscountPool(TxtDisct);
+            
              
+            Total.InnerText = "R" + total;
+            Vat.InnerText = "R" + VatCost;
+            Discount.InnerText = "R"+ DiscountAmount;
+            SubTotal.InnerText = "R" + FinalTot;
         }
 
         protected void BtnProceed_Click(object sender, EventArgs e)
@@ -318,9 +338,6 @@ namespace TimelessTreasuresWeb1
 
         }
 
-        protected void BtnBackToShop_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Shop.aspx");
-        }
+        
     }
 }

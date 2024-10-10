@@ -510,9 +510,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal ActiveDiscountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TimelessTreasuresWeb1.ServiceReference1.CartTracker[] CartTrackersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -525,9 +522,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal TaxCostsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal TotalField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -537,19 +531,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal ActiveDiscount {
-            get {
-                return this.ActiveDiscountField;
-            }
-            set {
-                if ((this.ActiveDiscountField.Equals(value) != true)) {
-                    this.ActiveDiscountField = value;
-                    this.RaisePropertyChanged("ActiveDiscount");
-                }
             }
         }
         
@@ -601,19 +582,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal TaxCosts {
-            get {
-                return this.TaxCostsField;
-            }
-            set {
-                if ((this.TaxCostsField.Equals(value) != true)) {
-                    this.TaxCostsField = value;
-                    this.RaisePropertyChanged("TaxCosts");
                 }
             }
         }
@@ -1801,83 +1769,6 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserCartWrapper", Namespace="http://schemas.datacontract.org/2004/07/TempService")]
-    [System.SerializableAttribute()]
-    public partial class UserCartWrapper : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal DiscountPercentageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal TaxCostField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal TotalField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal DiscountPercentage {
-            get {
-                return this.DiscountPercentageField;
-            }
-            set {
-                if ((this.DiscountPercentageField.Equals(value) != true)) {
-                    this.DiscountPercentageField = value;
-                    this.RaisePropertyChanged("DiscountPercentage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal TaxCost {
-            get {
-                return this.TaxCostField;
-            }
-            set {
-                if ((this.TaxCostField.Equals(value) != true)) {
-                    this.TaxCostField = value;
-                    this.RaisePropertyChanged("TaxCost");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Total {
-            get {
-                return this.TotalField;
-            }
-            set {
-                if ((this.TotalField.Equals(value) != true)) {
-                    this.TotalField = value;
-                    this.RaisePropertyChanged("Total");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -1991,10 +1882,10 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         System.Threading.Tasks.Task<int> RemoveItemFromCartAsync(int ProdID, int UserID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
-        int UpdateCartTotal(int UserId, decimal discounts);
+        int UpdateCartTotal(int UserId, decimal subtotal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateCartTotal", ReplyAction="http://tempuri.org/IService1/UpdateCartTotalResponse")]
-        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal discounts);
+        System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal subtotal);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateItemQuantity", ReplyAction="http://tempuri.org/IService1/UpdateItemQuantityResponse")]
         int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
@@ -2086,11 +1977,17 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/deleteItem", ReplyAction="http://tempuri.org/IService1/deleteItemResponse")]
         System.Threading.Tasks.Task<int> deleteItemAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCart", ReplyAction="http://tempuri.org/IService1/GetCartResponse")]
-        TimelessTreasuresWeb1.ServiceReference1.UserCartWrapper GetCart(int UserId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getSalesPerMonth", ReplyAction="http://tempuri.org/IService1/getSalesPerMonthResponse")]
+        string[] getSalesPerMonth();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCart", ReplyAction="http://tempuri.org/IService1/GetCartResponse")]
-        System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.UserCartWrapper> GetCartAsync(int UserId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getSalesPerMonth", ReplyAction="http://tempuri.org/IService1/getSalesPerMonthResponse")]
+        System.Threading.Tasks.Task<string[]> getSalesPerMonthAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getMonths", ReplyAction="http://tempuri.org/IService1/getMonthsResponse")]
+        string[] getMonths();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getMonths", ReplyAction="http://tempuri.org/IService1/getMonthsResponse")]
+        System.Threading.Tasks.Task<string[]> getMonthsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2264,12 +2161,12 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.RemoveItemFromCartAsync(ProdID, UserID);
         }
         
-        public int UpdateCartTotal(int UserId, decimal discounts) {
-            return base.Channel.UpdateCartTotal(UserId, discounts);
+        public int UpdateCartTotal(int UserId, decimal subtotal) {
+            return base.Channel.UpdateCartTotal(UserId, subtotal);
         }
         
-        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal discounts) {
-            return base.Channel.UpdateCartTotalAsync(UserId, discounts);
+        public System.Threading.Tasks.Task<int> UpdateCartTotalAsync(int UserId, decimal subtotal) {
+            return base.Channel.UpdateCartTotalAsync(UserId, subtotal);
         }
         
         public int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID) {
@@ -2392,12 +2289,20 @@ namespace TimelessTreasuresWeb1.ServiceReference1 {
             return base.Channel.deleteItemAsync(id);
         }
         
-        public TimelessTreasuresWeb1.ServiceReference1.UserCartWrapper GetCart(int UserId) {
-            return base.Channel.GetCart(UserId);
+        public string[] getSalesPerMonth() {
+            return base.Channel.getSalesPerMonth();
         }
         
-        public System.Threading.Tasks.Task<TimelessTreasuresWeb1.ServiceReference1.UserCartWrapper> GetCartAsync(int UserId) {
-            return base.Channel.GetCartAsync(UserId);
+        public System.Threading.Tasks.Task<string[]> getSalesPerMonthAsync() {
+            return base.Channel.getSalesPerMonthAsync();
+        }
+        
+        public string[] getMonths() {
+            return base.Channel.getMonths();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getMonthsAsync() {
+            return base.Channel.getMonthsAsync();
         }
     }
 }
