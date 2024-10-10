@@ -39,6 +39,9 @@ namespace TempService
     partial void InsertPUser(PUser instance);
     partial void UpdatePUser(PUser instance);
     partial void DeletePUser(PUser instance);
+    partial void InsertUCart(UCart instance);
+    partial void UpdateUCart(UCart instance);
+    partial void DeleteUCart(UCart instance);
     partial void InsertCartTracker(CartTracker instance);
     partial void UpdateCartTracker(CartTracker instance);
     partial void DeleteCartTracker(CartTracker instance);
@@ -51,9 +54,6 @@ namespace TempService
     partial void InsertCupon(Cupon instance);
     partial void UpdateCupon(Cupon instance);
     partial void DeleteCupon(Cupon instance);
-    partial void InsertUCart(UCart instance);
-    partial void UpdateUCart(UCart instance);
-    partial void DeleteUCart(UCart instance);
     #endregion
 		
 		public TempDatabaseDataContext() : 
@@ -110,6 +110,14 @@ namespace TempService
 			}
 		}
 		
+		public System.Data.Linq.Table<UCart> UCarts
+		{
+			get
+			{
+				return this.GetTable<UCart>();
+			}
+		}
+		
 		public System.Data.Linq.Table<CartTracker> CartTrackers
 		{
 			get
@@ -141,14 +149,6 @@ namespace TempService
 				return this.GetTable<Cupon>();
 			}
 		}
-		
-		public System.Data.Linq.Table<UCart> UCarts
-		{
-			get
-			{
-				return this.GetTable<UCart>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
@@ -165,9 +165,9 @@ namespace TempService
 		
 		private System.DateTime _DateOfBirth;
 		
-		private EntitySet<Invoice_> _Invoice_s;
-		
 		private EntitySet<UCart> _UCarts;
+		
+		private EntitySet<Invoice_> _Invoice_s;
 		
 		private EntityRef<PUser> _PUser;
 		
@@ -187,8 +187,8 @@ namespace TempService
 		
 		public Customer()
 		{
-			this._Invoice_s = new EntitySet<Invoice_>(new Action<Invoice_>(this.attach_Invoice_s), new Action<Invoice_>(this.detach_Invoice_s));
 			this._UCarts = new EntitySet<UCart>(new Action<UCart>(this.attach_UCarts), new Action<UCart>(this.detach_UCarts));
+			this._Invoice_s = new EntitySet<Invoice_>(new Action<Invoice_>(this.attach_Invoice_s), new Action<Invoice_>(this.detach_Invoice_s));
 			this._PUser = default(EntityRef<PUser>);
 			OnCreated();
 		}
@@ -277,19 +277,6 @@ namespace TempService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice_", Storage="_Invoice_s", ThisKey="CustId", OtherKey="UserID")]
-		public EntitySet<Invoice_> Invoice_s
-		{
-			get
-			{
-				return this._Invoice_s;
-			}
-			set
-			{
-				this._Invoice_s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_UCart", Storage="_UCarts", ThisKey="CustId", OtherKey="CustId")]
 		public EntitySet<UCart> UCarts
 		{
@@ -300,6 +287,19 @@ namespace TempService
 			set
 			{
 				this._UCarts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice_", Storage="_Invoice_s", ThisKey="CustId", OtherKey="UserID")]
+		public EntitySet<Invoice_> Invoice_s
+		{
+			get
+			{
+				return this._Invoice_s;
+			}
+			set
+			{
+				this._Invoice_s.Assign(value);
 			}
 		}
 		
@@ -357,18 +357,6 @@ namespace TempService
 			}
 		}
 		
-		private void attach_Invoice_s(Invoice_ entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = this;
-		}
-		
-		private void detach_Invoice_s(Invoice_ entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = null;
-		}
-		
 		private void attach_UCarts(UCart entity)
 		{
 			this.SendPropertyChanging();
@@ -376,6 +364,18 @@ namespace TempService
 		}
 		
 		private void detach_UCarts(UCart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
+		}
+		
+		private void attach_Invoice_s(Invoice_ entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_Invoice_s(Invoice_ entity)
 		{
 			this.SendPropertyChanging();
 			entity.Customer = null;
@@ -803,6 +803,185 @@ namespace TempService
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UCart")]
+	public partial class UCart : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _CustId;
+		
+		private decimal _Total;
+		
+		private EntitySet<CartTracker> _CartTrackers;
+		
+		private EntityRef<Customer> _Customer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnCustIdChanging(int value);
+    partial void OnCustIdChanged();
+    partial void OnTotalChanging(decimal value);
+    partial void OnTotalChanged();
+    #endregion
+		
+		public UCart()
+		{
+			this._CartTrackers = new EntitySet<CartTracker>(new Action<CartTracker>(this.attach_CartTrackers), new Action<CartTracker>(this.detach_CartTrackers));
+			this._Customer = default(EntityRef<Customer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustId", DbType="Int NOT NULL")]
+		public int CustId
+		{
+			get
+			{
+				return this._CustId;
+			}
+			set
+			{
+				if ((this._CustId != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustIdChanging(value);
+					this.SendPropertyChanging();
+					this._CustId = value;
+					this.SendPropertyChanged("CustId");
+					this.OnCustIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Decimal(18,2) NOT NULL")]
+		public decimal Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this.OnTotalChanging(value);
+					this.SendPropertyChanging();
+					this._Total = value;
+					this.SendPropertyChanged("Total");
+					this.OnTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UCart_CartTracker", Storage="_CartTrackers", ThisKey="Id", OtherKey="CartId")]
+		public EntitySet<CartTracker> CartTrackers
+		{
+			get
+			{
+				return this._CartTrackers;
+			}
+			set
+			{
+				this._CartTrackers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_UCart", Storage="_Customer", ThisKey="CustId", OtherKey="CustId", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.UCarts.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.UCarts.Add(this);
+						this._CustId = value.CustId;
+					}
+					else
+					{
+						this._CustId = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CartTrackers(CartTracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.UCart = this;
+		}
+		
+		private void detach_CartTrackers(CartTracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.UCart = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CartTracker")]
 	public partial class CartTracker : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -817,9 +996,9 @@ namespace TempService
 		
 		private decimal _Price;
 		
-		private EntityRef<Item> _Item;
-		
 		private EntityRef<UCart> _UCart;
+		
+		private EntityRef<Item> _Item;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -837,8 +1016,8 @@ namespace TempService
 		
 		public CartTracker()
 		{
-			this._Item = default(EntityRef<Item>);
 			this._UCart = default(EntityRef<UCart>);
+			this._Item = default(EntityRef<Item>);
 			OnCreated();
 		}
 		
@@ -930,40 +1109,6 @@ namespace TempService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_CartTracker", Storage="_Item", ThisKey="ProdID", OtherKey="Id", IsForeignKey=true)]
-		public Item Item
-		{
-			get
-			{
-				return this._Item.Entity;
-			}
-			set
-			{
-				Item previousValue = this._Item.Entity;
-				if (((previousValue != value) 
-							|| (this._Item.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Item.Entity = null;
-						previousValue.CartTrackers.Remove(this);
-					}
-					this._Item.Entity = value;
-					if ((value != null))
-					{
-						value.CartTrackers.Add(this);
-						this._ProdID = value.Id;
-					}
-					else
-					{
-						this._ProdID = default(int);
-					}
-					this.SendPropertyChanged("Item");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UCart_CartTracker", Storage="_UCart", ThisKey="CartId", OtherKey="Id", IsForeignKey=true)]
 		public UCart UCart
 		{
@@ -994,6 +1139,40 @@ namespace TempService
 						this._CartId = default(int);
 					}
 					this.SendPropertyChanged("UCart");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_CartTracker", Storage="_Item", ThisKey="ProdID", OtherKey="Id", IsForeignKey=true)]
+		public Item Item
+		{
+			get
+			{
+				return this._Item.Entity;
+			}
+			set
+			{
+				Item previousValue = this._Item.Entity;
+				if (((previousValue != value) 
+							|| (this._Item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Item.Entity = null;
+						previousValue.CartTrackers.Remove(this);
+					}
+					this._Item.Entity = value;
+					if ((value != null))
+					{
+						value.CartTrackers.Add(this);
+						this._ProdID = value.Id;
+					}
+					else
+					{
+						this._ProdID = default(int);
+					}
+					this.SendPropertyChanged("Item");
 				}
 			}
 		}
@@ -1751,233 +1930,6 @@ namespace TempService
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UCart")]
-	public partial class UCart : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _CustId;
-		
-		private decimal _Total;
-		
-		private decimal _ActiveDiscount;
-		
-		private decimal _TaxCosts;
-		
-		private EntitySet<CartTracker> _CartTrackers;
-		
-		private EntityRef<Customer> _Customer;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnCustIdChanging(int value);
-    partial void OnCustIdChanged();
-    partial void OnTotalChanging(decimal value);
-    partial void OnTotalChanged();
-    partial void OnActiveDiscountChanging(decimal value);
-    partial void OnActiveDiscountChanged();
-    partial void OnTaxCostsChanging(decimal value);
-    partial void OnTaxCostsChanged();
-    #endregion
-		
-		public UCart()
-		{
-			this._CartTrackers = new EntitySet<CartTracker>(new Action<CartTracker>(this.attach_CartTrackers), new Action<CartTracker>(this.detach_CartTrackers));
-			this._Customer = default(EntityRef<Customer>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustId", DbType="Int NOT NULL")]
-		public int CustId
-		{
-			get
-			{
-				return this._CustId;
-			}
-			set
-			{
-				if ((this._CustId != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustIdChanging(value);
-					this.SendPropertyChanging();
-					this._CustId = value;
-					this.SendPropertyChanged("CustId");
-					this.OnCustIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Decimal(18,2) NOT NULL")]
-		public decimal Total
-		{
-			get
-			{
-				return this._Total;
-			}
-			set
-			{
-				if ((this._Total != value))
-				{
-					this.OnTotalChanging(value);
-					this.SendPropertyChanging();
-					this._Total = value;
-					this.SendPropertyChanged("Total");
-					this.OnTotalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActiveDiscount", DbType="Decimal(4,2) NOT NULL")]
-		public decimal ActiveDiscount
-		{
-			get
-			{
-				return this._ActiveDiscount;
-			}
-			set
-			{
-				if ((this._ActiveDiscount != value))
-				{
-					this.OnActiveDiscountChanging(value);
-					this.SendPropertyChanging();
-					this._ActiveDiscount = value;
-					this.SendPropertyChanged("ActiveDiscount");
-					this.OnActiveDiscountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaxCosts", DbType="Decimal(18,2) NOT NULL")]
-		public decimal TaxCosts
-		{
-			get
-			{
-				return this._TaxCosts;
-			}
-			set
-			{
-				if ((this._TaxCosts != value))
-				{
-					this.OnTaxCostsChanging(value);
-					this.SendPropertyChanging();
-					this._TaxCosts = value;
-					this.SendPropertyChanged("TaxCosts");
-					this.OnTaxCostsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UCart_CartTracker", Storage="_CartTrackers", ThisKey="Id", OtherKey="CartId")]
-		public EntitySet<CartTracker> CartTrackers
-		{
-			get
-			{
-				return this._CartTrackers;
-			}
-			set
-			{
-				this._CartTrackers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_UCart", Storage="_Customer", ThisKey="CustId", OtherKey="CustId", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.UCarts.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.UCarts.Add(this);
-						this._CustId = value.CustId;
-					}
-					else
-					{
-						this._CustId = default(int);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CartTrackers(CartTracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.UCart = this;
-		}
-		
-		private void detach_CartTrackers(CartTracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.UCart = null;
 		}
 	}
 }

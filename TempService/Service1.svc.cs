@@ -23,7 +23,8 @@ namespace TempService
 
         int IService1.login(string Email, string Password)
         {
-          
+            //using the join is not 100% necessary as only the username and password really matter at this point
+            //but for later when this method needs to be updated for showing who signed in and so forth itll work
             var UserLogged = (from c in DB.PUsers
                               where c.UEmail.Equals(Email) && c.UPassword.Equals(Password)
                               select c).FirstOrDefault();
@@ -32,7 +33,10 @@ namespace TempService
                 return -1;
             }
 
-  
+            //simple logic from here
+            //check if user returned is null,if not  say they logged in succesfully
+            //Returns login role 
+            //perform additional check in front end for admin type to see if manager or admin
             if (UserLogged.Urole.Equals("Customer"))
             {
                 return 0;
@@ -805,9 +809,7 @@ namespace TempService
                 }
             }
 
-           
-                return CartItems;
-            
+            return CartItems;
         }
 
         public int RemoveItemFromCart(int ProdID, int UserID)
@@ -844,7 +846,7 @@ namespace TempService
      
         }
 
-        public int UpdateCartTotal(int UserId, decimal discounts)
+        public int UpdateCartTotal(int UserId, decimal subtotal)
         {
             var temp = (from UserCart in DB.UCarts
                         where UserCart.CustId == UserId
@@ -852,57 +854,29 @@ namespace TempService
 
             if (temp != null)
             {
-              
-                
+                if (subtotal == -3)
+                {
                     dynamic Calc = (from CTrack in DB.CartTrackers
                                     join CRT in DB.UCarts
                                     on CTrack.CartId equals CRT.Id
                                     where UserId == CRT.CustId
                                     select CTrack).DefaultIfEmpty();
-                decimal CurrentTotal = temp.Total;
-                decimal NewTotal = 0;
-                decimal DiscountPercentage = temp.ActiveDiscount;
-                decimal NewDiscount = discounts;
-                decimal NewTax =0;
+                    decimal NewTot = 0;
                     foreach (CartTracker CT in Calc)
                     {
                         if (CT != null)
                         {
-                            decimal tempTotal;
+                            decimal tempTotal = 0;
                             tempTotal = CT.Price * CT.Quantity;
-                            NewTotal += tempTotal;
+                            NewTot += tempTotal;
                         }
                     }
-                //If the total we calculate is not the same as the one originally stored
-                //Recalculate the discount and tax
-                decimal Calcs = NewTotal;
-                decimal DiscoutCalc = NewDiscount + DiscountPercentage;
-                if (CurrentTotal != NewTotal)
-                {
-                    
-                    if (NewDiscount != 0)
-                    {
-                 
-                        temp.Total = NewTotal;
-                    }   
+                    temp.Total = NewTot;
                 }
-                if (DiscoutCalc >= 100)
+                else
                 {
-                    DiscoutCalc = (decimal)99.99; //dont offer 100% discounts
+                    temp.Total = subtotal;
                 }
-                if (DiscoutCalc != 0)
-                {
-                    temp.ActiveDiscount = DiscoutCalc;
-                }
-
-                decimal DiscountValue = 0;
-                DiscountValue = (DiscoutCalc / (decimal)100.00) * Calcs;
-                Calcs = Calcs - DiscountValue;
-                NewTax = Calcs * 15 / 100;
-                temp.TaxCosts = Math.Round(NewTax, 2);
-                temp.Total = Math.Round(NewTotal);
-                
-
                 try
                 {
                     DB.SubmitChanges();
@@ -989,9 +963,8 @@ namespace TempService
                                      where CT.CartId == UserCart.Id
                                      select CT).DefaultIfEmpty();
                 var Ninv = new Invoice_();
-                decimal discountValue = UserCart.Total * UserCart.ActiveDiscount/100;
-                discountValue = Math.Round(discountValue, 2);
-                Ninv.Price = UserCart.Total + UserCart.TaxCosts-discountValue;
+
+                Ninv.Price = UserCart.Total;
                   foreach (var C in CartItems) {
 
                     //add each products id as a string and corresponding quantities too
@@ -1041,9 +1014,6 @@ namespace TempService
                                   select CT).FirstOrDefault();
 
                 UpdateCart.Total = 0;
-                UpdateCart.ActiveDiscount = 0;
-                UpdateCart.TaxCosts = 0;
-                
                 DB.SubmitChanges();
                 
             }catch(Exception E1)
@@ -1349,31 +1319,41 @@ namespace TempService
         public List<string> getRegisteredUsersPerMonth()
         {
 
-            List<string> regPerMonth = new List<string>(31);
+            List<string> regPerDay = new List<string>(30);
 
-            List<int> usersPerMonthInt = new List<int>(31);
+            List<int> usersPerDayInt = new List<int>(30);
 
             dynamic allUsers = (from u in DB.PUsers
+                                where u.Urole.Equals("Customer")
                              orderby u.Ucreationtime ascending
                              select u).DefaultIfEmpty();
 
+            for(int i = 0; i < usersPerDayInt.Capacity; i++)
+            {
+                usersPerDayInt.Add(0);
+            }
+            
             foreach (dynamic us in allUsers) {
                 DateTime creationTime = us.Ucreationtime;
 
-                int index = us.Ucreationtime.Day-1;
+                int index = creationTime.Day-1;
+                
+                if (index >= 0 && index < 31)
+                {
+                    int currentValue = usersPerDayInt[index] + 1;
 
-                int currentValue = usersPerMonthInt[index] + 1;
+                    usersPerDayInt.Insert(index, currentValue);
+                }
 
-
-                usersPerMonthInt.Insert(index, currentValue);
+                
             } 
 
-            foreach (int number in usersPerMonthInt)
+            foreach (int number in usersPerDayInt)
             {
-                regPerMonth.Add(number.ToString());
+                regPerDay.Add(number.ToString());
             }
 
-            return regPerMonth;
+            return regPerDay;
         }
 
         public int deleteItem(int id)
@@ -1405,27 +1385,51 @@ namespace TempService
             }
         }
 
-        public UserCartWrapper GetCart(int UserId)
+        public List<string> getSalesPerMonth()
         {
-            var ToReturn = (from u in DB.UCarts
-                            where u.CustId == UserId
-                            select u).FirstOrDefault();
+            List<string> salesPerMonth = new List<string>(11);
 
-            if(ToReturn !=null)
+            List<decimal> salesPerMonthInt = new List<decimal>(11);
+
+            dynamic allInvoices = (from i in DB.Invoice_s
+                                select i).DefaultIfEmpty();
+
+            for (int i = 0; i < salesPerMonthInt.Capacity; i++)
             {
-                UserCartWrapper UW = new UserCartWrapper
+                salesPerMonthInt.Add(0);
+            }
+
+            foreach (dynamic inv in allInvoices)
+            {
+                DateTime creationTime = inv.CreationDate;
+
+                int index = creationTime.Month - 1;
+
+                if (index >= 0 && index < 12)
                 {
-                    Total = ToReturn.Total,
-                    TaxCost = ToReturn.TaxCosts,
-                    DiscountPercentage=ToReturn.ActiveDiscount
-                };
-                return UW;
-            }
-            else
-            {
-                return null;
+                    decimal currentValue = salesPerMonthInt[index] + inv.Price;
+
+                    salesPerMonthInt.Insert(index, currentValue);
+                }
+
+
             }
 
+            foreach (int number in salesPerMonthInt)
+            {
+                salesPerMonth.Add(number.ToString());
+            }
+
+            return salesPerMonth;
+        }
+
+        public List<string> getMonths()
+        {
+            string[] monthsStr = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+            List<string> myMonths = new List<string>(monthsStr);
+
+            return myMonths;
         }
     }
 }

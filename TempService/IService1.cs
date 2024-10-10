@@ -102,7 +102,7 @@ namespace TempService
         int RemoveItemFromCart(int ProdID, int UserID);
 
         [OperationContract]
-        int UpdateCartTotal(int UserId,decimal discounts);
+        int UpdateCartTotal(int UserId,decimal subtotal);
 
         [OperationContract]
         int UpdateItemQuantity(int UserID, int NewQuantity, int ProductID);
@@ -148,8 +148,12 @@ namespace TempService
         List<String> getRegisteredUsersPerMonth();
         [OperationContract]
         int deleteItem(int id);
+
         [OperationContract]
-        UserCartWrapper GetCart(int UserId);
+        List<String> getSalesPerMonth();
+
+        [OperationContract]
+        List<String> getMonths();
 
     }
     
