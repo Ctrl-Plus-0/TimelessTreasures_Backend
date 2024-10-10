@@ -1,0 +1,23 @@
+﻿@using TimelessTreasuresWeb1.ServiceReference1
+
+
+
+@{
+
+    Service1Client client = new Service1Client();
+    
+
+
+    var myChart = new Chart(width: 800, height: 800)
+        .AddTitle("Monthly sales")
+        .AddSeries(
+            name: "Sales",
+            chartType: "Line",
+            xValue: client.getMonths(),
+            yValues: client.getSalesPerMonth())
+        .SetYAxis(
+            title: "Month")
+        .SetXAxis(
+            title: "Sales")
+        .Write();
+}

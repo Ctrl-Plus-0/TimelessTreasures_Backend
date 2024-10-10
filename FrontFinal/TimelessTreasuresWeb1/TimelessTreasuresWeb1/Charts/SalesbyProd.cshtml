@@ -8,9 +8,11 @@
             name: "Product",
             chartType: "Bar",
             xValue: client.getItemNames(),
-            yValues: client.getSalesPerProduct())
+            yValues: client.getSalesPerProduct(),
+            markerStep: 1)
         .SetYAxis(
-            title: "Products")
+            title: "Products"
+            )
         .SetXAxis(
             title: "Number of Products Sold")
         .Write();
