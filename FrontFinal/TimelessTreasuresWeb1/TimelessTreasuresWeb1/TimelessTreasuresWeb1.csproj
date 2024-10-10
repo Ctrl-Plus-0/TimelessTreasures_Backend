@@ -305,7 +305,6 @@
     <Content Include="Charts\SalesbyProd.cshtml" />
     <Content Include="Charts\Prodonhand.cshtml" />
     <Content Include="Charts\DailyRegister.cshtml" />
-    <Content Include="Charts\MonthlySales.cshtml" />
     <None Include="Connected Services\ServiceReference1\Service1.disco" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
@@ -533,6 +532,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ServiceReference1\TimelessTreasuresWeb1.ServiceReference1.Cupon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\TimelessTreasuresWeb1.ServiceReference1.UserCartWrapper.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

@@ -26,12 +26,12 @@ namespace TimelessTreasuresWeb1
                     break;
                 }
             }
-            ServiceReference1.Service1Client SC = new ServiceReference1.Service1Client();
 
-            string dynamicChart = "";
 
-         
-            dynamicChart += $@"<img src=""Charts/{selectedChart}.cshtml"">";
+            String dynamicChart = "";
+
+
+            dynamicChart += $"<img src=\"Charts/{selectedChart}.cshtml\"/>";
 
             report_chart.InnerHtml = dynamicChart;
         }

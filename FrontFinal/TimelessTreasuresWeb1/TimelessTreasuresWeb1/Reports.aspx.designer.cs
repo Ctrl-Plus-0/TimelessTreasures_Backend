@@ -24,6 +24,15 @@ namespace TimelessTreasuresWeb1
         protected global::System.Web.UI.WebControls.DropDownList chart_name;
 
         /// <summary>
+        /// chart_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList chart_type;
+
+        /// <summary>
         /// btnGetChart control.
         /// </summary>
         /// <remarks>

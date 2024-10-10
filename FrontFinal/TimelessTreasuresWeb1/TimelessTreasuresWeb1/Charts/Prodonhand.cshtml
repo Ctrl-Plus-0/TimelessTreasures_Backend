@@ -11,12 +11,11 @@
             name: "Product",
             chartType: "Bar",
             xValue: client.getItemNames(),
-            yValues: client.getItemOnHand(),
-            markerStep: 1)
+            yValues: client.getItemOnHand())
         .SetYAxis(
             title: "Products")
         .SetXAxis(
-            title: "Number of on hand")
+            title: "Number of Products Sold")
         .Write();
 }
 

@@ -74,6 +74,10 @@
 
 					<div class="pagination">
 
+						<asp:LinkButton ID="PrevPageButton" runat="server" CommandName="Prev" OnClick="PageNavigation_Click" CssClass="prev-arrow">
+							<i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+						</asp:LinkButton>
+
 						<asp:LinkButton ID="Page1" runat="server" CommandArgument="1" OnClick="PageNavigation_Click" CssClass="active">1</asp:LinkButton>
 						<asp:LinkButton ID="Page2" runat="server" CommandArgument="2" OnClick="PageNavigation_Click">2</asp:LinkButton>
 						<asp:LinkButton ID="Page3" runat="server" CommandArgument="3" OnClick="PageNavigation_Click">3</asp:LinkButton>
@@ -81,6 +85,10 @@
 						<asp:LinkButton ID="Page5" runat="server" CommandArgument="5" OnClick="PageNavigation_Click">5</asp:LinkButton>
 
 
+
+						<asp:LinkButton ID="NextPageButton" runat="server" CommandName="Next" OnClick="PageNavigation_Click" CssClass="next-arrow">
+							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+						</asp:LinkButton>
 	
 					</div>
 

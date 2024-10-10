@@ -18,7 +18,7 @@
         <!--Start of the Form For Submitting invoices and gift message -->
     <section class="login_box_area section_gap" id="VisibleForm" runat="server" visible="true">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="text-align:center">
 			
 				<div class="col-lg-6">
 					<div class="login_form_inner">
