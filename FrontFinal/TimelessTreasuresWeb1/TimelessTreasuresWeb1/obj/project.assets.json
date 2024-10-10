@@ -380,24 +380,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ndzal\\.nuget\\packages\\": {},
+    "C:\\Users\\Hamzah\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
+      "projectUniqueName": "C:\\Users\\Hamzah\\source\\repos\\TimelessTreasures_Backend\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
       "projectName": "TimelessTreasuresWeb1",
-      "projectPath": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
-      "packagesPath": "C:\\Users\\ndzal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ndzal\\Downloads\\GOOD-MORNING\\TimelessTreasures_Backend-master\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\obj\\",
+      "projectPath": "C:\\Users\\Hamzah\\source\\repos\\TimelessTreasures_Backend\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1.csproj",
+      "packagesPath": "C:\\Users\\Hamzah\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hamzah\\source\\repos\\TimelessTreasures_Backend\\FrontFinal\\TimelessTreasuresWeb1\\TimelessTreasuresWeb1\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ndzal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hamzah\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

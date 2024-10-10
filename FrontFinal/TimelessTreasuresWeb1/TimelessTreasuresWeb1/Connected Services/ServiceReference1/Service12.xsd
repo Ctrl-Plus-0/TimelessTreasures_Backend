@@ -61,10 +61,12 @@
   <xs:element name="CartTracker" nillable="true" type="tns:CartTracker" />
   <xs:complexType name="UCart">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ActiveDiscount" type="xs:decimal" />
       <xs:element minOccurs="0" name="CartTrackers" nillable="true" type="tns:ArrayOfCartTracker" />
       <xs:element minOccurs="0" name="CustId" type="xs:int" />
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxCosts" type="xs:decimal" />
       <xs:element minOccurs="0" name="Total" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
@@ -191,4 +193,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Cupon" nillable="true" type="tns:Cupon" />
+  <xs:complexType name="UserCartWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DiscountPercentage" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxCost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserCartWrapper" nillable="true" type="tns:UserCartWrapper" />
 </xs:schema>
