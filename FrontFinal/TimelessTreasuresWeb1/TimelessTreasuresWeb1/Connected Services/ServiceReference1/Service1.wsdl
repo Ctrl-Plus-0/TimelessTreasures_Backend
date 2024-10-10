@@ -212,11 +212,17 @@
   <wsdl:message name="IService1_deleteItem_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteItemResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetCart_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCart" />
+  <wsdl:message name="IService1_getSalesPerMonth_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSalesPerMonth" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetCart_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCartResponse" />
+  <wsdl:message name="IService1_getSalesPerMonth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSalesPerMonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getMonths_InputMessage">
+    <wsdl:part name="parameters" element="tns:getMonths" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getMonths_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getMonthsResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Register">
@@ -355,9 +361,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/deleteItem" message="tns:IService1_deleteItem_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/deleteItemResponse" message="tns:IService1_deleteItem_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCart">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCart" message="tns:IService1_GetCart_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCartResponse" message="tns:IService1_GetCart_OutputMessage" />
+    <wsdl:operation name="getSalesPerMonth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getSalesPerMonth" message="tns:IService1_getSalesPerMonth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getSalesPerMonthResponse" message="tns:IService1_getSalesPerMonth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getMonths">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getMonths" message="tns:IService1_getMonths_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getMonthsResponse" message="tns:IService1_getMonths_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -668,8 +678,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCart">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetCart" style="document" />
+    <wsdl:operation name="getSalesPerMonth">
+      <soap:operation soapAction="http://tempuri.org/IService1/getSalesPerMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMonths">
+      <soap:operation soapAction="http://tempuri.org/IService1/getMonths" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
