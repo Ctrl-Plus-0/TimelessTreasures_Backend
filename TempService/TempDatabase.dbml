@@ -6,8 +6,8 @@
       <Column Name="CustAddress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="CustPhoneNo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_UCart" Member="UCarts" ThisKey="CustId" OtherKey="CustId" Type="UCart" />
       <Association Name="Customer_Invoice_" Member="Invoice_s" ThisKey="CustId" OtherKey="UserID" Type="Invoice_" />
+      <Association Name="Customer_UCart" Member="UCarts" ThisKey="CustId" OtherKey="CustId" Type="UCart" />
       <Association Name="PUser_Customer" Member="PUser" ThisKey="CustId" OtherKey="UId" Type="PUser" IsForeignKey="true" />
     </Type>
   </Table>
@@ -32,23 +32,14 @@
       <Association Name="PUser_Admin" Member="Admin" ThisKey="UId" OtherKey="AdminId" Type="Admin" Cardinality="One" />
     </Type>
   </Table>
-  <Table Name="dbo.UCart" Member="UCarts">
-    <Type Name="UCart">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CustId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Association Name="UCart_CartTracker" Member="CartTrackers" ThisKey="Id" OtherKey="CartId" Type="CartTracker" />
-      <Association Name="Customer_UCart" Member="Customer" ThisKey="CustId" OtherKey="CustId" Type="Customer" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.CartTracker" Member="CartTrackers">
     <Type Name="CartTracker">
       <Column Name="CartId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ProdID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
-      <Association Name="UCart_CartTracker" Member="UCart" ThisKey="CartId" OtherKey="Id" Type="UCart" IsForeignKey="true" />
       <Association Name="Item_CartTracker" Member="Item" ThisKey="ProdID" OtherKey="Id" Type="Item" IsForeignKey="true" />
+      <Association Name="UCart_CartTracker" Member="UCart" ThisKey="CartId" OtherKey="Id" Type="UCart" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Items">
@@ -86,6 +77,17 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="DiscountPercentage" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UCart" Member="UCarts">
+    <Type Name="UCart">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ActiveDiscount" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TaxCosts" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Association Name="UCart_CartTracker" Member="CartTrackers" ThisKey="Id" OtherKey="CartId" Type="CartTracker" />
+      <Association Name="Customer_UCart" Member="Customer" ThisKey="CustId" OtherKey="CustId" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

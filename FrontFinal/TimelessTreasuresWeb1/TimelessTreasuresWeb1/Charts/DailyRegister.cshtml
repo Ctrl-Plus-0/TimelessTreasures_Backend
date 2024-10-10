@@ -6,18 +6,15 @@
     Service1Client client = new Service1Client();
 
     var myChart = new Chart(width: 800, height: 800)
-        .AddTitle("Users Registered per day")
+        .AddTitle("Items on Hand Per Product")
         .AddSeries(
-            name: "Registerers",
+            name: "Product",
             chartType: "Line",
             xValue: new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"},
             yValues: client.getRegisteredUsersPerMonth())
         .SetYAxis(
-            title: "Registered Users Per Day")
+            title: "Products")
         .SetXAxis(
-            title: "Day")
-        
+            title: "Number of Products Sold")
         .Write();
-
-    
 }

@@ -25,22 +25,24 @@
 				<div class="col-lg-2">
 					<div class="reports_side" style="padding: 20px; color: black;">
 						<p>Choose Chart</p>
-						<asp:DropDownList ID="chart_name" runat="server" style="min-width: 150px; margin: 20px;">
+						<asp:DropDownList ID="chart_name" runat="server" style="min-width: 100px; margin: 20px;">
 							<asp:ListItem Value="SalesbyProd">Sales by Product</asp:ListItem>
 							<asp:ListItem Value="Prodonhand">Stock on Hand by Product</asp:ListItem>
-							<asp:ListItem Value="DailyRegister">New Users per Day</asp:ListItem>
-							<asp:ListItem Value="MonthlySales">Monthly Sales</asp:ListItem>
+							<asp:ListItem Value="DailyRegister">New users per day</asp:ListItem>
 						</asp:DropDownList>
 
-						<asp:Button CssClass="genric-btn info" ID="btnGetChart" runat="server" Text="Get Report" OnClick="btnGetChart_Click" style="margin: 20px;" />
+						<!--<asp:DropDownList ID="chart_type" runat="server" style="min-width: 100px; margin: 20px;">
+							<asp:ListItem Value="Pie">Pie Chart</asp:ListItem>
+							<asp:ListItem Value="Column">Column Cart</asp:ListItem>
+							<asp:ListItem Value="Bar">Bar Chart</asp:ListItem>
+						</asp:DropDownList>-->
+						<asp:Button CssClass="genric-btn info" ID="btnGetChart" runat="server" Text="Get Report" OnClick="btnGetChart_Click" />
 					</div>
 				</div>
 				<div class="col-lg-10">
 					
 					
 					<div id="report_chart" runat="server">
-
-						
 						
 					</div>
 				</div>

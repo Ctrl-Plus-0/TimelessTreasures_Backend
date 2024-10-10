@@ -297,7 +297,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="UserId" type="xs:int" />
-        <xs:element minOccurs="0" name="subtotal" type="xs:decimal" />
+        <xs:element minOccurs="0" name="discounts" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -511,27 +511,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getSalesPerMonth">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getSalesPerMonthResponse">
+  <xs:element name="GetCart">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getSalesPerMonthResult" nillable="true" type="q15:ArrayOfstring" />
+        <xs:element minOccurs="0" name="UserId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getMonths">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getMonthsResponse">
+  <xs:element name="GetCartResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getMonthsResult" nillable="true" type="q16:ArrayOfstring" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/TempService" minOccurs="0" name="GetCartResult" nillable="true" type="q15:UserCartWrapper" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
